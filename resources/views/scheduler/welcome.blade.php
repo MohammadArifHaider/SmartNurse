@@ -36,7 +36,7 @@
     <!-- Core css -->
 
     <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" />-->
-    
+
      <link rel="stylesheet" href="{{asset('assets')}}/css/fullcalendar.css" />
 
 
@@ -48,9 +48,9 @@
       {
           width:34px;
       }
-       
-        
-   
+
+
+
   </style>
 
 </head>
@@ -80,21 +80,21 @@
                                 Home
                             </a>
                         </li>
-                        
+
                          <li class="desktop-toggle">
                             <a href="{{url('admin')}}">
                                 Admin
                             </a>
                         </li>
-                        
-                        
+
+
                         <li class="desktop-toggle">
                             <a href="{{url('intaker')}}">
                                 Intaker
                             </a>
                         </li>
-                        
-                        
+
+
                         <li class="desktop-toggle">
                             <a href="{{url('scheduler')}}">
                                 Scheduler
@@ -130,8 +130,8 @@
 
                                 <div class="accordion" id="accordion-default">
                                     @foreach ( $patient_list as $patient )
-                                    
-                                    
+
+
                                         @if($patient->cancel == 'yes')
                                          <div class="card">
                                             <div class="card-header" >
@@ -157,7 +157,7 @@
                                             </div>
                                         </div>
                                         @else
-                                        
+
                                         <div class="card">
                                             <div class="card-header">
                                                 <h5 class="card-title" onclick="call_full_calendar({{ $patient->id }})">
@@ -181,13 +181,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
-                                        @endif
-                                        
-                                        
-                                        
 
-                                       
+                                        @endif
+
+
+
+
+
 
                                         @endforeach
 
@@ -338,7 +338,7 @@
         formdata.append('date',date);
         formdata.append('time',time);
         formdata.append('assesment_type',assesment_type);
-        
+
          swal({
           title: "Are you sure?",
           text: "You will not be able to recover this assignment!",
@@ -351,7 +351,7 @@
           dangerMode: true,
         }).then(function(isConfirm) {
           if (isConfirm) {
-              
+
                     $.ajax({
                 processData: false,
                 contentType: false,
@@ -360,15 +360,11 @@
                 data: formdata,
                 success:function(data, status){
                   // alert(data);
-                     swal("Nurse Assign Successfully").then(function(isConfirm)
-                     {
-                         if(isConfirm)
-                         {
-                             location.reload();
-                         }
-                     });
+                     swal("Nurse Assign Successfully");
+                     location.reload();
+
                   // alert('Nurse Assign Successfully');
-                  
+
 
 
             },
@@ -376,7 +372,7 @@
 
 
               });
-            
+
           } else {
             swal("Cancelled", "Assignment of nurse canceled :)", "error");
           }
@@ -466,8 +462,8 @@
             type:'POST',
            data:{patient_id:$("#hidden_patient_id").val()},
             success:function(data, status){
-                
-              
+
+
 
                 //alert(patient_id);
                 events = JSON.parse(data);
@@ -546,17 +542,17 @@
                         //alert(msg);
                         if(msg == 'not_ok')
                         {   swal("Please Select a patient first");
-                           
+
                         }
                         else if(msg =='already_appointed')
-                        {    
-                            
+                        {
+
                             alert('Nurse already assigned for this slot. Try another nurse or another slot');
                         }
                         else
                         {
                         $("#assign_nurse").html(data);
-                               
+
                           $("#show_date_details").modal('show');
                         }
                         //alert(data);
@@ -709,8 +705,8 @@
 
 
     {{-- <script src="{{asset('assets')}}/js/vendors.min.js"></script>
-        
-      
+
+
 
     <script src="{{asset('assets')}}/vendors/chartjs/Chart.min.js"></script>
     <script src="{{asset('assets')}}/js/pages/dashboard-default.js"></script>
@@ -752,14 +748,3 @@
     <!-- JQuery -->
 
 <!-- Bootstrap tooltips -->
-
-
-
-
-
-
-
-
-
-
-
