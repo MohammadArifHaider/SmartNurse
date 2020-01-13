@@ -655,22 +655,19 @@
 
       $( document ).ajaxStart(function() {
          window.swal({
-  title: "Checking...",
+  title: "Loading...",
   text: "Please wait",
   imageUrl: "{{asset('image')}}/loading_spinner.gif",
-  showConfirmButton: false,
-  allowOutsideClick: false
+
+  button: false,
+  closeOnClickOutside: false,
+    closeOnEsc: false
 });
     });
 
     $( document ).ajaxStop(function() {
-       setTimeout(() => {
-  window.swal({
-    title: "Finished!",
-    showConfirmButton: false,
-    timer: 1000
-  });
-}, 2000);
+        swal.close();
+
     });
   </script>
 
