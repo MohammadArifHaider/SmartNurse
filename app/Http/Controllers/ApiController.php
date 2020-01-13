@@ -35,6 +35,13 @@ class ApiController extends Controller
     {
          //date_default_timezone_set('Asia/Dhaka');
          $date = $request->date;
+         $date2 = explode("-",$date);
+         $month = $date2[1];
+         if(strlen($month)==1)
+         {
+             $month ="0".$month;
+         }
+         $date = $date2[0]."-".$month."-".$date2[2];
 
         $nurse_id = $request->user_id;
         $appointment = nurse_scheduler::where('nurse_id','=',$nurse_id)->where('appointed_date','=',$date)->where('cancle','=','no')->get();
