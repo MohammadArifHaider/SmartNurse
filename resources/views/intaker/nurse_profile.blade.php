@@ -26,57 +26,68 @@
 
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Name</label>
-                            <input type="text" class="form-control" id="inputEmail4" placeholder="p-100">
+                            <input type="text" class="form-control" id="name" placeholder="John">
                         </div>
 
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Gender</label>
-                            <input type="text" class="form-control" id="inputEmail4" placeholder="p-100">
+
+
+                            <div>
+                                <input id="gender" name="gender" type="radio" value="male">
+                                <label for="radio2">Male</label>
+                                <input id="gender" name="gender" type="radio" value="female">
+                                <label for="radio2">Female</label>
+
+                                <input id="gender" name="gender" type="radio" value="other">
+                                <label for="radio2">Other</label>
+                            </div>
+
                         </div>
 
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Language</label>
-                            <input type="text" class="form-control" id="inputEmail4" placeholder="p-100">
+                            <input type="text" class="form-control" id="language" placeholder="English">
                         </div>
 
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Trained Plan</label>
-                            <input type="text" class="form-control" id="inputEmail4" placeholder="p-100">
+                            <input type="text" class="form-control" id="trained_plan">
                         </div>
 
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Email Address</label>
-                            <input type="text" class="form-control" id="inputEmail4" placeholder="p-100">
+                            <input type="text" class="form-control" id="email" placeholder="john@gmail.com">
                         </div>
 
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Nurse Registration No</label>
-                            <input type="text" class="form-control" id="inputEmail4" placeholder="p-100">
+                            <input type="text" class="form-control" id="registration_no" placeholder="1234">
                         </div>
 
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Phone number</label>
-                            <input type="text" class="form-control" id="inputEmail4" placeholder="p-100">
+                            <input type="text" class="form-control" id="phone_number" placeholder="1234">
                         </div>
 
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Address</label>
-                            <input type="text" class="form-control" id="inputEmail4" placeholder="p-100">
+                            <input type="text" class="form-control" id="address" placeholder="323 ARLINGTON AVE">
                         </div>
-                        
+
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">City</label>
-                            <input type="text" class="form-control" id="inputEmail4" placeholder="p-100">
+                            <input type="text" class="form-control" id="city" placeholder="Brooklyn">
                         </div>
-                        
+
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Country</label>
-                            <input type="text" class="form-control" id="inputEmail4" placeholder="p-100">
+                            <input type="text" class="form-control" id="country" placeholder="Kings">
                         </div>
-                        
+
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Zip</label>
-                            <input type="text" class="form-control" id="inputEmail4" placeholder="p-100">
+                            <input type="text" class="form-control" id="zip" placeholder="11208">
                         </div>
 
                         <div class="form-group col-md-6">
@@ -84,45 +95,45 @@
                            <div >
                                 <input class="prefered_day" type="checkbox" value = "sunday" >
                                 <label for="checkbox1">Sunday</label>
-                                
+
                                 <input class="prefered_day" type="checkbox" value = "monday" >
                                 <label for="checkbox1">Monday</label>
-                                
+
                                 <input class="prefered_day" type="checkbox" value = "tuesday" >
                                 <label for="checkbox1">Tuesday</label>
-                                
+
                                 <input class="prefered_day" type="checkbox"value = "wednesday" >
                                 <label for="checkbox1">Wednesday</label>
                                 <br>
-                                
+
                                 <input class="prefered_day" type="checkbox"value = "thursday" >
                                 <label for="checkbox1">Thursday</label>
-                                
+
                                 <input class="prefered_day" type="checkbox" value = "friday" >
                                 <label for="checkbox1">Friday</label>
-                                
+
                                 <input class="prefered_day" type="checkbox" value = "saturday">
                                 <label for="checkbox1">Saturday</label>
                             </div>
-                            
-                             
+
+
                         </div>
 
-                       
+
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Prefered Start Times</label>
-                            <input type="text" class="form-control" id="inputEmail4" placeholder="p-100">
+                            <input type="text" class="form-control" id="start_time" placeholder="10">
                         </div>
 
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Prefered End Times</label>
-                            <input type="text" class="form-control" id="inputEmail4" placeholder="p-100">
+                            <input type="text" class="form-control" id="end_time" placeholder="15">
                         </div>
 
 
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Prefered Notes</label>
-                            <input type="text" class="form-control" id="inputEmail4" placeholder="p-100">
+                            <input type="text" class="form-control" id="note">
                         </div>
 
 
@@ -285,17 +296,56 @@ headers: {
 
 
         })
-        
+
         $("#nurse_information_upload").on('click',function(){
-            var prefered_day = [];            
+            var prefered_day = [];
         $('.prefered_day:checked').each(function(){
             prefered_day.push($(this).val());
         });
-        
+
+      //var gender =   $("#gender:checked").val();
+      //alert (gender);
+
         var formdata = new FormData();
-        formdata.append(" ",);
+        formdata.append("name",$("#name").val());
+        formdata.append("gender",$("#gender:checked").val());
+        formdata.append("language",$("#language").val());
+        formdata.append("trained_plan",$("#trained_plan").val());
+        formdata.append("email",$("#email").val());
+        formdata.append("registration_no",$("#registration_no").val());
+        formdata.append("phone_number",$("#phone_number").val());
+        formdata.append("address",$("#address").val());
+        formdata.append("city",$("#city").val());
+        formdata.append("country",$("#country").val());
+        formdata.append("zip",$("#zip").val());
+        formdata.append("prefered_day",prefered_day);
+        formdata.append("start_time",$("#start_time").val());
+        formdata.append("end_time",$("#end_time").val());
+        formdata.append("note",$("#note").val());
+
+
+        $.ajax({
+            processData: false,
+            contentType: false,
+            url:"{{url('nurse_information_upload')}}",
+            type:'POST',
+            data: formdata,
+            success:function(data, status){
+
+              alert('Nurse Information Uploaded Successfully');
+
+          //  alert("Notice send successfully");
+            location.reload();
+        },
+
+
+
+          });
+
+
+
         //alert(prefered_day);
-            
+
         });
 
         $("#upload").on('click',function(){

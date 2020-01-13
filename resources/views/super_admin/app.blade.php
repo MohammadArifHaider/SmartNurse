@@ -41,7 +41,34 @@
                     </a>
                 </div>
                 <div class="nav-wrap">
-                    @include('header')
+                    <ul class="nav-left">
+                        <li class="desktop-toggle">
+                            <a href="{{ url('/') }}">
+                                Home
+                            </a>
+                        </li>
+
+                         <li class="desktop-toggle">
+                            <a href="{{url('admin')}}">
+                                Admin
+                            </a>
+                        </li>
+
+
+                        <li class="desktop-toggle">
+                            <a href="{{url('intaker')}}">
+                                Intaker
+                            </a>
+                        </li>
+
+
+                        <li class="desktop-toggle">
+                            <a href="{{url('scheduler')}}">
+                                Scheduler
+                            </a>
+                        </li>
+
+                    </ul>
                     <ul class="nav-right">
 
                         <li class="dropdown dropdown-animated scale-left">
@@ -57,7 +84,50 @@
             <!-- Header END -->
 
             <!-- Side Nav START -->
+            <div class="side-nav">
+                <div class="side-nav-inner">
 
+                    <ul class="side-nav-menu scrollable">
+                        <!--<li class="nav-item dropdown open">-->
+                        <!--    <a  href="{{url('/')}}">-->
+                        <!--        <span class="icon-holder">-->
+                        <!--            <i class="anticon anticon-dashboard"></i>-->
+                        <!--        </span>-->
+                        <!--        <span class="title">Result</span>-->
+
+                        <!--    </a>-->
+
+                        <!--</li>-->
+
+                        <li class="nav-item dropdown open">
+                            <a  href="{{url('view_user')}}">
+                                <span class="icon-holder">
+                                    <i class="anticon anticon-hdd"></i>
+                                </span>
+                                <span class="title">View User</span>
+
+                            </a>
+
+                        </li>
+
+                        <li class="nav-item dropdown open">
+                            <a  href="{{ url('create_user') }}">
+                                <span class="icon-holder">
+                                    <i class="anticon anticon-form"></i>
+                                </span>
+                                <span class="title">Create User</span>
+
+                            </a>
+
+                        </li>
+
+
+
+
+
+                    </ul>
+                </div>
+            </div>
            <div class="page-container">
              <div class="main-content">
 

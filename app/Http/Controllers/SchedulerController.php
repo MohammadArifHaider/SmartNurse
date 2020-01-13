@@ -10,6 +10,7 @@ use App\patient_profile;
 use Illuminate\Http\Request;
 use Session;
 use App\Mail\SendMail;
+use App\User;
 use Illuminate\Support\Facades\Mail;
 
 class SchedulerController extends Controller
@@ -92,9 +93,20 @@ curl_close($curl);
 
     public function home()
     {
-        if(Session::has('email'))
+
+        if(Session::has('user_id'))
         {
-            return view('welcome');
+            $user_id = Session::get('user_id');
+            $user_role = User::where('id','=',$user_id)->first()->user_role;
+            if($user_role === 'super_admin')
+            {
+                return view('super_admin.welcome');
+            }
+            else{
+                return view('welcome');
+            }
+
+
         }
         else
         {

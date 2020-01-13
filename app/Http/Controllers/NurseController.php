@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\patient_profile;
 use App\nurse_profile;
+use App\patient_profile;
 use DB;
 use App\distance_table;
-
-class PatientController extends Controller
+class NurseController extends Controller
 {
     //
-
     public function distance($lat1,$lon1,$lat2,$lon2)
     {
         $curl = curl_init();
@@ -113,71 +112,55 @@ curl_close($curl);
 
     }
 
-
-    public function patient_information_upload(Request $request)
+    public function nurse_information_upload(Request $request)
     {
-                $patients = new patient_profile();
-                $patients->user_id = 1;
-                $patients->insurance_plan = $request->insurance_plan;
-                $patients->date_received =$request->date_received;
-                $patients->date_need_to_be_finished =$request-> date_need_to_be_finished;
-                $patients->medicaid_id = $request->medicaid_id;
-                $patients->member_id = $request->member_id;
-                $patients->first_name = $request->first_name;
-                $patients->last_name = $request->last_name;
-                $patients->sex = $request->sex;
-                $patients->date_of_birth = $request->date_of_birth;
-                $patients->primary_language = $request->primary_language;
-                $patients->cell_phone = $request->cell_phone;
-                $patients->home_phone = $request->home_phone;
 
-                $patients->marital_status = $request->marital_status;
-                $patients->email = $request->email;
-                $patients->address = $request->address;
+        $nurse = new nurse_profile();
+        $nurse->user_id = 1;
+        $nurse->name = $request->name;
+        $nurse->gender =$request->gender;
+        $nurse->language =$request->language;
+        $nurse->trained_plan =$request->trained_plan;
+        $nurse->email_address =$request->email;
+        $nurse->nurse_registration_no =$request->registration_no;
+        $nurse->phone_number =$request->phone_number;
+        $nurse->address =$request->address;
+        $nurse->prefered_days =$request->prefered_day;
+        $nurse->prefered_location =$request->address;
+        $nurse->prefered_start_times =$request->start_time;
+        $nurse->prefered_end_times =$request->end_time;
+        $nurse->prefered_notes =$request->note;
+        $nurse->prefered_city =$request->city;
+        $nurse->prefered_county =$request->country;
+        $nurse->prefered_zip =$request->zip;
+        $nurse->save();
+        $nurse_id = $nurse->id;
+        $nurse_zip = $nurse->prefered_zip;
+        $patient = patient_profile::get();
+        for ($m = 0; $m < sizeof($patient); $m++) {
 
-                $patients->city = $request->city;
-                $patients->state = $request->state;
-                $patients->zip_code = $request->zip_code;
-                $patients->country = $request->country;
-                $patients->assesment_type = $request->assesment_type;
-                $patients->save();
-
-                $patient_id = $patients->id;
-                //$patient_address = $insert_data[$i]['address'] . ',' . $insert_data[$i]['city'];
-
-                $patient_zip = $patient_zip;
+            $patient_id = $patient[$m]->id;
+            //file_put_contents('test.txt', $patient_id);
+           // $patient_address = $patient[$m]['address'] . ',' . $patient[$m]['city'];
+           $patient_zip = $patient[$m]['zip_code'];
+            $shortest_distance = $this->get_shortest_distance($nurse_zip, $patient_zip);
 
 
-                $nurse = nurse_profile::get();
+            $distance_table = new distance_table();
+            $distance_table->patient_id = $patient_id;
+            $distance_table->nurse_id = $nurse_id;
+            $distance_table->shortest_distance = $shortest_distance['distance'];
+            $distance_table->duration = $shortest_distance['duration'];
+            $distance_table->patient_lat = $shortest_distance['patient_lat'];
+            $distance_table->patient_lon = $shortest_distance['patient_lon'];
+            $distance_table->shortest_nurse_lat = $shortest_distance['nurse_lat'];
+            $distance_table->shortest_nurse_lon = $shortest_distance['nurse_lon'];
 
-                for ($m = 0; $m < sizeof($nurse); $m++) {
+            $distance_table->save();
 
-                    $nurse_id = $nurse[$m]->id;
-                    //file_put_contents('test.txt',$patient_id);
-                   // $nurse_address = $nurse[$m]['prefered_location'];
-                   $nurse_zip = $nurse[$m]['prefered_zip'];
-                    $shortest_distance = $this->get_shortest_distance($nurse_zip, $patient_zip);
+        }
 
-                    // $distance_table = new distance_table();
-                    // $distance_table->patient_id = $patient_id;
-                    // $distance_table->nurse_id = $nurse_id;
-                    // $distance_table->shortest_distance = $shortest_distance;
-                    // $distance_table->save();
+        //file_put_contents('test.txt',$request->all());
 
-                    $distance_table = new distance_table();
-                    $distance_table->patient_id = $patient_id;
-                    $distance_table->nurse_id = $nurse_id;
-                    $distance_table->shortest_distance = $shortest_distance['distance'];
-                    $distance_table->duration = $shortest_distance['duration'];
-                    $distance_table->patient_lat = $shortest_distance['patient_lat'];
-                    $distance_table->patient_lon = $shortest_distance['patient_lon'];
-                    $distance_table->shortest_nurse_lat = $shortest_distance['nurse_lat'];
-                    $distance_table->shortest_nurse_lon = $shortest_distance['nurse_lon'];
-
-                    $distance_table->save();
-
-                }
     }
-
-
 }

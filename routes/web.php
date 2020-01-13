@@ -18,6 +18,8 @@ Route::get('log_out', function(){
  });
 Route::post('patient_information_upload','PatientController@patient_information_upload');
 
+Route::post('nurse_information_upload','NurseController@nurse_information_upload');
+
 Route::get('/',"SchedulerController@home");
 
 Route::get('intaker', function () {
@@ -27,7 +29,7 @@ Route::get('intaker', function () {
 
 Route::get('export', 'ExcelController@export');
 
-Route::post('login','SchedulerController@login');
+
 
 
 
@@ -64,6 +66,29 @@ Route::post('submit_nurse','SchedulerController@submit_nurse');
 Route::post('show_nurse_assign_modal','SchedulerController@show_nurse_assign_modal');
 
 Route::get('admin','AdminController@main_page');
+
+Route::get('super_admin','AdminController@super_admin_main_pages');
+
+Route::get('create_user','AdminController@view_create_user');
+Route::post('create_user','AdminController@create_user');
+
+Route::post('login','AdminController@login');
+
+Route::post('check_email_validity','AdminController@check_email_validity');
+
+
+Route::get('view_user','AdminController@view_user_page');
+
+Route::post('get_user_role_super_admin','AdminController@get_user_role_super_admin');
+
+Route::post('update_user_role','AdminController@update_user_role');
+
+Route::post('update_user_password','AdminController@update_user_password');
+
+Route::post('delete_user','AdminController@delete_user');
+
+
+
 
 
 

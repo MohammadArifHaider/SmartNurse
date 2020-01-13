@@ -74,34 +74,7 @@
                 </div>
 
                 <div class="nav-wrap">
-                    <ul class="nav-left">
-                        <li class="desktop-toggle">
-                            <a href="{{ url('/') }}">
-                                Home
-                            </a>
-                        </li>
-
-                         <li class="desktop-toggle">
-                            <a href="{{url('admin')}}">
-                                Admin
-                            </a>
-                        </li>
-
-
-                        <li class="desktop-toggle">
-                            <a href="{{url('intaker')}}">
-                                Intaker
-                            </a>
-                        </li>
-
-
-                        <li class="desktop-toggle">
-                            <a href="{{url('scheduler')}}">
-                                Scheduler
-                            </a>
-                        </li>
-
-                    </ul>
+                     @include('header');
                     <ul class="nav-right">
 
                         <li class="dropdown dropdown-animated scale-left">

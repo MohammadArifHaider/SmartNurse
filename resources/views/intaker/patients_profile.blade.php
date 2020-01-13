@@ -3,22 +3,22 @@
 @section('title')
 
 <h2 class="header-title">Form Layouts</h2>
-    
+
 @endsection
 
 @section('content')
- 
+
 <div class="card">
         <div class="card-body">
             <h4>Create Patients Profile</h4>
-           
+
             <div class="m-t-25" >
                 <form>
-                    
+
                     <h4>Member Control</h4>
                     <hr>
                     <div class="form-row">
-                        
+
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Insurance Plan<span style="color: red;">*</span></label>
                             <input type="text" class="form-control" id="insurance_plan" placeholder="Test">
@@ -31,7 +31,7 @@
                             <label for="inputEmail4">Date Need to finish<span style="color: red;">*</span></label>
                             <input type="text" class="form-control" id="date_need_to_be_finished" placeholder="05.11.2019">
                         </div>
-                        
+
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Assesment Type<span style="color: red;">*</span></label>
                              <select id="assesment_type" class="form-control">
@@ -40,20 +40,20 @@
                                                 <option value="re-assesment">Re Assesment</option>
                                 </select>
                         </div>
-                        
+
                     </div>
 
 
                     <h4>Personal Information</h4>
                     <hr>
                     <div class="form-row">
-                        
+
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Medicaid Id</label>
                             <input type="text" class="form-control" id="medicaid_id" placeholder="p-100">
                         </div>
-                        
-                       
+
+
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Member Id</label>
                             <input type="text" class="form-control" id="member_id" placeholder="50">
@@ -78,7 +78,7 @@
                             <label for="inputEmail4">Primary Language</label>
                             <input type="text" class="form-control" id="primary_language" placeholder="Bangla">
                         </div>
-                        
+
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Cell Phone</label>
                             <input type="text" class="form-control" id="cell_phone" placeholder="">
@@ -87,7 +87,7 @@
                             <label for="inputEmail4">Home Phone</label>
                             <input type="text" class="form-control" id="home_phone" placeholder="">
                         </div>
-                       
+
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Marital Status</label>
                             <input type="text" class="form-control" id="marital_status" placeholder="UM">
@@ -96,22 +96,22 @@
                             <label for="inputEmail4">Email</label>
                             <input type="email" class="form-control" id="email" placeholder="xyz@gmail.com">
                         </div>
-                            
+
                     </div>
 
 
                     <h4>Address</h4>
                     <hr>
                     <div class="form-row">
-                        
+
 
                         <div class="form-group col-md-12">
                             <label for="inputEmail4">Address<span style="color: red;">*</span></label>
                             <input type="text" class="form-control" id="address" placeholder="test">
                         </div>
 
-                       
-                        
+
+
                         <div class="form-group col-md-6">
                              <label for="inputEmail4">City</label>
                             <input type="text" class="form-control" id="city" placeholder="">
@@ -128,21 +128,21 @@
                              <label for="inputEmail4">Country</label>
                             <input type="text" class="form-control" id="country" placeholder="">
                         </div>
-                             
+
                     </div>
 
-                 
-                    
 
-                    
 
-                    
+
+
+
+
                     <button type="button" id = "patient_form_submit" style="float:right" class="btn btn-primary">Create Account</button>
                 </form>
             </div>
 
-           
-            
+
+
         </div>
         <hr>
         <h4 style="text-align:center">OR</h4>
@@ -153,7 +153,7 @@
                             <img src="{{asset('image')}}/loading_spinner.gif" />
                         </div>
                 <h4>Upload the batch file</h4>
-              
+
                 <div class="m-t-25">
                     <form method="post" enctype="multipart/form-data" action="{{ url('import') }}">
                         @csrf
@@ -161,14 +161,14 @@
                         <div class="col-md-7">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" name="select_file" id="customFile" multiple>
-                              
+
                                 <label class="custom-file-label" for="customFile">Choose file</label>
-                               
+
                             </div>
                         </div>
                         <div class="col-md-3 file_name_shown">
-                           
-                            <button type="button" id="upload" class="btn btn-primary">Upload</button> 
+
+                            <button type="button" id="upload" class="btn btn-primary">Upload</button>
 
                             {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl">Upload</button> --}}
 
@@ -176,7 +176,7 @@
                                 <div class="modal-dialog modal-xl">
                                     <div class="modal-content" style="overflow-x: auto;">
                                         <div class="modal-header">
-                                          
+
                                             <button type="button" class="close" data-dismiss="modal">
                                                 <i class="anticon anticon-close"></i>
                                             </button>
@@ -213,8 +213,8 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody id="missing_data">
-                                                               
-                                                               
+
+
                                                             </tbody>
                                                             {{-- <tfoot>
                                                                 <tr>
@@ -228,23 +228,23 @@
                                                             </tfoot> --}}
                                                         </table>
                                                     </div>
-                                                   
-                                                   
-                                                  
+
+
+
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
- 
+
                         </div>
 
                     </form>
 
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>
@@ -257,19 +257,19 @@
 
     <!-- Core JS -->
     <script src="{{asset('assets')}}/js/app.min.js"></script>
-   
+
     <script>
             $( document ).ajaxStart(function() {
                 $( ".preload" ).show();
             });
-            
+
             $( document ).ajaxStop(function() {
                 $( ".preload" ).hide();
             });
-              
+
 
         $(function () {
-            
+
             $(".preload").hide();
 
             $.ajaxSetup({
@@ -282,12 +282,12 @@ headers: {
 
 });
 
-            
+
         })
-        
+
         $("#patient_form_submit").on('click',function()
         {
-            
+
             var insurance_plan = $("#insurance_plan").val();
             var date_received = $("#date_received").val();
             var date_need_to_be_finished = $("#date_need_to_be_finished").val();
@@ -309,7 +309,7 @@ headers: {
             var country = $("#country").val();
             var assesment_type = $("#assesment_type").val();
             //alert(assesment_type);
-            
+
             var formdata = new FormData();
             formdata.append('insurance_plan',insurance_plan);
             formdata.append('date_received',date_received);
@@ -331,7 +331,7 @@ headers: {
             formdata.append('zip_code',zip_code);
             formdata.append('country',country);
             formdata.append('assesment_type',assesment_type);
-            
+
             $.ajax({
       processData: false,
       contentType: false,
@@ -349,11 +349,11 @@ headers: {
 
 
     });
-          
-            //alert(insurance_plan+" "+date_received+" "+date_need_to_be_finished+""+medicaid_id+" "+member_id+" "+first_name+" "+last_name+" "+sex+" "+date_of_birth+" "+primary_language+" "+ cell_phone+" "+home_phone+" "+marital_status+" "+email+" "+address+" "+city+" "+state+" "+zip_code+" "+country+" "+assesment_type); 
-            
+
+            //alert(insurance_plan+" "+date_received+" "+date_need_to_be_finished+""+medicaid_id+" "+member_id+" "+first_name+" "+last_name+" "+sex+" "+date_of_birth+" "+primary_language+" "+ cell_phone+" "+home_phone+" "+marital_status+" "+email+" "+address+" "+city+" "+state+" "+zip_code+" "+country+" "+assesment_type);
+
         });
-        
+
         $("#upload").on('click',function(){
 
                var formdata = new FormData();
@@ -391,7 +391,7 @@ headers: {
         });
 
 
-      
+
 
         $('#customFile').on('change',function(){
             //get the file name
@@ -416,8 +416,8 @@ headers: {
 
 
 
-  
-    
+
+
 @endsection
 
 
