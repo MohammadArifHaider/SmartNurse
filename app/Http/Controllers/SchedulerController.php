@@ -34,7 +34,7 @@ curl_setopt_array($curl, array(
 ));
 
 $distance = curl_exec($curl);
-file_put_contents('test.txt',$distance);
+//file_put_contents('test.txt',$distance);
  $distance_arr = json_decode($distance);
         $elements = $distance_arr->rows[0]->elements;
         $distance = $elements[0]->distance->text;
@@ -490,8 +490,9 @@ curl_close($curl);
 
 
 
+
             }
-            file_put_contents('test.txt',json_encode($data2));
+            //file_put_contents('test.txt',json_encode($data2));
             echo json_encode($data2);
 
             // /file_put_contents('test.txt',echo_json_encode($data));
@@ -690,7 +691,7 @@ curl_close($curl);
         $nameOfDay = date('l', strtotime($nurse_searching_date));
         $nurse_id = array();
         $nurse_id_list = distance_table::where('patient_id', '=', $patient_id)->orderBy('shortest_distance', 'ASC')->get();
-        file_put_contents('test.txt', $nurse_id_list);
+       // file_put_contents('test.txt', $nurse_id_list);
 
         $data = ' <thead>
                     <tr>

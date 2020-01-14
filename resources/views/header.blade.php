@@ -42,7 +42,7 @@
                      </li>
                  <li class="desktop-toggle">
                     <a href="scheduler">
-                      Admin
+                      Scheduler
                     </a>
                  </li>';
 
