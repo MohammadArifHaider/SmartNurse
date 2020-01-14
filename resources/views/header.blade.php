@@ -21,6 +21,32 @@
                   ';
               }
             }
+            else
+            {
+
+               echo'
+               <li class="desktop-toggle">
+                <a href="super_admin">
+                 Super Admin
+                </a>
+                 </li>
+               <li class="desktop-toggle">
+                    <a href="admin">
+                      Admin
+                    </a>
+                     </li>
+                <li class="desktop-toggle">
+                    <a href="intaker">
+                      Inaker
+                    </a>
+                     </li>
+                 <li class="desktop-toggle">
+                    <a href="scheduler">
+                      Admin
+                    </a>
+                 </li>';
+
+            }
             ?>
 
 

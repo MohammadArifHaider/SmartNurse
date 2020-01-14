@@ -43,8 +43,8 @@
                 <div class="nav-wrap">
                     <ul class="nav-left">
                         <li class="desktop-toggle">
-                            <a href="{{ url('/') }}">
-                                Home
+                            <a href="{{ url('super_admin') }}">
+                                Super Admin
                             </a>
                         </li>
 

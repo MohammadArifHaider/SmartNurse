@@ -16054,7 +16054,7 @@ iframe {
 
 .side-nav {
     width: 280px;
-    background-color: #fff;
+    background: linear-gradient(to left, #9900ff 1%, #990099 100%);
     z-index: 1000;
     top: 70px;
     bottom: 0px;
