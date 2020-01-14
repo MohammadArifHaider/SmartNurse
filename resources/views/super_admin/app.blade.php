@@ -44,7 +44,7 @@
                     <ul class="nav-left">
                         <li class="desktop-toggle">
                             <a href="{{ url('super_admin') }}">
-                                Super Adminn
+                                Super Admin
                             </a>
                         </li>
 
