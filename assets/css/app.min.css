@@ -26145,10 +26145,11 @@ a.badge-purple:focus {
 .accordion>.card>.card-header>.card-title>a {
     padding: 15px 25px;
     display: block;
-    color: #2a2a2a;
-    background-color: #fafafa;
+    background: linear-gradient(to left, #9900ff 1%, #990099 100%);
+    background-color: #fcfcfc;
     font-size: 14px;
-    font-weight: 400
+    font-weight: bold;
+    color: white;
 }
 
 .accordion>.card>.card-header>.card-title>a:not(.collapsed):after {

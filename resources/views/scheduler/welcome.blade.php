@@ -99,11 +99,11 @@
             <!-- Side Nav START -->
             <div class="side-nav">
                 <div class="side-nav-inner">
-                        <p style="margin-left:15px;padding-top:15px;color:#D70606">Total pending patient: {{ $pending_patient }}</p>
+                        <p style="margin-left:15px;padding-top:15px;color:white;font-size:18px;font-weight:500">Pending patient: {{ $pending_patient }}</p>
 
 <input type="hidden" id="hidden_patient_id" value="all">
                     <ul class="side-nav-menu scrollable">
-                        <h4 style="margin-left:15px;padding-top:15px;">Patient in Queue</h4>
+                        <h5 style="margin-left:15px;padding-top:15px;">Patient in Queue</h5>
 
 
                         <li class="nav-item dropdown">
@@ -117,7 +117,7 @@
                                             <div class="card-header" >
                                                 <h5 class="card-title" onclick="call_full_calendar({{ $patient->id }})">
 
-                                                    <a class="collapsed" data-toggle="collapse" href="#collapseOneDefault{{ $patient->id }}" style="color:red">
+                                                    <a class="collapsed" data-toggle="collapse" href="#collapseOneDefault{{ $patient->id }}" style="background:red">
                                                         <span >{{ $patient->first_name." ".$patient->last_name}}</span>
                                                     </a>
                                                 </h5>
