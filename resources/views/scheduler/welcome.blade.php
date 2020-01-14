@@ -99,7 +99,10 @@
             <!-- Side Nav START -->
             <div class="side-nav">
                 <div class="side-nav-inner">
-                        <p style="margin-left:15px;padding-top:15px;color:white;font-size:18px;font-weight:500">Pending patient: {{ $pending_patient }}</p>
+                    <div style="background-color:black;height:50px;">
+                       <p style="margin-left:15px;padding-top:15px;color:white;font-size:18px;font-weight:500">Pending patient: {{ $pending_patient }}</p>
+                    </div>
+                        {{--  <p style="margin-left:15px;padding-top:15px;color:white;font-size:18px;font-weight:500">Pending patient: {{ $pending_patient }}</p>  --}}
 
 <input type="hidden" id="hidden_patient_id" value="all">
                     <ul class="side-nav-menu scrollable">
