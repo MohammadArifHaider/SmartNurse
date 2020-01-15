@@ -14,6 +14,67 @@ class AdminController extends Controller
 {
     //
 
+
+    public function get_assigned_nurse_data()
+    {
+        date_default_timezone_set('Asia/Dhaka');
+        $date = date('Y-m-d');
+        $date_array[0] =$date;
+
+
+
+        for($i = 1;$i<7;$i++)
+        {
+            $date1 = date('Y-m-d', strtotime($date. '-1 days'));
+            $date_array [$i] = $date1;
+            $date = $date1;
+
+        }
+          $data = array();
+         for($i=0;$i<sizeof($date_array);$i++)
+         {
+             $sum = nurse_scheduler::where('created_at','LIKE',$date_array[$i]."%")->get()->groupBy('nurse_id');
+             array_push($data,array('date'=>$date_array[$i],'patient_count'=>sizeof($sum)));
+         }
+         echo json_encode($data);
+
+      // file_put_contents('test.txt',json_encode($data));
+
+
+
+    }
+
+
+
+    public function get_assigned_patient_data()
+    {
+        date_default_timezone_set('Asia/Dhaka');
+        $date = date('Y-m-d');
+        $date_array[0] =$date;
+
+
+
+        for($i = 1;$i<7;$i++)
+        {
+            $date1 = date('Y-m-d', strtotime($date. '-1 days'));
+            $date_array [$i] = $date1;
+            $date = $date1;
+
+        }
+          $data = array();
+         for($i=0;$i<sizeof($date_array);$i++)
+         {
+             $sum = nurse_scheduler::where('created_at','LIKE',$date_array[$i]."%")->get()->groupBy('patient_id');
+             array_push($data,array('date'=>$date_array[$i],'patient_count'=>sizeof($sum)));
+         }
+         echo json_encode($data);
+
+       // file_put_contents('test.txt',json_encode($data));
+
+
+
+    }
+
     public function update_user_role(Request $request)
     {
            $user_id = $request->user_id;

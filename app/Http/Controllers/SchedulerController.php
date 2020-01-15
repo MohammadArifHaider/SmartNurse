@@ -348,7 +348,7 @@ curl_close($curl);
         else{
 
             date_default_timezone_set('Asia/Dhaka');
-        $date = date('Y-m-d');
+            $date = date('Y-m-d');
             $date_limit = 30;
             $date_array = array();
 

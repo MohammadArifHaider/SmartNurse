@@ -86,7 +86,9 @@ Route::post('update_user_role','AdminController@update_user_role');
 Route::post('update_user_password','AdminController@update_user_password');
 
 Route::post('delete_user','AdminController@delete_user');
+Route::get('get_assigned_patient_data','AdminController@get_assigned_patient_data');
 
+Route::get('get_assigned_nurse_data','AdminController@get_assigned_nurse_data');
 
 
 
