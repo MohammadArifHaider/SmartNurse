@@ -23,7 +23,7 @@ Route::post('nurse_information_upload','NurseController@nurse_information_upload
 Route::get('/',"SchedulerController@home");
 
 Route::get('intaker', function () {
-    return view('intaker.welcome');
+    return view('intaker.patients_profile');
 });
 
 

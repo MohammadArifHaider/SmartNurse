@@ -164,7 +164,7 @@ class AdminController extends Controller
             if($user_role === 'super_admin')
             {
                Session::put('user_id', $id);
-               return view('super_admin.welcome');
+               return view('super_admin.view_user');
             }
             else
             {
