@@ -4832,11 +4832,16 @@ input[type="button"].btn-block {
 }
 
 .accordion>.card {
-    overflow: hidden
+    overflow: hidden;
+    margin-right: 60px;
 }
 
 .accordion>.card:not(:first-of-type) .card-header:first-child {
-    border-radius: 0
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    -o-border-radius: 0;
 }
 
 .accordion>.card:not(:first-of-type):not(:last-of-type) {
@@ -12687,11 +12692,11 @@ code[class*="language-css"] {
 html,
 html a,
 body {
-    -webkit-font-smoothing: antialiased
+    -webkit-font-smoothing: antialiased;
 }
 
 body {
-    font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Montserrat Alternates', sans-serif;
     font-size: 14px;
     background-color: #f9fbfd;
     color: #53535f;
@@ -13014,6 +13019,14 @@ iframe {
 
 .m-l-0 {
     margin-left: 0 !important
+}
+
+.custom-card-admin {
+    background-color: #7714b7 !important;
+}
+
+.custom-card-admin>p {
+    color: white !important;
 }
 
 .m-v-0 {
@@ -16054,7 +16067,7 @@ iframe {
 
 .side-nav {
     width: 280px;
-    background: linear-gradient(to left, #9900ff 1%, #990099 100%);
+    background: transparent;
     z-index: 1000;
     top: 70px;
     bottom: 0px;
@@ -16096,7 +16109,6 @@ iframe {
     margin: 0;
     padding-left: 0;
     overflow: auto;
-    border-right: 1px solid #edf2f9;
     height: calc(100vh - 70px)
 }
 
@@ -16162,8 +16174,8 @@ iframe {
 }
 
 .side-nav .side-nav-inner .side-nav-menu li.dropdown.open>a {
-    color: white;
-    font-size: 14px;
+    color: rgb(10, 10, 10);
+    font-size: 16px;
     font-weight: bold;
 }
 
@@ -16499,9 +16511,8 @@ iframe {
 }
 
 .header {
-    background: #fff;
+    background: linear-gradient(to right, #ccffff 1%, #cc99ff 100%);
     height: 70px;
-    border-bottom: 1px solid #edf2f9;
     position: fixed;
     top: 0px;
     width: 100%;
@@ -16511,7 +16522,6 @@ iframe {
 
 .header .logo {
     width: 280px;
-    border-right: 1px solid #edf2f9;
     transition: all 0.2s ease;
     -webkit-transition: all 0.2s ease;
     -moz-transition: all 0.2s ease;
@@ -16547,7 +16557,7 @@ iframe {
 .header .nav-wrap {
     flex: 1;
     display: flex;
-    justify-content: space-between
+    justify-content: center
 }
 
 .header .nav-wrap .nav-left,
@@ -16565,8 +16575,10 @@ iframe {
 .header .nav-wrap .nav-right li nz-dropdown>a {
     padding: 5px 15px;
     font-size: 20px;
-    color: #53535f;
+    color: white;
     display: block;
+    margin: 1px;
+    background-color: #7714b7;
     transition: background-color 0.3s;
     -webkit-transition: background-color 0.3s;
     -moz-transition: background-color 0.3s;
@@ -16939,7 +16951,7 @@ iframe {
 
 .page-container {
     min-height: 100vh;
-    padding-left: 280px;
+    padding-left: 200px!important;
     transition: all 0.2s ease;
     -webkit-transition: all 0.2s ease;
     -moz-transition: all 0.2s ease;

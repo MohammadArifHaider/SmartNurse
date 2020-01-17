@@ -1,5 +1,6 @@
 
     <div class="nav-wrap">
+        <div style="padding-top:10px; text-align:center">
         <ul class="nav-left">
           <?php
             $user_id = Session::get('user_id');
@@ -51,6 +52,7 @@
 
 
         </ul>
+        </div>
 
     </div>
 

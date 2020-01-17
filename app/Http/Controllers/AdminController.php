@@ -188,7 +188,7 @@ class AdminController extends Controller
 
     public function super_admin_main_pages()
     {
-        return view('super_admin.welcome');
+        return view('super_admin.view_user');
     }
 
     public function main_page()

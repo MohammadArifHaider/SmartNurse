@@ -62,7 +62,7 @@
 
 </head>
 
-<body style="overflow-x:auto">
+<body style="overflow-x:auto;background: linear-gradient(to right, #ccffff 1%, #cc99ff 100%);">
     <div class="app">
         <div class="layout">
             <!-- Header START -->
@@ -99,16 +99,16 @@
             <!-- Side Nav START -->
             <div class="side-nav">
                 <div class="side-nav-inner">
-                    <div style="background-color:black;height:50px;text-align:center" >
-                       <p style="margin-left:15px;padding-top:15px;color:white;font-size:18px;font-weight:500">Pending patient: {{ $pending_patient }}</p>
+                    <div style="background-color:black;height:50px;text-align:center; margin-right:60px;margin-left:1px" >
+                       <p style="margin-left:15px;padding-top:15px;color:white;font-size:18px;font-weight:500;" >Pending patient: {{ $pending_patient }}</p>
                     </div>
                         {{--  <p style="margin-left:15px;padding-top:15px;color:white;font-size:18px;font-weight:500">Pending patient: {{ $pending_patient }}</p>  --}}
 
 <input type="hidden" id="hidden_patient_id" value="all">
                     <ul class="side-nav-menu scrollable">
-                        <h5 style="margin-left:15px;padding-top:15px;color:white">Patient in Queue</h5>
+                        <h5 style="margin-left:15px;padding-top:15px;color:black">Patient in Queue</h5>
 
-
+                       <div>
                         <li class="nav-item dropdown">
 
                                 <div class="accordion" id="accordion-default">
@@ -178,6 +178,7 @@
                                     </div>
 
                         </li>
+                    </div>
 
                     </ul>
                 </div>

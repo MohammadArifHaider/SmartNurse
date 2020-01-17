@@ -24,3 +24,5 @@ Route::post('get_schedule','ApiController@get_schedule');
 Route::post('notification','ApiController@notification');
 
 Route::post('cancel_schedule','ApiController@cancle_schedule');
+
+Route::post('test','ApiController@test');

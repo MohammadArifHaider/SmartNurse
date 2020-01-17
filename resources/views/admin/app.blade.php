@@ -4,12 +4,20 @@
 
 
 <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="cache-control" content="no-store" />
+    <meta http-equiv="cache-control" content="must-revalidate" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+    <meta http-equiv="pragma" content="no-cache" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
-<meta http-equiv="Pragma" content="no-cache" />
-<meta http-equiv="Expires" content="0" />
+
     <title>Smart Nurse</title>
 
     <!-- Favicon -->
@@ -20,10 +28,11 @@
 <link href="{{asset('assets')}}/vendors/datatables/dataTables.bootstrap.min.css" rel="stylesheet">
     <!-- Core css -->
     <link href="{{asset('assets')}}/css/app.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat+Alternates&display=swap" rel="stylesheet">
 
 </head>
 
-<body style="overflow-x:auto">
+<body  style="overflow-x:auto; background: linear-gradient(to right, #ccffff 1%, #cc99ff 100%);">
     <div class="app">
         <div class="layout">
             <!-- Header START -->
