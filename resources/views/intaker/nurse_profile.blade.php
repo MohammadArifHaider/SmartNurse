@@ -300,8 +300,10 @@ headers: {
         $("#nurse_information_upload").on('click',function(){
             var prefered_day = [];
         $('.prefered_day:checked').each(function(){
-            prefered_day.push($(this).val());
+            prefered_day.push($(this).val().charAt(0).toUpperCase() + $(this).val().slice(1));
         });
+
+       // alert(prefered_day);
 
       //var gender =   $("#gender:checked").val();
       //alert (gender);

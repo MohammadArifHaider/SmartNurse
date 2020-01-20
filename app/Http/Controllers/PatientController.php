@@ -145,7 +145,7 @@ curl_close($curl);
                 $patient_id = $patients->id;
                 //$patient_address = $insert_data[$i]['address'] . ',' . $insert_data[$i]['city'];
 
-                $patient_zip = $patient_zip;
+                $patient_zip = $patients->zip_code;
 
 
                 $nurse = nurse_profile::get();

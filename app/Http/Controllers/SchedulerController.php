@@ -365,6 +365,7 @@ curl_close($curl);
             }
 
                  $nurse_list = distance_table::where('patient_id','=',$patient_id)->orderBy('shortest_distance','ASC')->get();
+
            // file_put_contents('test.txt',json_encode($nurse_list));
             $data2 = array();
             $a = 0;
@@ -373,7 +374,8 @@ curl_close($curl);
               $nurse_id      = $nurse_list[$i]->nurse_id;
 
 
-             $nurse_schedule = nurse_scheduler::where('status','=','running')->where('nurse_id','=',$nurse_id)->get();
+            // $nurse_schedule = nurse_scheduler::where('status','=','running')->where('nurse_id','=',$nurse_id)->get();
+             //file_put_contents('test.txt',json_encode($nurse_schedule));
 
               $nurse_profile = nurse_profile::where('id','=',$nurse_id)->first();
               $patient_profile = patient_profile::where('id','=',$patient_id)->first();
@@ -427,6 +429,8 @@ curl_close($curl);
                 {
                    $day = date('l', strtotime($date_array[$j]));
                    if (in_array($day, $nurse_day)) {
+                    // $myfile = fopen("file.txt", "a+") or die("Unable to open file!");
+                    // fwrite($myfile,$nurse_id." "."\n");
                        for ($k=0;$k<sizeof($prefered_times);$k++) {
                            $a++;
 
@@ -453,11 +457,12 @@ curl_close($curl);
                                    $busy_time[$m] = $tmp_time.":00";
                                    $appointed_started_time =$tmp_time;
                                }
-                            //    $myfile = fopen("file.txt", "a+") or die("Unable to open file!");
-                            //    fwrite($myfile,json_encode($busy_time)." "."\n");
+
 
                                //file_put_contents("test.txt", json_encode($busy_time));
                            }
+
+
 
 
 
@@ -495,7 +500,7 @@ curl_close($curl);
             //file_put_contents('test.txt',json_encode($data2));
             echo json_encode($data2);
 
-            // /file_put_contents('test.txt',echo_json_encode($data));
+            //file_put_contents('test.txt',json_encode($data2));
 
 
 
