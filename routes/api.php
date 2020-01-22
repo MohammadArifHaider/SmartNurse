@@ -25,4 +25,5 @@ Route::post('notification','ApiController@notification');
 
 Route::post('cancel_schedule','ApiController@cancle_schedule');
 
-Route::post('test','ApiController@test');
+Route::post('update_firebase_token','ApiController@update_firebase_token');
+

@@ -83,13 +83,20 @@ class ApiController extends Controller
     {
          date_default_timezone_set('Asia/Dhaka');
          $date = date('d-m-Y');
+         $date2 = explode("-",$date);
+         $month = $date2[1];
+         if(strlen($month)==1)
+         {
+             $month ="0".$month;
+         }
+         $date = $date2[0]."-".$month."-".$date2[2];
         $nurse_id = $request->user_id;
         $appointment = nurse_scheduler::where('nurse_id','=',$nurse_id)->where('appointed_date','=',$date)->where('cancle','=','no')->get();
         $appointment_list = array();
 
         if($appointment->isEmpty())
         {
-            //return $date;
+           // return $date;
             return json_encode($appointment_list);
         }
         else
@@ -165,5 +172,19 @@ class ApiController extends Controller
     {
         $nurse_lat = $request->lat;
         $nurse_lon = $request->lon;
+    }
+
+    public function update_firebase_token(Request $request)
+
+    {
+
+
+        $user_id = $request->user_id;
+        $key = $request->key;
+        nurse_profile::where('id','=',$user_id)->update(['firebase_token'=>$key]);
+
+        	return response()->json(['response'=>'ok']);
+
+
     }
 }

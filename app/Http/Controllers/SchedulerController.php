@@ -158,6 +158,46 @@ curl_close($curl);
     //     }
     // }
 
+    public function push_notification($nurse_id)
+    {
+
+       // file_put_contents('test.txt','push_notification');
+    $title ="hi";
+    $message = "hello";
+    $image_url ="https://storage.googleapis.com/imp-projects/flower-show/1.2.3/images/splash/frontflower_left.png";
+
+    $path_to_fcm= 'https://fcm.googleapis.com/fcm/send';
+    $server_key= "AAAAbE0lZTk:APA91bFUjuLDJebrQd-Nd0XhJoW9bp-pNblPCZggPKJCWoY06Xn7xcS8sIt7gIXuGf2PWwJjHHUfas21hMPc3MvXj6OLd1WcgE-nwqIQA6uvA2QE2sf-FSBh3Zbs5i2T7ehfD92D7ILY";
+
+
+        $key = nurse_profile::where('id','=',$nurse_id)->first()->firebase_token ;//"d85b_7DQz_0:APA91bG31jWgzzwd8-P7kovxmUfCyDAJKcJkwyUlIoMJ3NlnkdsC0CNF55uY2u5WNUfVA8IraOtqWriw-wCBMhqrxOSRa0qCQL7CjMJ9mtMMcyBgLO35ccppytFFrFuaNSd9IVGulZFT";
+
+        $headers = array(
+            'Authorization: key=' . $server_key,
+            'Content-Type: application/json'
+        );
+
+    	 $fields = array('to' => $key,
+            'notification' => array('title'=>$title,'body'=>$message,'sound'=>"default"));
+
+		$payload =json_encode($fields);
+
+        $curl_session = curl_init();
+
+        // Set the url, number of POST vars, POST data
+        curl_setopt($curl_session, CURLOPT_URL, $path_to_fcm);
+		curl_setopt($curl_session, CURLOPT_POST, true);
+        curl_setopt($curl_session, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($curl_session, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($curl_session, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($curl_session, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4 );
+        curl_setopt($curl_session, CURLOPT_POSTFIELDS, $payload);
+
+		$result =curl_exec($curl_session);
+
+		curl_close($curl_session);
+
+    }
     public function submit_nurse(Request $request)
     {
 
@@ -219,6 +259,7 @@ curl_close($curl);
             'phone_number'        =>$nurse_contact_no
         );
         Mail::to($patient_email)->send(new SendMail($data));
+        $this->push_notification($nurse_id);
 
 
 
@@ -429,16 +470,15 @@ curl_close($curl);
                 {
                    $day = date('l', strtotime($date_array[$j]));
                    if (in_array($day, $nurse_day)) {
-                    // $myfile = fopen("file.txt", "a+") or die("Unable to open file!");
-                    // fwrite($myfile,$nurse_id." "."\n");
+
                        for ($k=0;$k<sizeof($prefered_times);$k++) {
-                           $a++;
+
 
                            $tmp_date = date('d-m-Y', strtotime($date_array[$j]));
-                           //file_put_contents('test.txt',$date);
+
 
                            $nurse_schedule = nurse_scheduler::where('status', '=', 'running')->where('nurse_id', '=', $nurse_id)->where('appointed_date', '=', $tmp_date)->get();
-                          // $exist = nurse_scheduler::where('status','=','running')->where('nurse_id','=',$nurse_id)->where('appointed_date','=',$tmp_date)->where('appointed_start_time','=',$prefered_times[$k])->first();
+
                           $exist = nurse_scheduler::where('status','=','running')->where('nurse_id','=',$nurse_id)->where('appointed_date','=',$tmp_date)->first();
                            $busy_time = array();
                            if ($exist) {
@@ -447,9 +487,7 @@ curl_close($curl);
 
 
                                $appointed_started_time = $appointed_started_time2[0];
-                        //         $myfile = fopen("file.txt", "a+") or die("Unable to open file!");
-                        //    fwrite($myfile,$appointed_started_time2[0]." "."\n");
-                               //file_put_contents('test.txt',$appointed_started_time);
+
 
                                $busy_time[0] = $appointed_started_time.':00';
                                for ($m = 1;$m<=$duration_hour-1;$m++) {
@@ -459,30 +497,42 @@ curl_close($curl);
                                }
 
 
+
+
+
+
                                //file_put_contents("test.txt", json_encode($busy_time));
                            }
+                        if ($exist) {
+                            if (!in_array($prefered_times[$k], $busy_time)) {
+                                $a++;
+                                array_push($data2, [
+
+
+              'id' => $a,
+              'title' => $nurse_name." ".sizeof($nurse_schedule),
+              'nurse_id'=>$nurse_id,
+              'start' => $date_array[$j].'T'.$prefered_times[$k],
+              'end' => $date_array[$j].'T'.$prefered_times[$k],
+              'call_count'=>sizeof($nurse_schedule)
+
+
+          ]);
+                            }
+                        }
 
 
 
 
 
-                                if (!in_array($prefered_times[$k],$busy_time)) {
-                                    array_push($data2, [
-
-
-                      'id' => $a,
-                      'title' => $nurse_name." ".sizeof($nurse_schedule),
-                      'nurse_id'=>$nurse_id,
-                      'start' => $date_array[$j].'T'.$prefered_times[$k],
-                      'end' => $date_array[$j].'T'.$prefered_times[$k],
-                      'call_count'=>sizeof($nurse_schedule)
-
-
-                  ]);
-                                }
 
 
                        }
+
+
+
+
+
                    }
 
 
@@ -491,6 +541,149 @@ curl_close($curl);
 
 
                 }
+
+
+
+
+
+
+
+            }
+
+            for($i = 0;$i<sizeof($nurse_list);$i++)
+            {
+              $nurse_id      = $nurse_list[$i]->nurse_id;
+
+
+            // $nurse_schedule = nurse_scheduler::where('status','=','running')->where('nurse_id','=',$nurse_id)->get();
+             //file_put_contents('test.txt',json_encode($nurse_schedule));
+
+              $nurse_profile = nurse_profile::where('id','=',$nurse_id)->first();
+              $patient_profile = patient_profile::where('id','=',$patient_id)->first();
+
+
+
+              $nurse_name = $nurse_profile->name;
+              $assesment_type = $patient_profile->assesment_type;
+              $duration_minute = $nurse_list[$i]->duration;
+
+              if($assesment_type =="primary")
+              {
+                  $duration_minute = $duration_minute+200;
+              }
+              else
+              {
+                  $duration_minute = $duration_minute+100;
+              }
+                 $duration_hour = ceil($duration_minute/60);
+
+                //     $myfile = fopen("file.txt", "a+") or die("Unable to open file!");
+                //  fwrite($myfile,$nurse_name." ".$duration_minute." ".$assesment_type."\n");
+
+
+
+
+              $start_time = $nurse_profile->prefered_start_times;
+              $end_time = $nurse_profile->prefered_end_times;
+              $prefered_times = array();
+              $time_difference =$end_time - $start_time;
+
+             $prefered_times[0] = $start_time.":00";
+              for($m = 1 ;$m<$time_difference;$m++ )
+              {
+                 $start_time = $start_time+1;
+                 $time = $start_time.":00";
+                 $prefered_times[$m] = $time;
+              }
+              $prefered_times[$time_difference] = $end_time.':00';
+
+              //file_put_contents('test4.txt',$prefered_times);
+
+
+
+              $nurse_day =  $nurse_profile->prefered_days;
+              $nurse_day = explode(',',$nurse_day);
+
+
+
+                for($j = 0;$j<sizeof($date_array);$j++)
+                {
+                   $day = date('l', strtotime($date_array[$j]));
+                   if (in_array($day, $nurse_day)) {
+
+                       for ($k=0;$k<sizeof($prefered_times);$k++) {
+
+
+                           $tmp_date = date('d-m-Y', strtotime($date_array[$j]));
+
+
+                           $nurse_schedule = nurse_scheduler::where('status', '=', 'running')->where('nurse_id', '=', $nurse_id)->where('appointed_date', '=', $tmp_date)->get();
+
+                          $exist = nurse_scheduler::where('status','=','running')->where('nurse_id','=',$nurse_id)->where('appointed_date','=',$tmp_date)->first();
+                           $busy_time = array();
+                           if ($exist) {
+                               $appointed_started_time = $exist->appointed_start_time;
+                               $appointed_started_time2 = explode(':', $appointed_started_time);
+
+
+                               $appointed_started_time = $appointed_started_time2[0];
+
+
+                               $busy_time[0] = $appointed_started_time.':00';
+                               for ($m = 1;$m<=$duration_hour-1;$m++) {
+                                   $tmp_time = $appointed_started_time+1;
+                                   $busy_time[$m] = $tmp_time.":00";
+                                   $appointed_started_time =$tmp_time;
+                               }
+
+
+
+
+
+
+                               //file_put_contents("test.txt", json_encode($busy_time));
+                           }
+                        if (!$exist) {
+
+                            if (!in_array($prefered_times[$k], $busy_time)) {
+                                $a++;
+                                array_push($data2, [
+
+
+              'id' => $a,
+              'title' => $nurse_name." ".sizeof($nurse_schedule),
+              'nurse_id'=>$nurse_id,
+              'start' => $date_array[$j].'T'.$prefered_times[$k],
+              'end' => $date_array[$j].'T'.$prefered_times[$k],
+              'call_count'=>sizeof($nurse_schedule)
+
+
+          ]);
+                            }
+                        }
+
+
+
+
+
+
+
+                       }
+
+
+
+
+
+                   }
+
+
+
+                    //file_put_contents('test.txt',$date);
+
+
+                }
+
+
 
 
 
@@ -517,175 +710,7 @@ curl_close($curl);
 
 
         }
-        // else{
 
-        //     $nurse_list = distance_table::where('patient_id','=',$patient_id)->orderBy('shortest_distance','ASC')->get();
-        //    // file_put_contents('test.txt',json_encode($nurse_list));
-        //     $data2 = array();
-        //     $a = 0;
-        //     for($i = 0;$i<sizeof($nurse_list);$i++)
-        //     {
-        //       $nurse_id      = $nurse_list[$i]->nurse_id;
-        //      // $myfile = fopen("file.txt", "a+") or die("Unable to open file!");
-        //       //fwrite($myfile,$nurse_id." ".$nurse_list[$i]->shortest_distance."\n");
-        //       $call_count    = array();
-        //      $nurse_schedule = nurse_scheduler::where('status','=','running')->where('nurse_id','=',$nurse_id)->get();
-        //     // print_r(nurse_scheduler::all()); die();
-        //    // file_put_contents('test.txt',nurse_scheduler::all());
-        //       for($b=0;$b<sizeof($nurse_schedule);$b++)
-        //       {
-
-        //         $call_count[$b] = date('l', strtotime($nurse_schedule[$b]->appointed_date));
-        //       }
-        //      // file_put_contents('test2.txt',json_encode($call_count));
-        //      // $call_count = sizeof($call_count);
-        //      //file_put_contents('test5.txt',$nurse_id);
-        //       $nurse_profile = nurse_profile::where('id','=',$nurse_id)->first();
-
-
-
-        //       $nurse_name = $nurse_profile->name;
-
-        //       // $date = $nurse_schedule[$i]->appointed_date;
-        //       // $date = explode('-',$date);
-        //       // $date = $date[2].'-'.$date[1].'-'.$date[0];
-        //       // $date = $date."T16:00:00";
-
-        //       $start_time = $nurse_profile->prefered_start_times;
-        //       $end_time = $nurse_profile->prefered_end_times;
-        //       $prefered_times = array();
-        //       $time_difference =$end_time - $start_time;
-
-        //      $prefered_times[0] = $start_time.":00";
-        //       for($m = 1 ;$m<$time_difference;$m++ )
-        //       {
-        //          $start_time = $start_time+1;
-        //          $time = $start_time.":00";
-        //          $prefered_times[$m] = $time;
-        //       }
-        //       $prefered_times[$time_difference] = $end_time.':00';
-
-        //       //file_put_contents('test4.txt',$prefered_times);
-
-
-
-        //       $nurse_day =  $nurse_profile->prefered_days;
-        //       $nurse_day = explode(',',$nurse_day);
-
-
-        //       $day = array();
-        //       for($j=0;$j<sizeof($nurse_day);$j++)
-        //       {
-        //          if($nurse_day[$j] =="Sunday")
-        //          {
-        //              $day[$j]=0;
-        //          }
-        //          else if($nurse_day[$j] =="Monday")
-        //          {
-        //              $day[$j] = 1;
-        //          }
-        //          else if($nurse_day[$j] =="Tuesday")
-        //          {
-        //              $day[$j] = 2;
-        //          }
-        //          else if($nurse_day[$j] =="Wednesday")
-        //          {
-        //              $day[$j] = 3;
-        //          }
-        //          else if($nurse_day[$j] =="Thursday")
-        //          {
-        //              $day[$j] = 4;
-        //          }
-        //          else if($nurse_day[$j] =="Friday")
-        //          {
-        //              $day[$j] = 5;
-        //          }
-        //          else if($nurse_day[$j] =="Saturday")
-        //          {
-        //              $day[$j] = 6;
-        //          }
-
-        //       }
-        //       $call = array();
-
-        //       for($j=0;$j<sizeof($call_count);$j++)
-        //       {
-        //          if($call_count[$j] =="Sunday")
-        //          {
-        //              $call[$j]=0;
-        //          }
-        //          else if($call_count[$j] =="Monday")
-        //          {
-        //              $call[$j] = 1;
-        //          }
-        //          else if($call_count[$j] =="Tuesday")
-        //          {
-        //              $call[$j] = 2;
-        //          }
-        //          else if($call_count[$j] =="Wednesday")
-        //          {
-        //              $call[$j] = 3;
-        //          }
-        //          else if($call_count[$j] =="Thursday")
-        //          {
-        //              $call[$j] = 4;
-        //          }
-        //          else if($nurse_day[$j] =="Friday")
-        //          {
-        //              $call[$j] = 5;
-        //          }
-        //          else if($nurse_day[$j] =="Saturday")
-        //          {
-        //              $call[$j] = 6;
-        //          }
-
-        //       }
-
-
-        //        for ($x=0;$x<sizeof($day);$x++) {
-        //            for ($k = 0; $k < sizeof($prefered_times); $k++) {
-        //                $a++;
-        //                if (in_array($day[$x], $call)) {
-        //                    $total_assign = count(array_keys($call,$day[$x]));
-        //                    //file_put_contents('test2.txt',$total_assign);
-
-
-        //                    array_push($data2, [
-
-        //               'id' => $a,
-        //               'title' => $nurse_name." ".$total_assign,
-        //               'nurse_id'=>$nurse_id,
-        //               'start' => $prefered_times[$k],
-        //               'dow' => [$day[$x]],
-
-        //           ]);
-        //                }
-        //                else{
-        //                 array_push($data2, [
-
-        //                     'id' => $a,
-        //                     'title' => $nurse_name." "." ".'0',
-        //                     'nurse_id'=>$nurse_id,
-        //                     'start' => $prefered_times[$k],
-        //                     'dow' => [$day[$x]],
-        //                 ]);
-        //                }
-        //            }
-        //        }
-
-        //     }
-        //     //file_put_contents('test.txt',json_encode($data2));
-        //     echo json_encode($data2);
-
-        //     // /file_put_contents('test.txt',echo_json_encode($data));
-
-
-
-
-        // }
-
-
-        //file_put_contents('test.txt',json_encode($data));
 
     }
 
