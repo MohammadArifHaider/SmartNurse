@@ -70,9 +70,16 @@
 
                         <div class="form-group col-md-12">
                             <label for="inputEmail4">User Role</label>
-                           <div>
+                           <div style="padding-left:10px">
+
+
                             <label class="checkbox-container">Admin
                                 <input class="user_role" type="checkbox" value="admin" >
+                                <span class="checkmark"></span>
+                              </label>
+
+                              <label class="checkbox-container">Super Admin
+                                <input class="user_role" type="checkbox" value="super_admin" >
                                 <span class="checkmark"></span>
                               </label>
 
