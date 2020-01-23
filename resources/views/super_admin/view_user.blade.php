@@ -37,6 +37,11 @@
                                 <span class="checkmark"></span>
                               </label>
 
+                              <label class="checkbox-container">Super Admin
+                                <input class="user_role" type="checkbox" value="super_admin" >
+                                <span class="checkmark"></span>
+                              </label>
+
                               <label class="checkbox-container">Intaker
                                 <input class="user_role" type="checkbox" value="intaker">
                                 <span class="checkmark"></span>
