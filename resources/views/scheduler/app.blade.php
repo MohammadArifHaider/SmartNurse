@@ -4,7 +4,7 @@
 
 
 <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -29,6 +29,7 @@
     <!-- Core css -->
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat+Alternates&display=swap" rel="stylesheet">
 
 
 
@@ -42,7 +43,7 @@
             <div class="header">
                 <div class="logo logo-dark">
                     <a href="http://www.candthomecare.com/">
-                        <img src="{{ asset('image') }}/logo.jpg" alt="Logo">
+                        <img src="{{ asset('image') }}/logo1.jpg" alt="Logo">
                         <img class="logo-fold" src="assets/images/logo/logo-fold11.png" alt="Logo">
                     </a>
                 </div>

@@ -18,6 +18,7 @@
 
     <!-- page css -->
 <link href="{{asset('assets')}}/vendors/datatables/dataTables.bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat+Alternates&display=swap" rel="stylesheet">
     <!-- Core css -->
     <link href="{{asset('assets')}}/css/app.min.css" rel="stylesheet">
 
@@ -30,7 +31,7 @@
             <div class="header">
                 <div class="logo logo-dark">
                     <a href="{{url('/')}}">
-                        <img src="{{ asset('image') }}/logo.jpg" alt="Logo">
+                        <img src="{{ asset('image') }}/logo1.jpg" alt="Logo">
                         <img class="logo-fold" src="assets/images/logo/logo-fold11.png" alt="Logo">
                     </a>
                 </div>

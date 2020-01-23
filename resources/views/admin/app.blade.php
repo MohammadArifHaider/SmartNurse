@@ -39,14 +39,14 @@
             <div class="header">
                 <div class="logo logo-dark">
                     <a href="{{url('/')}}">
-                        <img src="{{ asset('image') }}/logo.jpg" alt="Logo">
+                        <img src="{{ asset('image') }}/logo1.jpg" alt="Logo">
                         <img class="logo-fold" src="assets/images/logo/logo-fold11.png" alt="Logo">
                     </a>
                 </div>
                 <div class="logo logo-white">
                     <a href="{{url('/')}}">
                         <img src="assets/images/logo/logo-white.png" alt="Logo">
-                        <img class="logo-fold" src="assets/images/logo/logo-fold-white1.png" alt="Logo">
+                        <img class="logo-fold" src="assets/images/logo/logo-fold-white11.png" alt="Logo">
                     </a>
                 </div>
                 <div class="nav-wrap">
