@@ -609,7 +609,7 @@ curl_close($curl);
 
 
             }
-            file_put_contents('test.txt',json_encode($data2));
+            //file_put_contents('test.txt',json_encode($data2));
             echo json_encode($data2);
 
             //file_put_contents('test.txt',json_encode($data2));
