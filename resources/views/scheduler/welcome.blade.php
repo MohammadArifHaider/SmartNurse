@@ -62,7 +62,7 @@
 
 </head>
 
-<body style="overflow-x:auto;background: linear-gradient(to right, #ccffff 1%, #cc99ff 100%);">
+<body style="overflow-x:auto;background: linear-gradient(to right, #ccffcc 1%, #cc99ff 100%);">
     <div class="app">
         <div class="layout">
             <!-- Header START -->
@@ -102,7 +102,7 @@
                     <div style="background-color:black;height:50px;text-align:center; margin-right:60px;margin-left:1px" >
                        <p style="margin-left:15px;padding-top:15px;color:white;font-size:18px;font-weight:500;" >Pending patient: {{ $pending_patient }}</p>
                     </div>
-                        {{--  <p style="margin-left:15px;padding-top:15px;color:white;font-size:18px;font-weight:500">Pending patient: {{ $pending_patient }}</p>  --}}
+
 
 <input type="hidden" id="hidden_patient_id" value="all">
                     <ul class="side-nav-menu scrollable">
@@ -418,7 +418,7 @@
             editable:true,
             allDay:true,
 
-            eventOrder: "id",
+            eventOrder: 'id',
 
 
 
@@ -496,7 +496,8 @@
 
             eventClick:function(calEvent, jsEvent, view)
             {
-                var patient_id = $('#hidden_patient_id').val();
+                //alert(calEvent.id);
+              var patient_id = $('#hidden_patient_id').val();
                 var nurse_id = calEvent.nurse_id;
               // alert(nurse_id);
               var time = calEvent.start.format('H:mm');

@@ -87,6 +87,9 @@ $(function() {
 
     fetch_data();
 
+
+
+
     $("#password").focusout(function() {
 
         password_check();

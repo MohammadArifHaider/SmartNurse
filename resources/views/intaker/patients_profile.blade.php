@@ -25,11 +25,20 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Date Received<span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" id="date_received" placeholder="29.10.2019">
+                            {{--  <input type="text" class="form-control" id="date_received" placeholder="29.10.2019">  --}}
+                            <div class="input-affix m-b-10">
+                                <i class="prefix-icon anticon anticon-calendar"></i>
+                                <input type="text" class="form-control datepicker-input" placeholder="Pick a date" id="date_received">
+                            </div>
+
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Date Need to finish<span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" id="date_need_to_be_finished" placeholder="05.11.2019">
+                            {{--  <input type="text" class="form-control" id="date_need_to_be_finished" placeholder="05.11.2019">  --}}
+                            <div class="input-affix m-b-10">
+                                <i class="prefix-icon anticon anticon-calendar"></i>
+                                <input type="text" class="form-control datepicker-input" placeholder="Pick a date" id="date_need_to_be_finished">
+                            </div>
                         </div>
 
                         <div class="form-group col-md-6">
@@ -72,7 +81,11 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Date of Birth<span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" id="date_of_birth" placeholder="02.02.2000">
+                            {{--  <input type="text" class="form-control" id="date_of_birth" placeholder="02.02.2000">  --}}
+                            <div class="input-affix m-b-10">
+                                <i class="prefix-icon anticon anticon-calendar"></i>
+                                <input type="text" class="form-control datepicker-input" placeholder="Pick a date" id="date_of_birth">
+                            </div>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Primary Language</label>
@@ -149,9 +162,7 @@
 
         <div class="card">
             <div class="card-body">
-                    <div class="preload">
-                            <img src="{{asset('image')}}/loading_spinner.gif" />
-                        </div>
+
                 <h4>Upload the batch file</h4>
 
                 <div class="m-t-25">
@@ -185,7 +196,7 @@
                                             <div class="card" style="overflow-x: auto;">
                                                 <div class="card-body" style="overflow-x: auto;">
                                                     <h4>Missing Data</h4><span style="float:right" ><a href="{{ url('export') }}"><button type="button" id="export" class="btn btn-primary">Download Missing Data</button></a></span>
-                                                    <p style="color:red">This record has missing data. Please fill it up and re-upload</p>
+                                                    <p style="color:red">Some record has missing data. Please fill it up and re-upload</p>
                                                     <div class="m-t-25">
                                                         <table id="data-table" class="table table-bordred">
                                                             <thead>
@@ -248,6 +259,8 @@
             </div>
         </div>
     </div>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <script src="{{asset('assets')}}/js/vendors.min.js"></script>
 
     <!-- page js -->
@@ -256,21 +269,35 @@
     <script src="{{asset('assets')}}/js/pages/datatables.js"></script>
 
     <!-- Core JS -->
+    <script src="{{asset('assets')}}/vendors/select2/select2.min.js"></script>
+    <script src="{{asset('assets')}}/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="{{asset('assets')}}/js/pages/form-elements.js"></script>
+    <script src="{{asset('assets')}}/vendors/quill/quill.min.js"></script>
     <script src="{{asset('assets')}}/js/app.min.js"></script>
+
 
     <script>
             $( document ).ajaxStart(function() {
-                $( ".preload" ).show();
+                window.swal({
+                    title: "Loading...",
+                    text: "Please wait",
+                    imageUrl: "{{asset('image')}}/loading_spinner.gif",
+
+                    button: false,
+                    closeOnClickOutside: false,
+                      closeOnEsc: false
+                  });
+
             });
 
             $( document ).ajaxStop(function() {
-                $( ".preload" ).hide();
+                swal.close();
             });
 
 
         $(function () {
 
-            $(".preload").hide();
+
 
             $.ajaxSetup({
 

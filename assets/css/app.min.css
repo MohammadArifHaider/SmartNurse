@@ -16511,7 +16511,7 @@ iframe {
 }
 
 .header {
-    background: linear-gradient(to right, #ccffff 1%, #cc99ff 100%);
+    background: linear-gradient(to right, #ccffcc 1%, #cc99ff 100%);
     height: 70px;
     position: fixed;
     top: 0px;
@@ -27106,9 +27106,9 @@ a.badge-purple:focus {
 }
 
 .table>thead>tr>th {
-    color: #2a2a2a;
-    border-bottom: 1px solid #ededed;
-    font-weight: 500
+    color: black !important;
+    border-bottom: 1px solid black !important;
+    font-weight: bold !important
 }
 
 .table .thead-dark th {

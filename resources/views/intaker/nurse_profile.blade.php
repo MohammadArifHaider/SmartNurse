@@ -165,9 +165,7 @@
 
         <div class="card">
             <div class="card-body">
-                    <div class="preload">
-                            <img src="{{asset('image')}}/loading_spinner.gif" />
-                        </div>
+
                 <h4>Upload the batch file</h4>
 
                 <div class="m-t-25">
@@ -261,6 +259,7 @@
             </div>
         </div>
     </div>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="{{asset('assets')}}/js/vendors.min.js"></script>
 
     <!-- page js -->
@@ -273,17 +272,26 @@
 
     <script>
             $( document ).ajaxStart(function() {
-                $( ".preload" ).show();
+                window.swal({
+                    title: "Loading...",
+                    text: "Please wait",
+                    imageUrl: "{{asset('image')}}/loading_spinner.gif",
+
+                    button: false,
+                    closeOnClickOutside: false,
+                      closeOnEsc: false
+                  });
+
             });
 
             $( document ).ajaxStop(function() {
-                $( ".preload" ).hide();
+                swal.close();
             });
 
 
         $(function () {
 
-            $(".preload").hide();
+
             $.ajaxSetup({
 
 headers: {

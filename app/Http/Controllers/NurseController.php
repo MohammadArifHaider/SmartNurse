@@ -56,6 +56,15 @@ curl_close($curl);
 
     }
 
+    public function show_nurse_list()
+    {
+        $nurse_lists = nurse_profile::all();
+        return view('intaker.view_nurse_list', ['nurse_lists' => $nurse_lists]);
+    }
+
+
+
+
     public function get_shortest_distance($nurse_zip,$patient_zip)
     {
         // $nurse_address = 'Bahaddarhat,Chittagong:GEC,Chitttagong:Agrabad,Chittagong';

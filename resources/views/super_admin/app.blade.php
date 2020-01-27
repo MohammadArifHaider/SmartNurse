@@ -5,11 +5,17 @@
 
 <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="cache-control" content="no-store" />
+    <meta http-equiv="cache-control" content="must-revalidate" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+    <meta http-equiv="pragma" content="no-cache" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
-<meta http-equiv="Pragma" content="no-cache" />
-<meta http-equiv="Expires" content="0" />
+
     <title>Smart Nurse</title>
 
     <!-- Favicon -->
@@ -24,7 +30,7 @@
 
 </head>
 
-<body style="overflow-x:auto;background: linear-gradient(to right, #ccffff 1%, #cc99ff 100%);">
+<body style="overflow-x:auto;background: linear-gradient(to right, #ccffcc 1%, #cc99ff 100%);">
     <div class="app">
         <div class="layout">
             <!-- Header START -->
@@ -42,6 +48,7 @@
                     </a>
                 </div>
                 <div class="nav-wrap">
+                    <div class="nav-wrap">
                     <ul class="nav-left">
                         <li class="desktop-toggle">
                             <a href="{{ url('super_admin') }}">
@@ -70,6 +77,7 @@
                         </li>
 
                     </ul>
+                </div>
                     <ul class="nav-right">
 
                         <li class="dropdown dropdown-animated scale-left">
@@ -80,6 +88,7 @@
 
                     </ul>
                 </div>
+
 
             </div>
             <!-- Header END -->

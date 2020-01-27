@@ -22,6 +22,7 @@
 
 
     <!-- page css -->
+    <link href="{{asset('assets')}}/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
 <link href="{{asset('assets')}}/vendors/datatables/dataTables.bootstrap.min.css" rel="stylesheet">
     <!-- Core css -->
     <link href="{{asset('assets')}}/css/app.min.css" rel="stylesheet">
@@ -29,7 +30,7 @@
 
 </head>
 
-<body style="overflow-x:auto; background: linear-gradient(to right, #ccffff 1%, #cc99ff 100%);">
+<body style="overflow-x:auto; background:linear-gradient(to right, #ccffcc 1%, #cc99ff 100%);">
     <div class="app">
         <div class="layout">
             <!-- Header START -->
@@ -89,12 +90,36 @@
 
                         </li>
 
+
+
                         <li class="nav-item dropdown open">
                             <a  href="{{ url('nurse_profile') }}">
                                 <span class="icon-holder">
                                     <i class="anticon anticon-form"></i>
                                 </span>
                                 <span class="title">Nurse Profile</span>
+
+                            </a>
+
+                        </li>
+
+                        <li class="nav-item dropdown open">
+                            <a  href="{{url('view_patient_List')}}">
+                                <span class="icon-holder">
+                                    <i class="anticon anticon-hdd"></i>
+                                </span>
+                                <span class="title">Patients List</span>
+
+                            </a>
+
+                        </li>
+
+                        <li class="nav-item dropdown open">
+                            <a  href="{{url('view_nurse_List')}}">
+                                <span class="icon-holder">
+                                    <i class="anticon anticon-hdd"></i>
+                                </span>
+                                <span class="title">Nurse List</span>
 
                             </a>
 

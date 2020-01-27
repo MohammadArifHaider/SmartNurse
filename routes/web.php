@@ -91,6 +91,11 @@ Route::get('get_assigned_patient_data','AdminController@get_assigned_patient_dat
 Route::get('get_assigned_nurse_data','AdminController@get_assigned_nurse_data');
 
 
+Route::get('view_patient_List','PatientController@show_patient_list');
+
+Route::get('view_nurse_List','NurseController@show_nurse_list');
+
+
 
 
 

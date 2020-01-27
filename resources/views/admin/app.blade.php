@@ -32,7 +32,7 @@
 
 </head>
 
-<body  style="overflow-x:auto; background: linear-gradient(to right, #ccffff 1%, #cc99ff 100%);">
+<body  style="overflow-x:auto; background: linear-gradient(to right, #ccffcc 1%, #cc99ff 100%);">
     <div class="app">
         <div class="layout">
             <!-- Header START -->

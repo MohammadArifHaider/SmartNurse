@@ -57,6 +57,12 @@ curl_close($curl);
 
     }
 
+    public function show_patient_list()
+    {
+        $patient_lists = patient_profile::where('status', '=', 'not_assign')->get();
+        return view('intaker.view_patient_list', ['patient_lists' => $patient_lists]);
+    }
+
     public function get_shortest_distance($nurse_zip,$patient_zip)
     {
         // $nurse_address = 'Bahaddarhat,Chittagong:GEC,Chitttagong:Agrabad,Chittagong';

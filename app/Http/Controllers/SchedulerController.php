@@ -368,8 +368,13 @@ curl_close($curl);
 
     public function show_patient_list()
     {
-        $patient_lists = patient_profile::where('status', '=', 'not_assign')->get();
+        $patient_lists = patient_profile::all();
         return view('scheduler.patients_list', ['patient_lists' => $patient_lists]);
+    }
+    public function my_sort($a,$b)
+    {
+    if ($a['call_count']==$b['call_count']) return 0;
+    return ($a['call_count']>$b['call_count'])?-1:1;
     }
 
     public function fetch_calendar_data(Request $request)
@@ -410,18 +415,13 @@ curl_close($curl);
            // file_put_contents('test.txt',json_encode($nurse_list));
             $data2 = array();
             $a = 0;
+
             for($i = 0;$i<sizeof($nurse_list);$i++)
             {
               $nurse_id      = $nurse_list[$i]->nurse_id;
 
-
-            // $nurse_schedule = nurse_scheduler::where('status','=','running')->where('nurse_id','=',$nurse_id)->get();
-             //file_put_contents('test.txt',json_encode($nurse_schedule));
-
               $nurse_profile = nurse_profile::where('id','=',$nurse_id)->first();
               $patient_profile = patient_profile::where('id','=',$patient_id)->first();
-
-
 
               $nurse_name = $nurse_profile->name;
               $assesment_type = $patient_profile->assesment_type;
@@ -437,12 +437,6 @@ curl_close($curl);
               }
                  $duration_hour = ceil($duration_minute/60);
 
-                //     $myfile = fopen("file.txt", "a+") or die("Unable to open file!");
-                //  fwrite($myfile,$nurse_name." ".$duration_minute." ".$assesment_type."\n");
-
-
-
-
               $start_time = $nurse_profile->prefered_start_times;
               $end_time = $nurse_profile->prefered_end_times;
               $prefered_times = array();
@@ -457,38 +451,25 @@ curl_close($curl);
               }
               $prefered_times[$time_difference] = $end_time.':00';
 
-              //file_put_contents('test4.txt',$prefered_times);
-
-
-
               $nurse_day =  $nurse_profile->prefered_days;
               $nurse_day = explode(',',$nurse_day);
-
-
 
                 for($j = 0;$j<sizeof($date_array);$j++)
                 {
                    $day = date('l', strtotime($date_array[$j]));
                    if (in_array($day, $nurse_day)) {
-
+                         $a = 0;
                        for ($k=0;$k<sizeof($prefered_times);$k++) {
-
 
                            $tmp_date = date('d-m-Y', strtotime($date_array[$j]));
 
-
                            $nurse_schedule = nurse_scheduler::where('status', '=', 'running')->where('nurse_id', '=', $nurse_id)->where('appointed_date', '=', $tmp_date)->get();
-
                           $exist = nurse_scheduler::where('status','=','running')->where('nurse_id','=',$nurse_id)->where('appointed_date','=',$tmp_date)->first();
                            $busy_time = array();
                            if ($exist) {
                                $appointed_started_time = $exist->appointed_start_time;
                                $appointed_started_time2 = explode(':', $appointed_started_time);
-
-
                                $appointed_started_time = $appointed_started_time2[0];
-
-
                                $busy_time[0] = $appointed_started_time.':00';
                                for ($m = 1;$m<=$duration_hour-1;$m++) {
                                    $tmp_time = $appointed_started_time+1;
@@ -496,12 +477,6 @@ curl_close($curl);
                                    $appointed_started_time =$tmp_time;
                                }
 
-
-
-
-
-
-                               //file_put_contents("test.txt", json_encode($busy_time));
                            }
                         if ($exist) {
                             if (!in_array($prefered_times[$k], $busy_time)) {
@@ -522,47 +497,23 @@ curl_close($curl);
                         }
 
 
-
-
-
-
-
                        }
-
-
-
-
 
                    }
 
-
-
-                    //file_put_contents('test.txt',$date);
-
-
                 }
 
-
-
-
-
-
-
             }
+
+
+           //usort($data2,array($this,'my_sort'));
+
 
             for($i = 0;$i<sizeof($nurse_list);$i++)
             {
               $nurse_id      = $nurse_list[$i]->nurse_id;
-
-
-            // $nurse_schedule = nurse_scheduler::where('status','=','running')->where('nurse_id','=',$nurse_id)->get();
-             //file_put_contents('test.txt',json_encode($nurse_schedule));
-
               $nurse_profile = nurse_profile::where('id','=',$nurse_id)->first();
               $patient_profile = patient_profile::where('id','=',$patient_id)->first();
-
-
-
               $nurse_name = $nurse_profile->name;
               $assesment_type = $patient_profile->assesment_type;
               $duration_minute = $nurse_list[$i]->duration;
@@ -580,9 +531,6 @@ curl_close($curl);
                 //     $myfile = fopen("file.txt", "a+") or die("Unable to open file!");
                 //  fwrite($myfile,$nurse_name." ".$duration_minute." ".$assesment_type."\n");
 
-
-
-
               $start_time = $nurse_profile->prefered_start_times;
               $end_time = $nurse_profile->prefered_end_times;
               $prefered_times = array();
@@ -597,20 +545,14 @@ curl_close($curl);
               }
               $prefered_times[$time_difference] = $end_time.':00';
 
-              //file_put_contents('test4.txt',$prefered_times);
-
-
-
               $nurse_day =  $nurse_profile->prefered_days;
               $nurse_day = explode(',',$nurse_day);
-
-
 
                 for($j = 0;$j<sizeof($date_array);$j++)
                 {
                    $day = date('l', strtotime($date_array[$j]));
                    if (in_array($day, $nurse_day)) {
-
+                      $a =0;
                        for ($k=0;$k<sizeof($prefered_times);$k++) {
 
 
@@ -636,12 +578,6 @@ curl_close($curl);
                                    $appointed_started_time =$tmp_time;
                                }
 
-
-
-
-
-
-                               //file_put_contents("test.txt", json_encode($busy_time));
                            }
                         if (!$exist) {
 
@@ -663,34 +599,17 @@ curl_close($curl);
                         }
 
 
-
-
-
-
-
                        }
-
-
-
 
 
                    }
 
 
-
-                    //file_put_contents('test.txt',$date);
-
-
                 }
 
 
-
-
-
-
-
             }
-            //file_put_contents('test.txt',json_encode($data2));
+            file_put_contents('test.txt',json_encode($data2));
             echo json_encode($data2);
 
             //file_put_contents('test.txt',json_encode($data2));
@@ -713,6 +632,9 @@ curl_close($curl);
 
 
     }
+
+
+
 
     public function search_nurse(Request $request)
     {
