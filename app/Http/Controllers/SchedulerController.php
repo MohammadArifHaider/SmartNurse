@@ -100,10 +100,56 @@ curl_close($curl);
             $user_role = User::where('id','=',$user_id)->first()->user_role;
             if($user_role === 'super_admin')
             {
-                return view('super_admin.welcome');
+
+               return view('super_admin.view_user');
             }
-            else{
-                return view('welcome');
+
+            else
+            {
+
+                $user_role = explode(',',$user_role);
+             if(in_array('intaker',$user_role))
+             {
+                return view('intaker.patients_profile');
+             }
+             else if(in_array('scheduler',$user_role))
+             {
+                $patient_list = patient_profile::where('status', '=', 'not_assign')->get();
+                $pending_patient = sizeof($patient_list);
+
+                return view('scheduler.welcome', ['patient_list' => $patient_list,'pending_patient'=>$pending_patient]);
+             }
+
+             else if(in_array('admin',$user_role))
+             {
+                date_default_timezone_set('Asia/Dhaka');
+                $date = date('Y-m-d');
+
+                $pending_patient = patient_profile::where('status', '=', 'not_assign')->get();
+                $total_pending_patient = sizeof($pending_patient);
+
+                $assign_patient = nurse_scheduler::where('created_at', 'LIKE', $date."%")->get();
+                $total_assign_patient = sizeof($assign_patient);
+
+                $total_assign_nurse = sizeof($assign_patient);
+
+                $occupied_nurse = 0;
+                for ($i = 0; $i < sizeof($assign_patient); $i++) {
+                    $nurse_id = $assign_patient[$i]->nurse_id;
+
+                    $nurse_count = nurse_scheduler::where('nurse_id', '=', $nurse_id)->where('appointed_date', '=', $date)->get();
+
+                    if (sizeof($nurse_count) == 3) {
+                        $occupied_nurse++;
+                    }
+                }
+
+                return view('admin.welcome', ['total_pedning_patient' => $total_pending_patient, 'total_assign_nurse' => $total_assign_nurse, 'total_assign_patient' => $total_assign_patient, 'occupied_nurse' => $occupied_nurse]);
+             }
+
+
+
+
             }
 
 
