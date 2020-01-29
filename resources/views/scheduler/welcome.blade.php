@@ -5,7 +5,8 @@
 
 
 
-<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="cache-control" content="max-age=0" />
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="cache-control" content="no-store" />
@@ -44,17 +45,14 @@
 
     <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" />-->
 
-     <link rel="stylesheet" href="{{asset('assets')}}/css/fullcalendar.css" />
+     <link rel="stylesheet" href="{{asset('assets')}}/css/fullcalendar.css?{{time()}}" />
 
 
   <style>
         .fc-time-grid-event .fc-time {
            display: none;
         }
-      .fc-axis
-      {
-          width:34px;
-      }
+
 
 
 
@@ -416,9 +414,22 @@
 
 
             editable:true,
-            allDay:true,
+            allDaySlot: false,
+            views: {
+                timeGrid: {
+                    agendaWeek: 1
+                 }
+
+              },
 
             eventOrder: 'id',
+            height: "auto",
+            slotMinutes: 60,
+
+            slotDuration: '00:60:00',
+
+
+           slotLabelInterval: 60,
 
 
 
@@ -561,7 +572,7 @@
             eventAfterAllRender: function() {
 
                 // define static values, use this values to vary the event item height
-                var defaultItemHeight = 25;
+                var defaultItemHeight = 50;
                 var defaultEventItemHeight = 18;
                 // ...
 
