@@ -116,40 +116,37 @@ curl_close($curl);
 
         ];
 
-
-       // file_put_contents('test.txt',json_encode($path));
-//file_put_contents('test3.txt',$distance);
         return $path;
 
 
     }
 
-    public function get_lat_lon($nurse_address, $patient_address)
-    {
-        $client = new \GuzzleHttp\Client();
+//     public function get_lat_lon($nurse_address, $patient_address)
+//     {
+//         $client = new \GuzzleHttp\Client();
 
-        $geocoder = new Geocoder($client);
+//         $geocoder = new Geocoder($client);
 
-        $geocoder->setApiKey(config('geocoder.key'));
+//         $geocoder->setApiKey(config('geocoder.key'));
 
-// $geocoder->setCountry(config('US'));
+// // $geocoder->setCountry(config('US'));
 
-        $nurse_address = $geocoder->getCoordinatesForAddress($nurse_address);
-        $patient_address = $geocoder->getCoordinatesForAddress($patient_address);
+//         $nurse_address = $geocoder->getCoordinatesForAddress($nurse_address);
+//         $patient_address = $geocoder->getCoordinatesForAddress($patient_address);
 
-        $nurse_lat = $nurse_address['lat'];
-        $nurse_lon = $nurse_address['lng'];
+//         $nurse_lat = $nurse_address['lat'];
+//         $nurse_lon = $nurse_address['lng'];
 
-        $patient_lat = $patient_address['lat'];
-        $patient_lon = $patient_address['lng'];
+//         $patient_lat = $patient_address['lat'];
+//         $patient_lon = $patient_address['lng'];
 
-        //file_put_contents('test2.txt', $nurse_lat . " " . $nurse_lon . " " . $patient_lat . " " . $patient_lon);
+//         //file_put_contents('test2.txt', $nurse_lat . " " . $nurse_lon . " " . $patient_lat . " " . $patient_lon);
 
-        $distance = $this->distance($nurse_lat, $nurse_lon, $patient_lat, $patient_lon, 'K');
-//file_put_contents('test3.txt',$distance);
-        return $distance;
+//         $distance = $this->distance($nurse_lat, $nurse_lon, $patient_lat, $patient_lon, 'K');
+// //file_put_contents('test3.txt',$distance);
+//         return $distance;
 
-    }
+//     }
 
     public function get_shortest_distance($nurse_zip,$patient_zip)
     {
@@ -339,17 +336,17 @@ curl_close($curl);
                 $nurse->save();
 
                 $nurse_id = $nurse->id;
-                //$nurse_address = $insert_data[$i]['prefered_location'].",".$insert_data[$i]['prefered_city'].",".$insert_data[$i]['prefered_country'];
-                $nurse_zip = $insert_data[$i]['prefered_zip'];
+                $nurse_address = $insert_data[$i]['prefered_location'].",".$insert_data[$i]['prefered_city'].",".$insert_data[$i]['prefered_country'];
+                //$nurse_zip = $insert_data[$i]['prefered_zip'];
 
                 $patient = patient_profile::get();
                 for ($m = 0; $m < sizeof($patient); $m++) {
 
                     $patient_id = $patient[$m]->id;
                     //file_put_contents('test.txt', $patient_id);
-                   // $patient_address = $patient[$m]['address'] . ',' . $patient[$m]['city'];
-                   $patient_zip = $patient[$m]['zip_code'];
-                    $shortest_distance = $this->get_shortest_distance($nurse_zip, $patient_zip);
+                   $patient_address = $patient[$m]['address'] . ',' . $patient[$m]['city'];
+                   //$patient_zip = $patient[$m]['zip_code'];
+                    $shortest_distance = $this->find_distance($nurse_address, $patient_address);
 
 
                     $distance_table = new distance_table();
@@ -677,9 +674,9 @@ curl_close($curl);
                 $patients->save();
 
                 $patient_id = $patients->id;
-                //$patient_address = $insert_data[$i]['address'] . ',' . $insert_data[$i]['city'];
+                $patient_address = $insert_data[$i]['address'] . ',' . $insert_data[$i]['city'];
 
-                $patient_zip = $insert_data[$i]['zip_code'];
+               // $patient_zip = $insert_data[$i]['zip_code'];
 
 
                 $nurse = nurse_profile::get();
@@ -688,9 +685,9 @@ curl_close($curl);
 
                     $nurse_id = $nurse[$m]->id;
                     //file_put_contents('test.txt',$patient_id);
-                   // $nurse_address = $nurse[$m]['prefered_location'];
-                   $nurse_zip = $nurse[$m]['prefered_zip'];
-                    $shortest_distance = $this->get_shortest_distance($nurse_zip, $patient_zip);
+                   $nurse_address = $nurse[$m]['prefered_location'];
+                   //$nurse_zip = $nurse[$m]['prefered_zip'];
+                    $shortest_distance = $this->find_distance($nurse_address, $patient_address);
 
                     // $distance_table = new distance_table();
                     // $distance_table->patient_id = $patient_id;

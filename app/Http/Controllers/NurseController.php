@@ -8,9 +8,12 @@ use App\nurse_profile;
 use App\patient_profile;
 use DB;
 use App\distance_table;
+use Spatie\Geocoder\Geocoder;
 class NurseController extends Controller
 {
     //
+
+
     public function distance($lat1,$lon1,$lat2,$lon2)
     {
         $curl = curl_init();
@@ -52,6 +55,43 @@ $distance = curl_exec($curl);
 $err = curl_error($curl);
 
 curl_close($curl);
+
+
+    }
+    public function find_distance($nurse_address, $patient_address)
+    {
+        $client = new \GuzzleHttp\Client();
+
+        $geocoder = new Geocoder($client);
+
+        $geocoder->setApiKey(config('geocoder.key'));
+
+// $geocoder->setCountry(config('US'));
+
+        $nurse_address = $geocoder->getCoordinatesForAddress($nurse_address);
+        $patient_address = $geocoder->getCoordinatesForAddress($patient_address);
+
+        $nurse_lat = $nurse_address['lat'];
+        $nurse_lon = $nurse_address['lng'];
+
+        $patient_lat = $patient_address['lat'];
+        $patient_lon = $patient_address['lng'];
+
+        //file_put_contents('test2.txt', $nurse_lat . " " . $nurse_lon . " " . $patient_lat . " " . $patient_lon);
+
+        $distance = $this->distance($nurse_lat, $nurse_lon, $patient_lat, $patient_lon);
+
+        $path = [
+            'patient_lat'=>$patient_lat,
+            'patient_lon'=>$patient_lon,
+            'nurse_lat'=>$nurse_lat,
+            'nurse_lon'=>$nurse_lon,
+            'distance'=>$distance['distance'],
+            'duration'=>$distance['duration'],
+
+        ];
+
+        return $path;
 
 
     }
@@ -146,13 +186,14 @@ curl_close($curl);
         $nurse_id = $nurse->id;
         $nurse_zip = $nurse->prefered_zip;
         $patient = patient_profile::get();
+        $nurse_address = $request->address.",".$request->city.",".$request->country;
         for ($m = 0; $m < sizeof($patient); $m++) {
 
             $patient_id = $patient[$m]->id;
             //file_put_contents('test.txt', $patient_id);
-           // $patient_address = $patient[$m]['address'] . ',' . $patient[$m]['city'];
-           $patient_zip = $patient[$m]['zip_code'];
-            $shortest_distance = $this->get_shortest_distance($nurse_zip, $patient_zip);
+            $patient_address = $patient[$m]['address'] . ',' . $patient[$m]['city'];
+           //$patient_zip = $patient[$m]['zip_code'];
+            $shortest_distance = $this->find_distance($nurse_address, $patient_address);
 
 
             $distance_table = new distance_table();

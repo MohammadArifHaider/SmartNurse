@@ -12696,7 +12696,7 @@ body {
 }
 
 body {
-    font-family: 'Montserrat Alternates', sans-serif;
+    font-family: 'Montserrat Alternates', sans-serif !important;
     font-size: 14px;
     background-color: #f9fbfd;
     color: #53535f;

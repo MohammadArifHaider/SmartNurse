@@ -417,10 +417,27 @@ curl_close($curl);
         $patient_lists = patient_profile::all();
         return view('scheduler.patients_list', ['patient_lists' => $patient_lists]);
     }
-    public function my_sort($a,$b)
+
+
+    public function array_frequency_count($array,$value)
     {
-    if ($a['call_count']==$b['call_count']) return 0;
-    return ($a['call_count']>$b['call_count'])?-1:1;
+
+        $count = 0;
+
+            foreach ($array as $item) {
+                if ($item['start'] == $value) {
+                    $count++;
+                }
+            }
+
+
+          return $count;
+
+        //   $myfile = fopen("file.txt", "a+") or die("Unable to open file!");
+        // fwrite($myfile,$value." ".$count."\n");
+
+          //file_put_contents('test.txt',$array[0]['start']);
+
     }
 
     public function fetch_calendar_data(Request $request)
@@ -599,6 +616,7 @@ curl_close($curl);
                    $day = date('l', strtotime($date_array[$j]));
                    if (in_array($day, $nurse_day)) {
                       $a =0;
+                      $count = 0;
                        for ($k=0;$k<sizeof($prefered_times);$k++) {
 
 
@@ -627,20 +645,29 @@ curl_close($curl);
                            }
                         if (!$exist) {
 
+
+
+
                             if (!in_array($prefered_times[$k], $busy_time)) {
-                                $a++;
+                                $count= $this->array_frequency_count($data2, $date_array[$j].'T'.$prefered_times[$k]);
+                                if ($count<3) {
+                                    $a++;
+
+
                                 array_push($data2, [
 
 
-              'id' => $a,
-              'title' => $nurse_name." ".sizeof($nurse_schedule),
-              'nurse_id'=>$nurse_id,
-              'start' => $date_array[$j].'T'.$prefered_times[$k],
-              'end' => $date_array[$j].'T'.$prefered_times[$k],
-              'call_count'=>sizeof($nurse_schedule)
+                        'id' => $a,
+                        'title' => $nurse_name." ".sizeof($nurse_schedule),
+                        'nurse_id'=>$nurse_id,
+                        'start' => $date_array[$j].'T'.$prefered_times[$k],
+                        'end' => $date_array[$j].'T'.$prefered_times[$k],
+                        'call_count'=>sizeof($nurse_schedule)
 
 
-          ]);
+                      ]);
+                            }
+
                             }
                         }
 

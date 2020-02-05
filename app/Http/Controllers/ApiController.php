@@ -7,11 +7,124 @@ use App\nurse_profile;
 use App\nurse_scheduler;
 use App\patient_profile;
 use App\distance_table;
+use App\nurse_status;
 
 class ApiController extends Controller
 {
     //
 
+
+    public function distance($lat1,$lon1,$lat2,$lon2)
+    {
+        $curl = curl_init();
+
+curl_setopt_array($curl, array(
+    //CURLOPT_URL => "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=Washington%2CDC&destinations=New%20York%20City%2CNY&key=AIzaSyAXhRPj6NklgCWF5h8Gn-nptIFXX0jpVhE",
+ CURLOPT_URL =>'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins='.$lat1.','.$lon1.'&destinations='.$lat2.','.$lon2.'&key=AIzaSyAXhRPj6NklgCWF5h8Gn-nptIFXX0jpVhE',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+
+));
+
+$distance = curl_exec($curl);
+//file_put_contents('test.txt',$distance);
+ $distance_arr = json_decode($distance);
+        $elements = $distance_arr->rows[0]->elements;
+        $distance = $elements[0]->distance->text;
+        $duration = $elements[0]->duration->text;
+        $distance = explode(" ",$distance);
+
+        $total_distance = $distance[0];
+
+        $duration = explode(' ',$duration);
+          if (sizeof($duration)>2) {
+              $total_duration = $duration[0]*60 + $duration[2];
+          }
+          else{
+              $total_duration = $duration[0];
+          }
+
+        $arr = ['distance'=>$total_distance,
+                  'duration'=>$total_duration];
+                  return $arr;
+
+$err = curl_error($curl);
+
+curl_close($curl);
+
+
+    }
+    public function nurse_finish(Request $request)
+    {
+        date_default_timezone_set('Asia/Dhaka');
+        $nurse_status_id =$request->nurse_status_id;
+        $nurse_finish_lat =$request->nurse_finish_lat;
+        $nurse_finish_lon =$request->nurse_finish_lon;
+
+        $nurse_finish_time = date("H:i:s");
+
+        $nurse_start_lat = nurse_status::where('id','=',$nurse_status_id)->first()->nurse_start_lat;
+        $nurse_start_lon = nurse_status::where('id','=',$nurse_status_id)->first()->nurse_start_lon;
+
+         $distance_duration_array = $this->distance($nurse_start_lat,$nurse_start_lon,$nurse_finish_lat,$nurse_finish_lon);
+
+         $distance_required = $distance_duration_array['distance'];
+         $time_required = $distance_duration_array['duration'];
+
+         if(nurse_status::where('id','=',$nurse_status_id)->update(['nurse_finish_time'=>$nurse_finish_time,'distance_required'=>$distance_required,'time_required'=>$time_required]))
+
+         {
+              return response()->json(['response'=>'ok']);
+         }
+         else
+         {
+             return response()->json(['response'=>'not_ok']);
+         }
+
+
+
+
+
+
+
+    }
+     public function nurse_start(Request $request)
+    {
+        date_default_timezone_set('Asia/Dhaka');
+
+        $scheduler_id = $request->scheduler_id;
+        $nurse_id = nurse_scheduler::where('id','=',$scheduler_id)->first()->nurse_id;
+        $patient_id = nurse_scheduler::where('id','=',$scheduler_id)->first()->patient_id;
+
+        $nurse_start_lat = $request->nurse_start_lat;
+        $nurse_start_lon = $request->nurse_start_lon;
+        $patient_lat = distance_table::where('patient_id','=',$patient_id)->first()->patient_lat;
+        $patient_lon = distance_table::where('patient_id','=',$patient_id)->first()->patient_lon;
+        $distance_duration_array = $this->distance($nurse_start_lat,$nurse_start_lon,$patient_lat,$patient_lon);
+        $nurse_estimate_distance_to_go_patient_home = $distance_duration_array['distance'];
+        $nurse_estimate_time_to_go_patient_home = $distance_duration_array['duration'];
+        $nurse_start_time = date("H:i:s");
+        $nurse_status = new nurse_status();
+
+        $nurse_status->nurse_id = $nurse_id;
+        $nurse_status->patient_id = $patient_id;
+        $nurse_status->scheduler_id = $scheduler_id;
+        $nurse_status->nurse_start_time = $nurse_start_time;
+        $nurse_status->nurse_start_lat = $nurse_start_lat;
+        $nurse_status->nurse_start_lon = $nurse_start_lon;
+        $nurse_status->estimate_distance_to_go_patient_home = $nurse_estimate_distance_to_go_patient_home;
+        $nurse_status->estimate_time_to_go_patient_home = $nurse_estimate_time_to_go_patient_home;
+        $nurse_status->save();
+        $nurse_status_id = $nurse_status->id;
+
+        //file_put_contents('nurse_start_test.txt',$nurse_id." ".$patient_id." ".$nurse_start_lat." ".$nurse_start_lon);
+        return response()->json(['nurse_status_id'=>$nurse_status_id]);
+
+    }
     public function login(Request $reuqest)
     {
 

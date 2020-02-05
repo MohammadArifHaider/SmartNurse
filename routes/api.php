@@ -19,6 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('login','ApiController@login');
 Route::post('get_schedule_today','ApiController@get_schedule_today');
+
+Route::post('get_schedule_week','ApiController@get_schedule_week');
 Route::post('get_schedule','ApiController@get_schedule');
 
 Route::post('notification','ApiController@notification');
@@ -26,4 +28,10 @@ Route::post('notification','ApiController@notification');
 Route::post('cancel_schedule','ApiController@cancle_schedule');
 
 Route::post('update_firebase_token','ApiController@update_firebase_token');
+
+Route::post('update_image','ApiController@update_image');
+
+Route::post('update_profile','ApiController@update_profile');
+Route::post('nurse_start','ApiController@nurse_start');
+Route::post('nurse_finish','ApiController@nurse_finish');
 

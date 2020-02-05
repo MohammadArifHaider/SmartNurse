@@ -21,7 +21,9 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<link href="{{ asset('assets')}}/css/app.min.css"rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css?family=Montserrat+Alternates&display=swap" rel="stylesheet">
+<link href="{{ asset('assets')}}/css/app.min.css?{{time()}}"rel="stylesheet">
 
     <title>Smart Nurse</title>
 
@@ -415,12 +417,19 @@
 
             editable:true,
             allDaySlot: false,
+            eventLimit: true, // for all non-agenda views
             views: {
-                timeGrid: {
-                    agendaWeek: 1
-                 }
+                agenda: {
+                eventLimit: 6 // adjust to 6 only for agendaWeek/agendaDay
+                },
+                week: {
+                    eventLimit: 6
+                  },
+                  timeGrid: {
+                    eventLimit: 6
+                  },
 
-              },
+            },
 
             eventOrder: 'id',
             height: "auto",
@@ -433,7 +442,7 @@
 
 
 
-            defaultView: 'agendaWeek',
+             defaultView: 'agendaWeek',
 
             minTime:'09:00:00',
             maxTime:'19:00:00',
@@ -572,7 +581,7 @@
             eventAfterAllRender: function() {
 
                 // define static values, use this values to vary the event item height
-                var defaultItemHeight = 50;
+                var defaultItemHeight = 30;
                 var defaultEventItemHeight = 18;
                 // ...
 
@@ -611,7 +620,7 @@
                       var maxItemsOnRow = currentEventRowElement.attr('data-max-items') || 1;
                       if (accumulator >= maxItemsOnRow) {
                         currentEventRowElement.attr('data-max-items', accumulator + 1);
-                        currentEventRowElement.css('height', '+=' + defaultItemHeight.toString() + 'px');
+                        currentEventRowElement.css('height', '+=' + 0 + 'px');
                       }
                     } else {
                       // reset count
