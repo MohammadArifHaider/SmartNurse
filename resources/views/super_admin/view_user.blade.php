@@ -1,172 +1,79 @@
 @extends('super_admin.app')
 
-@section('title')
+{{-- @section('title')
 
 <h2 class="header-title">Form Layouts</h2>
 
-@endsection
+@endsection --}}
 
 @section('content')
 
-<div class="modal fade bd-example-modal" id="update_role_modal">
-    <input type ="hidden" id ="user_id_role" >
-    <div class="modal-dialog">
-        <div class="modal-content" style="overflow-x: auto;">
-            <div class="modal-header">
-
-                <button type="button" class="close" data-dismiss="modal">
-                    <i class="anticon anticon-close"></i>
-                </button>
-            </div>
-            <div class="modal-body">
+<div class="content-wrapper" style="background-image: url({{asset('assets')}}//Artboard.png);">
+    <div class="row">
+      <div class="col-md-12">
+          <div class="card-body">
 
 
-                <div class="card" style="overflow-x: auto;">
+            @include('nav_list')
+            <div class="tab-content">
+              <div class="tab-pane fade show active" id="home-1" role="tabpanel" aria-labelledby="home-tab">
 
-                    <div class="card-body" style="overflow-x: auto;">
+                <div class="main-panel">
+                    <div class="content-wrapper">
+                      <div class="page-header">
 
+                        {{-- <nav aria-label="breadcrumb">
+                          <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">view user</li>
+                          </ol>
+                        </nav> --}}
+                      </div>
+                      <div class="card">
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-12">
+                              <div class="table-responsive">
+                                <table id="data-table" class="table table-bordered">
+                                  <thead>
+                                    <tr style="color: #4d72c1;">
+                                        <th></th>
+                                        <th>Name</th>
+                                        <th>Admin</th>
+                                        <th>Inteker</th>
+                                        <th>Scheduler</th>
+                                        <th>Update Password</th>
+                                        <th>Remove User</th>
 
-                        <div class="m-t-25">
-                         <div class="form-row">
+                                    </tr>
+                                  </thead>
 
-                        <div class="form-group col-md-9">
-                            <label for="inputEmail4">User Role</label>
-                           <div>
-                            <label class="checkbox-container">Admin
-                                <input class="user_role" type="checkbox" value="admin" >
-                                <span class="checkmark"></span>
-                              </label>
-
-                              <label class="checkbox-container">Super Admin
-                                <input class="user_role" type="checkbox" value="super_admin" >
-                                <span class="checkmark"></span>
-                              </label>
-
-                              <label class="checkbox-container">Intaker
-                                <input class="user_role" type="checkbox" value="intaker">
-                                <span class="checkmark"></span>
-                              </label>
-
-                              <label class="checkbox-container">Scheduler
-                                <input class="user_role" type="checkbox" value="scheduler">
-                                <span class="checkmark"></span>
-                              </label>
+                                  <tbody id="user_data_super_admin">
 
 
 
-
-
+                                  </tbody>
+                                </table>
+                              </div>
                             </div>
-
-                            <div class="invalid-feedback" id = "user_role_error">
-
-                            </div>
-
+                          </div>
                         </div>
-                        <div class="form-group col-md-3">
-
-                            <button type="button" id = "update_role" style="float:right" class="btn btn-primary m-t-15">Update</button>
-
-                        </div>
-
-                         </div>
-
-
-                        </div>
-
+                      </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="modal fade bd-example-modal" id="update_password_modal">
-    <input type ="hidden" id ="user_id_password" >
-    <div class="modal-dialog">
-        <div class="modal-content" style="overflow-x: auto;">
-            <div class="modal-header">
-
-                <button type="button" class="close" data-dismiss="modal">
-                    <i class="anticon anticon-close"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-
-
-                <div class="card" style="overflow-x: auto;">
-
-                    <div class="card-body" style="overflow-x: auto;">
-
-
-                        <div class="m-t-25">
-                         <div class="form-row">
-
-                            <div class="form-group col-md-6">
-                                <label for="inputEmail4">Password</label>
-                                <input type="password" class="form-control" id="password" placeholder="*****">
-                                <div class="invalid-feedback" id = "password_error">
-
+                    <!-- content-wrapper ends -->
                                 </div>
 
-                            </div>
-
-                            <div class="form-group col-md-6">
-                                <label for="inputEmail4">Re-type Password</label>
-                                <input type="password" class="form-control" id="r-password" placeholder="*****">
-
-                                <div class="invalid-feedback" id = "r_password_error">
-
-                                </div>
-                            </div>
-
-                        <div class="form-group col-md-3">
-
-                            <button type="button" id = "update_password" style="float:right" class="btn btn-primary m-t-15">Update</button>
-
-                        </div>
-
-                         </div>
+              </div>
 
 
-                        </div>
-
-                    </div>
-                </div>
             </div>
-        </div>
-    </div>
-</div>
+          </div>
 
-<div class="card">
-    <div class="card-body">
-        <h4>User List</h4>
-
-        <div class="m-t-25">
-            <table id="data-table" class="table table-bordred">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody id="user_data_super_admin">
-
-                </tbody>
-
-            </table>
-        </div>
-
-
+      </div>
 
     </div>
-</div>
-    </div>
-<script src="{{asset('assets')}}/js/vendors.min.js"></script>
+  </div>
+  <script src="{{asset('assets')}}/js/vendors.min.js"></script>
 
     <!-- page js -->
     <script src="{{asset('assets')}}/vendors/datatables/jquery.dataTables.min.js"></script>
@@ -190,8 +97,8 @@
 
             $('#data-table').DataTable({
                 'paging' : true,
-                'lengthChange': true,
-                'searching' : true,
+                'lengthChange': false,
+                'searching' : false,
                 'ordering' : false,
                 'info' : false,
                 'autoWidth' : false
@@ -201,6 +108,7 @@
 
 
     </script>
+
 
 
 

@@ -1,1 +1,22 @@
-2020-02-10T11:00
+{
+   "destination_addresses" : [ "378 Syosset-Woodbury Rd, Woodbury, NY 11797, USA" ],
+   "origin_addresses" : [ "210 Grant Ave, Brooklyn, NY 11208, USA" ],
+   "rows" : [
+      {
+         "elements" : [
+            {
+               "distance" : {
+                  "text" : "47.6 km",
+                  "value" : 47628
+               },
+               "duration" : {
+                  "text" : "44 mins",
+                  "value" : 2629
+               },
+               "status" : "OK"
+            }
+         ]
+      }
+   ],
+   "status" : "OK"
+}

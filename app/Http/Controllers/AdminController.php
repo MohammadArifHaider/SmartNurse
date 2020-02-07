@@ -101,25 +101,119 @@ class AdminController extends Controller
         $data = "";
         for ($i = 0; $i < sizeof($user); $i++) {
 
-            $data .= '<tr>
-
-            <td>' . $user[$i]->name . '</td>
-            <td>' . $user[$i]->email . '</td>
-            <td>' . $user[$i]->user_role . '</td>
-
-        <td>
-           <button onclick="update_role(' . $user[$i]->id . ')" class="btn btn-primary ">Update Role</button>
-       </td>
-       <td>
-       <button onclick="update_password(' . $user[$i]->id . ')" class="btn btn-success ">Update Passwors</button>
-        </td>
-      <td>
-           <button onclick="delete_user(' . $user[$i]->id . ')" class="btn btn-danger ">Delete User</button>
-       </td>
+            $user_role = explode(",",$user[$i]->user_role);
 
 
 
-           </tr>';
+            $data .= ' <tr>
+            <th><i class="fa fa-user-circle table-icon"></i></th>
+            <td>' . $user[$i]->name . '<br><a href="#">' . $user[$i]->email . '</a></td>
+            ';
+
+            if (in_array('admin',$user_role)) {
+               $data.='
+               <td>
+               <label class="switch">
+              <input type="checkbox" checked >
+
+
+                 <span class="slider round"></span>
+               </label>
+             </td>
+
+               ';
+            }
+            else
+            {
+                $data.='
+                <td>
+                <label class="switch">
+               <input type="checkbox" >
+
+
+                  <span class="slider round"></span>
+                </label>
+              </td>
+
+                ';
+            }
+
+            if (in_array('intaker',$user_role)) {
+
+                $data.='
+                <td>
+                <label class="switch">
+               <input type="checkbox" checked >
+
+
+                  <span class="slider round"></span>
+                </label>
+              </td>
+
+                ';
+
+            }
+            else
+            {
+                $data.='
+                <td>
+                <label class="switch">
+               <input type="checkbox">
+
+
+                  <span class="slider round"></span>
+                </label>
+              </td>
+
+                ';
+            }
+
+            if (in_array('scheduler',$user_role)) {
+                $data.='
+                <td>
+                <label class="switch">
+               <input type="checkbox" checked >
+
+
+                  <span class="slider round"></span>
+                </label>
+              </td>
+
+                ';
+
+            }
+            else
+            {
+                $data.='
+                <td>
+                <label class="switch">
+               <input type="checkbox" >
+
+
+                  <span class="slider round"></span>
+                </label>
+              </td>
+
+                ';
+
+            }
+
+
+           $data.='
+
+
+            <td style="text-align:center">
+            <button type="button" class="btn btn-primary btn-rounded btn-icon">
+                          <i class="fa fa-edit"></i>
+                        </button>
+            </td>
+            <td style="text-align:center">
+            <button type="button" class="btn btn-danger btn-rounded btn-icon">
+            <i class="fa fa-trash"></i>
+          </button>
+            </td>
+
+        </tr>';
 
         }
         return $data;
@@ -234,17 +328,36 @@ class AdminController extends Controller
         ))) {
             $id = Auth::id();
             $user_role = User::where('id','=',$id)->first()->user_role;
-            if($user_role === 'super_admin')
-            {
-               Session::put('user_id', $id);
-               return view('super_admin.view_user');
-            }
-
-            else
-            {
                 Session::put('user_id', $id);
                 $user_role = explode(',',$user_role);
-             if(in_array('intaker',$user_role))
+
+                if(in_array('admin',$user_role))
+                {
+                   date_default_timezone_set('Asia/Dhaka');
+                   $date = date('Y-m-d');
+
+                   $pending_patient = patient_profile::where('status', '=', 'not_assign')->get();
+                   $total_pending_patient = sizeof($pending_patient);
+
+                   $assign_patient = nurse_scheduler::where('created_at', 'LIKE', $date."%")->get();
+                   $total_assign_patient = sizeof($assign_patient);
+
+                   $total_assign_nurse = sizeof($assign_patient);
+
+                   $occupied_nurse = 0;
+                   for ($i = 0; $i < sizeof($assign_patient); $i++) {
+                       $nurse_id = $assign_patient[$i]->nurse_id;
+
+                       $nurse_count = nurse_scheduler::where('nurse_id', '=', $nurse_id)->where('appointed_date', '=', $date)->get();
+
+                       if (sizeof($nurse_count) == 3) {
+                           $occupied_nurse++;
+                       }
+                   }
+
+                   return view('admin.welcome', ['total_pedning_patient' => $total_pending_patient, 'total_assign_nurse' => $total_assign_nurse, 'total_assign_patient' => $total_assign_patient, 'occupied_nurse' => $occupied_nurse]);
+                }
+             else if(in_array('intaker',$user_role))
              {
                 return view('intaker.patients_profile');
              }
@@ -256,37 +369,12 @@ class AdminController extends Controller
                 return view('scheduler.welcome', ['patient_list' => $patient_list,'pending_patient'=>$pending_patient]);
              }
 
-             else if(in_array('admin',$user_role))
-             {
-                date_default_timezone_set('Asia/Dhaka');
-                $date = date('Y-m-d');
-
-                $pending_patient = patient_profile::where('status', '=', 'not_assign')->get();
-                $total_pending_patient = sizeof($pending_patient);
-
-                $assign_patient = nurse_scheduler::where('created_at', 'LIKE', $date."%")->get();
-                $total_assign_patient = sizeof($assign_patient);
-
-                $total_assign_nurse = sizeof($assign_patient);
-
-                $occupied_nurse = 0;
-                for ($i = 0; $i < sizeof($assign_patient); $i++) {
-                    $nurse_id = $assign_patient[$i]->nurse_id;
-
-                    $nurse_count = nurse_scheduler::where('nurse_id', '=', $nurse_id)->where('appointed_date', '=', $date)->get();
-
-                    if (sizeof($nurse_count) == 3) {
-                        $occupied_nurse++;
-                    }
-                }
-
-                return view('admin.welcome', ['total_pedning_patient' => $total_pending_patient, 'total_assign_nurse' => $total_assign_nurse, 'total_assign_patient' => $total_assign_patient, 'occupied_nurse' => $occupied_nurse]);
-             }
 
 
 
 
-            }
+
+
 
 
           // file_put_contents('test.txt', $id);
