@@ -1,4 +1,4 @@
-@extends('super_admin.app')
+@extends('admin.app')
 
 {{-- @section('title')
 
@@ -14,7 +14,23 @@
           <div class="card-body">
 
 
-            @include('nav_list')
+          <ul  class="nav nav-tabs" role="tablist">
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="admin"  id="home-tab" data-toggle="tab"  role="tab" aria-controls="home-1" aria-selected="true" >Admin</a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="intaker"  id="home-tab" >Inteker</a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="scheduler">Scheduler</a>
+                  </li>
+
+
+             </ul>
+
             <div class="tab-content">
               <div class="tab-pane fade show active" id="home-1" role="tabpanel" aria-labelledby="home-tab">
 

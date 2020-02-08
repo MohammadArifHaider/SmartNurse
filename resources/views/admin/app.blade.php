@@ -405,20 +405,20 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="view-user.html">
+            <a class="nav-link" href="admin">
               <i class="fa fa-user-circle menu-icon"></i>
               <span class="menu-title">Report</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="update-user.html">
+            <a class="nav-link" href="{{url('create_user')}}">
               <i class="fa fa-plus-circle menu-icon"></i>
               <span class="menu-title">Create User</span>
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="update-user.html">
+            <a class="nav-link" href="{{url('view_user')}}">
               <i class="fa fa-plus-circle menu-icon"></i>
               <span class="menu-title">View User</span>
             </a>
