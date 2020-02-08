@@ -57,55 +57,57 @@
                               <form class="forms-sample">
                                 <div class="form-group">
                                   <label for="exampleInputUsername1"><i class="fa fa-user-circle" style="color: #dedede;"></i> Name</label>
-                                  <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Username">
+                                  <input type="text" class="form-control" id="name" placeholder="John">
+                                  <p class="invalid-feedback" id = "name_error"></p>
                                 </div>
                                 <div class="form-group">
                                   <label for="exampleInputEmail1"><i class="fa fa-envelope" style="color: #dedede;"></i> Email address</label>
-                                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                                  <input type="email" class="form-control" id="email" placeholder="john@gmail.com">
+                                  <p class="invalid-feedback" id = "email_error"></p>
                                 </div>
                                 <div class="form-group">
                                   <label for="exampleInputPassword1"><i class="fa fa-lock" style="color: #dedede;"></i> Password</label>
-                                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                  <input type="password" class="form-control" id="password" placeholder="*****">
+                                  <p class="invalid-feedback" id = "password_error"></p>
                                 </div>
                                 <div class="form-group">
                                   <label for="exampleInputConfirmPassword1"><i class="fa fa-lock" style="color: #dedede;"></i> Confirm Password</label>
-                                  <input type="password" class="form-control" id="exampleInputConfirmPassword1" placeholder="Password">
+                                  <input type="password" class="form-control" id="r-password" placeholder="*****">
+                                  <p class="invalid-feedback" id = "r_password_error"></p>
                                 </div>
 
                                 <div class="form-group">
-                                  <div class="form-check form-check-flat form-check-primary">
-                                    <h4 class="card-title">User Role</h4>
-                                    <div class="col-md-6">
-                      <div class="form-group">
-                        <div class="form-check">
-                          <label class="form-check-label">
-                            <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="">
-                            Admin
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <label class="form-check-label">
-                            <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2" checked>
-                            Super admin
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <label class="form-check-label">
-                            <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="">
-                            Inteker
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <label class="form-check-label">
-                            <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="">
-                            Scheduler
-                          </label>
+                                    <div class="form-check form-check-flat form-check-primary">
+                                      <h4 class="card-title">User Role</h4>
+                                      <div class="col-md-6">
+                        <div class="form-group">
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input checkbox user_role"  value="admin">
+                              Admin
+                            </label>
+                          </div>
+
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input checkbox user_role" value="intaker">
+                              Inteker
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input checkbox user_role"  value="scheduler">
+                              Scheduler
+                            </label>
+                          </div>
+                          <p class="invalid-feedback" id = "user_role_error"></p>
                         </div>
                       </div>
-                    </div>
+                                    </div>
                                   </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary mr-2">Create User</button>
+
+
+                                <button type="button" id="user_creation" class="btn btn-primary mr-2">Create User</button>
 
                               </form>
                             </div>
@@ -113,7 +115,7 @@
                         </div>
                     </div>
                     </div>
-                    <!-- content-wrapper ends -->
+
                                 </div>
 
               </div>
@@ -126,47 +128,47 @@
 
     </div>
   </div>
-  <script src="{{asset('assets')}}/js/vendors.min.js"></script>
 
-    <!-- page js -->
-    <script src="{{asset('assets')}}/vendors/datatables/jquery.dataTables.min.js"></script>
+
+@endsection
+
+<script src="{{asset('assets')}}/js/vendors.min.js"></script>
+
+<script src="{{asset('assets')}}/vendors/datatables/jquery.dataTables.min.js"></script>
 <script src="{{asset('assets')}}/vendors/datatables/dataTables.bootstrap.min.js"></script>
     <script src="{{asset('assets')}}/js/pages/datatables.js"></script>
 
     <!-- Core JS -->
     <script src="{{asset('assets')}}/js/app.min.js"></script>
-    <script src="{{asset('assets')}}/js/custom/view_user_data.js"></script>
+    <script src="{{asset('assets')}}/js/custom/user_creation.js"></script>
+
 
     <script>
-            $( document ).ajaxStart(function() {
-                $( ".preload" ).show();
+
+
+
+
+
+        $(function() {
+
+            $(".preload").hide();
+            $.ajaxSetup({
+
+                headers: {
+
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+                }
+
             });
 
-            $( document ).ajaxStop(function() {
-                $( ".preload" ).hide();
-            });
-
-
-
-            $('#data-table').DataTable({
-                'paging' : true,
-                'lengthChange': false,
-                'searching' : false,
-                'ordering' : false,
-                'info' : false,
-                'autoWidth' : false
-            })
 
 
 
 
+        })
     </script>
 
 
-
-
-
-
-@endsection
 
 

@@ -114,7 +114,7 @@ class AdminController extends Controller
                $data.='
                <td>
                <label class="switch">
-              <input type="checkbox" checked >
+              <input type="checkbox" id="admin_switch" value="admin" checked >
 
 
                  <span class="slider round"></span>
@@ -128,7 +128,7 @@ class AdminController extends Controller
                 $data.='
                 <td>
                 <label class="switch">
-               <input type="checkbox" >
+               <input type="checkbox" id="admin_switch" value="admin" >
 
 
                   <span class="slider round"></span>
@@ -143,7 +143,7 @@ class AdminController extends Controller
                 $data.='
                 <td>
                 <label class="switch">
-               <input type="checkbox" checked >
+               <input type="checkbox" checked id="intaker_switch" >
 
 
                   <span class="slider round"></span>
@@ -158,7 +158,7 @@ class AdminController extends Controller
                 $data.='
                 <td>
                 <label class="switch">
-               <input type="checkbox">
+               <input type="checkbox" id="intaker_switch">
 
 
                   <span class="slider round"></span>
@@ -172,7 +172,7 @@ class AdminController extends Controller
                 $data.='
                 <td>
                 <label class="switch">
-               <input type="checkbox" checked >
+               <input type="checkbox" checked  id="scheduler_switch">
 
 
                   <span class="slider round"></span>
@@ -187,7 +187,7 @@ class AdminController extends Controller
                 $data.='
                 <td>
                 <label class="switch">
-               <input type="checkbox" >
+               <input type="checkbox" id="scheduler_switch">
 
 
                   <span class="slider round"></span>
@@ -203,12 +203,12 @@ class AdminController extends Controller
 
 
             <td style="text-align:center">
-            <button type="button" class="btn btn-primary btn-rounded btn-icon">
+            <button type="button" class="btn btn-primary btn-rounded btn-icon" onclick="update_password(' . $user[$i]->id . ')">
                           <i class="fa fa-edit"></i>
                         </button>
             </td>
             <td style="text-align:center">
-            <button type="button" class="btn btn-danger btn-rounded btn-icon">
+            <button type="button" class="btn btn-danger btn-rounded btn-icon" onclick="delete_user(' . $user[$i]->id . ')">
             <i class="fa fa-trash"></i>
           </button>
             </td>

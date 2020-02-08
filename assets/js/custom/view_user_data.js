@@ -104,6 +104,8 @@ $(function() {
 
 
 
+
+
     function password_check() {
 
         if ($("#password").val().length == 0)

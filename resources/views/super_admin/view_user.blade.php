@@ -8,7 +8,64 @@
 
 @section('content')
 
-<div class="content-wrapper" style="background-image: url({{asset('assets')}}//Artboard.png);">
+<div class="modal fade bd-example-modal" id="update_password_modal">
+    <input type ="hidden" id ="user_id_password" >
+    <div class="modal-dialog">
+        <div class="modal-content" style="overflow-x: auto;">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="fa fa-window-close"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+
+
+                <div class="card" style="overflow-x: auto;">
+
+                    <div class="card-body" style="overflow-x: auto;">
+
+
+                        <div class="m-t-25">
+                         <div class="form-row">
+
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail4">Password</label>
+                                <input type="password" class="form-control" id="password" placeholder="*****">
+                                <div class="invalid-feedback" id = "password_error">
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail4">Re-type Password</label>
+                                <input type="password" class="form-control" id="r-password" placeholder="*****">
+
+                                <div class="invalid-feedback" id = "r_password_error">
+
+                                </div>
+                            </div>
+
+                        <div class="form-group col-md-3">
+
+                            <button type="button" id = "update_password" style="float:right" class="btn btn-primary m-t-15">Update</button>
+
+                        </div>
+
+                         </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-wrapper" style="background-image: url({{asset('assets')}}/Artboard.png);">
     <div class="row">
       <div class="col-md-12">
           <div class="card-body">
