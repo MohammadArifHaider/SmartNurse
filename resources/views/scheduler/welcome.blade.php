@@ -424,27 +424,35 @@
               <hr>
             </li>
             <li class="nav-item">
-              <p class="nav-link" class="menu-title" style="font-size: 18px; font-style: ''"><b>Pending Patient : 4</b></p>
+              <p class="nav-link" class="menu-title" style="font-size: 18px; font-style: ''"><b>Pending Patient : {{$pending_patient}}</b></p>
               <p class="nav-link" class="menu-title" style="font-size: 15px; font-style: ''"><b>Select a Patient ....</b></p>
             </li>
 
 
+            <input type="hidden" id="hidden_patient_id" value="all">
+
+            @foreach ($patient_list as $patient )
+
+
+
             <li class="nav-item">
-              <a class="nav-link" data-toggle="collapse" href="#patient-1" aria-expanded="false" aria-controls="patient-1">
+              <a class="nav-link" data-toggle="collapse" href="#patient-{{$patient->id}}" href='javascript:;' onclick='call_full_calendar({{ $patient->id }})' aria-expanded="false" aria-controls="patient-1">
                 <i class="fa fa-chevron-circle-down menu-icon" style="color: #04b76b;"></i>
-                <span class="menu-title">Banita Acosta</span>
+                <span class="menu-title">{{$patient->first_name." ".$patient->last_name}}</span>
               </a>
-              <div class="collapse" id="patient-1">
+              <div class="collapse" id="patient-{{$patient->id}}">
                 <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"><i class="fa fa-minus" style="padding-right: 27px;"></i>Name : Banita Acosta</li>
-                  <li class="nav-item"><i class="fa fa-minus" style="padding-right: 27px;"></i>Medical ID : TW3980876</li>
-                  <li class="nav-item"><i class="fa fa-minus" style="padding-right: 27px;"></i>DOB : 12345</li>
-                  <li class="nav-item"><i class="fa fa-minus" style="padding-right: 27px;"></i>Address : Housing Sate</li>
-                  <li class="nav-item"><i class="fa fa-minus" style="padding-right: 27px;"></i>Phone No : 123456789</li>
-                  <li class="nav-item"><i class="fa fa-minus" style="padding-right: 27px;"></i>Assesment Type : Primary</li>
+
+                  <li class="nav-item"><i class="fa fa-minus" style="padding-right: 27px;"></i>Medicaid ID : {{$patient->medicaid_id}}</li>
+
+                  <li class="nav-item"><i class="fa fa-minus" style="padding-right: 27px;"></i>Address : {{ $patient->address.",".$patient->city }}</li>
+                  <li class="nav-item"><i class="fa fa-minus" style="padding-right: 27px;"></i>Phone No : {{ $patient->cell_phone }}</li>
+                  <li class="nav-item"><i class="fa fa-minus" style="padding-right: 27px;"></i>Assesment Type : {{$patient->assesment_type}}</li>
                 </ul>
               </div>
             </li>
+
+            @endforeach
 
 
 
@@ -498,8 +506,8 @@
                             <div id="calendar"></div>
 
 
-                            <div class="modal fade bd-example-modal-xl" id="show_date_details">
-                                <div class="modal-dialog modal-xl">
+                            <div class="modal fade modal-lg" id="show_date_details" style="padding-right:0px;margin-left:100px;align:center" >
+                                <div class="modal-dialog modal-lg">
                                     <div class="modal-content" style="overflow-x: auto;">
                                         <div class="modal-header">
 
