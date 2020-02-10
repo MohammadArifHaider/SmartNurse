@@ -1,3 +1,13 @@
+
+      <?php
+      $user_id = Session::get('user_id');
+      $user = \App\User::where('id','=',$user_id)->first();
+      $image = $user->user_image;
+      $name = $user->name;
+
+
+      ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -197,7 +207,7 @@
             </div>
           </li>-->
           <li class="nav-item nav-profile dropdown">
-            <h5><b>Hi, John &nbsp</b></h5>
+            <h5><b>Hi, {{ $name }} &nbsp</b></h5>
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
 
             </a>
@@ -402,22 +412,20 @@
 
 
 
-
-
       <nav class="sidebar sidebar-offcanvas" id="sidebar" >
 
         <ul class="nav">
             <li class="nav-item nav-profile">
               <div class="profile-image">
-                  <img style="" src="images/faces/face5.jpg" alt="image"/>
+                  <img style="" src="{{asset('image')}}/user_image/{{$image}}" alt="image"/>
                 </div>
               <div class="nav-link">
                 <div class="profile-name">
                   <p class="name">
-                  Mohammad Robiul Alam
+                 {{ $name }}
                   </p>
                   <p class="designation">
-                    Super Admin
+                   Scheduler
                   </p>
                 </div>
               </div>
@@ -526,7 +534,7 @@
 
 
                                                     <div class="m-t-25">
-                                                        <table id="data-table" class="table table-bordred">
+                                                        <table id="data-table" class="table table-bordered">
                                                             <thead>
                                                                 <th>Nurse Name</th>
                                                                 <th>Patient Name</th>
@@ -556,32 +564,6 @@
                                 </div>
                             </div>
 
-                            <div class="modal fade bd-example-modal-xl" id="map_modal">
-                                <div class="modal-dialog modal-xl">
-                                    <div class="modal-content" style="overflow-x: auto;">
-                                        <div class="modal-header">
-
-                                            <button type="button" class="close" data-dismiss="modal">
-                                                <i class="anticon anticon-close"></i>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-
-                                            <div class="card" style="overflow-x: auto;">
-
-                                                <div class="card-body" style="overflow-x: auto;">
-
-
-                                                    <div class="m-t-25">
-                                                        <div id="map" style="width: 400px; height: 300px"></div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
                         </div>
 
@@ -992,7 +974,7 @@
   <script>
     $('#data-table').DataTable({
         'paging' : false,
-        'lengthChange': true,
+        'lengthChange': false,
         'searching' : false,
         'ordering' : false,
         'info' : false,

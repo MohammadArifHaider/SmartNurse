@@ -238,6 +238,15 @@ class AdminController extends Controller
     public function create_user(Request $request)
     {
         //file_put_contents('test.txt',$request->all());
+        $image = time().'.'.request()->file->getClientOriginalExtension();
+        //file_put_contents('tes.txt', $image);
+       // request()->file->move(public_path('news_image'), $image);
+
+       request()->file->move(base_path('image/user_image'), $image);
+
+       $request['user_image'] = $image;
+
+
 
         if (User::create($request->all())) {
             return "ok";

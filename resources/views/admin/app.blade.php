@@ -1,3 +1,11 @@
+<?php
+      $user_id = Session::get('user_id');
+      $user = \App\User::where('id','=',$user_id)->first();
+      $image = $user->user_image;
+      $name = $user->name;
+
+
+      ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -180,7 +188,7 @@
             </div>
           </li>-->
           <li class="nav-item nav-profile dropdown">
-            <h5><b>Hi, John &nbsp</b></h5>
+            <h5><b>Hi, {{ $name }} &nbsp</b></h5>
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
 
             </a>
@@ -391,18 +399,20 @@
         <ul class="nav" style="padding-top:3px">
           <li class="nav-item nav-profile">
             <div class="profile-image">
-                <img style="" src="{{asset('assets')}}/faces/face5.jpg" alt="image"/>
+                <img style="" src="{{asset('image')}}/user_image/{{$image}}" alt="image"/>
               </div>
+
             <div class="nav-link">
               <div class="profile-name">
                 <p class="name">
-                Mohammad Robiul Alam
+               {{ $name }}
                 </p>
                 <p class="designation">
                   Super Admin
                 </p>
               </div>
-            </div>
+
+        </div>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="admin">

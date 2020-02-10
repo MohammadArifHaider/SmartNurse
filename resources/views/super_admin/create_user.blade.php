@@ -78,7 +78,7 @@
 
                                 <div class="form-group">
                                     <div class="form-check form-check-flat form-check-primary">
-                                      <h4 class="card-title">User Role</h4>
+                                        <label for="exampleInputConfirmPassword1"><i class="fa fa-address-book" style="color: #dedede;"></i> User Role</label>
                                       <div class="col-md-6">
                         <div class="form-group">
                           <div class="form-check">
@@ -102,9 +102,24 @@
                           </div>
                           <p class="invalid-feedback" id = "user_role_error"></p>
                         </div>
+
                       </div>
                                     </div>
                                   </div>
+
+                                  <div class="form-group">
+                                    <label for="exampleInputConfirmPassword1"><i class="fa fa-camera" style="color: #dedede;"></i> Upload Image</label>
+                                    <input type="file" id="upload" enctype="multipart/form-data" class="file-upload-default" accept="image/*" multiple>
+                                    <div class="input-group col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                      <input type="text" class="form-control file-upload-info" disabled placeholder="Upload image file">
+                                      <span class="input-group-append">
+                                        <button class="file-upload-browse btn btn-primary" type="button">Browse</button>
+                                      </span>
+
+                                    </div>
+
+                                  </div>
+
 
 
                                 <button type="button" id="user_creation" class="btn btn-primary mr-2">Create User</button>
@@ -140,7 +155,9 @@
 
     <!-- Core JS -->
     <script src="{{asset('assets')}}/js/app.min.js"></script>
-    <script src="{{asset('assets')}}/js/custom/user_creation.js"></script>
+    <script src="{{asset('assets')}}/js/custom/user_creation.js?{{time()}}"></script>
+
+    <script src="{{asset('assets')}}/js/file-upload.js"></script>
 
 
     <script>

@@ -229,6 +229,7 @@ $(function() {
         formdata.append('email', $("#email").val());
         formdata.append('password', $("#password").val());
         formdata.append('user_role', user_role);
+        formdata.append('file', $('#upload')[0].files[0]);
 
         if (!error && user_role.length > 0) {
 
