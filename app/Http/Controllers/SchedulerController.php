@@ -552,7 +552,8 @@ curl_close($curl);
               'nurse_id'=>$nurse_id,
               'start' => $date_array[$j].'T'.$prefered_times[$k],
               'end' => $date_array[$j].'T'.$prefered_times[$k],
-              'call_count'=>sizeof($nurse_schedule)
+              'call_count'=>sizeof($nurse_schedule),
+              'color'=>'#F9F908'
 
 
           ]);
@@ -662,7 +663,8 @@ curl_close($curl);
                         'nurse_id'=>$nurse_id,
                         'start' => $date_array[$j].'T'.$prefered_times[$k],
                         'end' => $date_array[$j].'T'.$prefered_times[$k],
-                        'call_count'=>sizeof($nurse_schedule)
+                        'call_count'=>sizeof($nurse_schedule),
+                        'color'=>'#2BE7D7'
 
 
                       ]);

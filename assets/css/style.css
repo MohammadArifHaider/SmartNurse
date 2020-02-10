@@ -32581,7 +32581,8 @@ body.avgrund-active {
 
 /* Full Calendar */
 
-.fc button {
+
+/* .fc button {
     height: auto;
     background-image: none;
     text-shadow: none;
@@ -32703,7 +32704,7 @@ body.avgrund-active {
 
 .fc-external-events .fc-event:nth-child(4) {
     border-color: #F5A623;
-}
+} */
 
 
 /* Google Charts */
