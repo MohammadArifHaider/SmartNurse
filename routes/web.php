@@ -95,6 +95,10 @@ Route::get('view_patient_list','PatientController@show_patient_list');
 
 Route::get('view_nurse_list','NurseController@show_nurse_list');
 
+Route::post('submit_change_address','PatientController@submit_change_address');
+
+Route::post('submit_patient_note','PatientController@submit_patient_note');
+
 
 
 

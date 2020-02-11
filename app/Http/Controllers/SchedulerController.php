@@ -362,6 +362,7 @@ curl_close($curl);
              <td>'.$address.'</td>
              <td>'.$assesment_type.'</td>
              <td>'.$distance.'</td>
+             <td></td>
 
             ';
 

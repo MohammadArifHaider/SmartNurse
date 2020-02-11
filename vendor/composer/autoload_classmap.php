@@ -39,6 +39,7 @@ return array(
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
     'App\\User' => $baseDir . '/app/User.php',
     'App\\distance_table' => $baseDir . '/app/distance_table.php',
+    'App\\nurse_form' => $baseDir . '/app/nurse_form.php',
     'App\\nurse_profile' => $baseDir . '/app/nurse_profile.php',
     'App\\nurse_scheduler' => $baseDir . '/app/nurse_scheduler.php',
     'App\\nurse_status' => $baseDir . '/app/nurse_status.php',

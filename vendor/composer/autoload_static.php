@@ -601,6 +601,7 @@ class ComposerStaticInitf23224b8b20b6552f40affbc1a5bdca1
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'App\\distance_table' => __DIR__ . '/../..' . '/app/distance_table.php',
+        'App\\nurse_form' => __DIR__ . '/../..' . '/app/nurse_form.php',
         'App\\nurse_profile' => __DIR__ . '/../..' . '/app/nurse_profile.php',
         'App\\nurse_scheduler' => __DIR__ . '/../..' . '/app/nurse_scheduler.php',
         'App\\nurse_status' => __DIR__ . '/../..' . '/app/nurse_status.php',
