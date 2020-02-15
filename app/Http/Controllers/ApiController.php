@@ -8,6 +8,7 @@ use App\nurse_scheduler;
 use App\patient_profile;
 use App\distance_table;
 use App\nurse_status;
+use App\nurse_assesment_form;
 
 class ApiController extends Controller
 {
@@ -58,26 +59,81 @@ curl_close($curl);
 
 
     }
+    public function submit_nurse_form(Request $request)
+    {
+        //file_put_contents('submit_nurse_form.txt',json_encode($request->all()));
+        $scheduler_id = $request->scheduler_id;
+        $narrative_note = $request->narrative_note;
+        $t1_q1 = $request->t1_q1;
+        $t1_q2 = $request->t1_q2;
+        $t1_q3 = $request->t1_q3;
+        $t2_q1 = $request->t2_q1;
+        $t2_q2 = $request->t2_q2;
+        $t2_q3 = $request->t2_q3;
+
+        nurse_assesment_form::create(['scheduler_id'=>$scheduler_id,'narrative_note_answer'=>$narrative_note,'t1_q1_answer'=>$t1_q1,'t1_q2_answer'=>$t1_q2,'t1_q3_answer'=>$t1_q3,'t2_q1_answer'=>$t2_q1,'t2_q2_answer'=>$t2_q2,'t2_q3_answer'=>$t2_q3]);
+        //nurse_assesment_form::create($request->all());
+
+
+
+        nurse_status::where('scheduler_id','=',$scheduler_id)->update(['status'=>'3']);
+         return response()->json(['response'=>'ok']);
+    }
+
+     public function submit_nurse_form_not_available(Request $request)
+    {
+        file_put_contents('submit_nurse_form_not_available.txt',json_encode($request->all()));
+        $scheduler_id = $request->scheduler_id;
+
+        nurse_status::where('scheduler_id','=',$scheduler_id)->update(['status'=>'4']);
+         return response()->json(['response'=>'ok']);
+    }
+    public function nurse_current_distance_update(Request $request)
+    {
+        $nurse_current_lat = $request->nurse_current_lat;
+        $nurse_current_lon = $request->nurse_current_lon;
+        $nurse_status_id =$request->nurse_status_id;
+
+         $nurse_start_lat = nurse_status::where('id','=',$nurse_status_id)->first()->nurse_start_lat;
+        $nurse_start_lon = nurse_status::where('id','=',$nurse_status_id)->first()->nurse_start_lon;
+
+         $distance_duration_array = $this->distance($nurse_start_lat,$nurse_start_lon,$nurse_current_lat,$nurse_current_lon);
+
+         $current_distance_covered = $distance_duration_array['distance'];
+
+          if(nurse_status::where('id','=',$nurse_status_id)->update(['current_distance_covered'=>$current_distance_covered]))
+
+         {
+              return response()->json(['response'=>'ok']);
+         }
+         else
+         {
+             return response()->json(['response'=>'not_ok']);
+         }
+
+
+    }
     public function nurse_finish(Request $request)
     {
         date_default_timezone_set('Asia/Dhaka');
-        $nurse_status_id =$request->nurse_status_id;
-        $nurse_finish_lat =$request->nurse_finish_lat;
-        $nurse_finish_lon =$request->nurse_finish_lon;
+        $scheduler_id =$request->scheduler_id;
+        $nurse_finish_lat =22.367727;//$request->nurse_finish_lat;
+        $nurse_finish_lon =91.832673;//$request->nurse_finish_lon;
 
         $nurse_finish_time = date("H:i:s");
 
-        $nurse_start_lat = nurse_status::where('id','=',$nurse_status_id)->first()->nurse_start_lat;
-        $nurse_start_lon = nurse_status::where('id','=',$nurse_status_id)->first()->nurse_start_lon;
+        $nurse_start_lat = nurse_status::where('scheduler_id','=',$scheduler_id)->first()->nurse_start_lat;
+        $nurse_start_lon = nurse_status::where('scheduler_id','=',$scheduler_id)->first()->nurse_start_lon;
 
          $distance_duration_array = $this->distance($nurse_start_lat,$nurse_start_lon,$nurse_finish_lat,$nurse_finish_lon);
 
          $distance_required = $distance_duration_array['distance'];
          $time_required = $distance_duration_array['duration'];
 
-         if(nurse_status::where('id','=',$nurse_status_id)->update(['nurse_finish_time'=>$nurse_finish_time,'distance_required'=>$distance_required,'time_required'=>$time_required]))
+         if(nurse_status::where('scheduler_id','=',$scheduler_id)->update(['nurse_finish_time'=>$nurse_finish_time,'distance_required'=>$distance_required,'time_required'=>$time_required]))
 
          {
+             nurse_status::where('scheduler_id','=',$scheduler_id)->update(['status'=>2]);
               return response()->json(['response'=>'ok']);
          }
          else
@@ -92,6 +148,23 @@ curl_close($curl);
 
 
     }
+    public function get_status(Request $request)
+    {
+        $scheduler_id = $request->scheduler_id;
+        $nurse_status = nurse_status:: where('scheduler_id','=',$scheduler_id)->first();
+        if($nurse_status)
+        {
+        $status = $nurse_status->status;
+
+        }
+        else
+        {
+            $status = 0;
+        }
+
+        return response()->json(['status'=>$status]);
+
+    }
      public function nurse_start(Request $request)
     {
         date_default_timezone_set('Asia/Dhaka');
@@ -102,11 +175,11 @@ curl_close($curl);
 
         $nurse_start_lat = $request->nurse_start_lat;
         $nurse_start_lon = $request->nurse_start_lon;
-        $patient_lat = distance_table::where('patient_id','=',$patient_id)->first()->patient_lat;
-        $patient_lon = distance_table::where('patient_id','=',$patient_id)->first()->patient_lon;
-        $distance_duration_array = $this->distance($nurse_start_lat,$nurse_start_lon,$patient_lat,$patient_lon);
-        $nurse_estimate_distance_to_go_patient_home = $distance_duration_array['distance'];
-        $nurse_estimate_time_to_go_patient_home = $distance_duration_array['duration'];
+        $patient_lat = 22.359069;//distance_table::where('patient_id','=',$patient_id)->first()->patient_lat;
+        $patient_lon = 91.821216;//distance_table::where('patient_id','=',$patient_id)->first()->patient_lon;
+      $distance_duration_array = $this->distance($nurse_start_lat,$nurse_start_lon,$patient_lat,$patient_lon);
+        $nurse_estimate_distance_to_go_patient_home = 5;//$distance_duration_array['distance'];
+        $nurse_estimate_time_to_go_patient_home =6;// $distance_duration_array['duration'];
         $nurse_start_time = date("H:i:s");
         $nurse_status = new nurse_status();
 
@@ -118,11 +191,12 @@ curl_close($curl);
         $nurse_status->nurse_start_lon = $nurse_start_lon;
         $nurse_status->estimate_distance_to_go_patient_home = $nurse_estimate_distance_to_go_patient_home;
         $nurse_status->estimate_time_to_go_patient_home = $nurse_estimate_time_to_go_patient_home;
+        $nurse_status->status = 1;
         $nurse_status->save();
         $nurse_status_id = $nurse_status->id;
 
-        //file_put_contents('nurse_start_test.txt',$nurse_id." ".$patient_id." ".$nurse_start_lat." ".$nurse_start_lon);
-        return response()->json(['nurse_status_id'=>$nurse_status_id]);
+        //file_put_contents('nurse_start_test.txt',$nurse_id." ".$patient_id." ".$nurse_start_lat." ".$nurse_start_lon." ".$patient_lat." ".$patient_lon);
+        return response()->json(['response'=>'ok']);
 
     }
     public function login(Request $reuqest)
@@ -253,13 +327,6 @@ curl_close($curl);
 
     }
 
-
-
-
-
-
-
-
     public function get_schedule_today(Request $request)
     {
          date_default_timezone_set('Asia/Dhaka');
@@ -291,9 +358,6 @@ curl_close($curl);
                 $patient_lat = distance_table::where('patient_id','=',$patient_id)->first()->patient_lat;
                 $patient_lon = distance_table::where('patient_id','=',$patient_id)->first()->patient_lon;
 
-
-
-
                 array_push($appointment_list,['scheduler_id'=>$appointment[$i]->id,'p_name'=>$patient_name,'p_id'=>$patient_id,'appointment_time'=>$appointment[$i]->appointed_start_time,'lat'=>$patient_lat,'lon'=>$patient_lon,'p_address'=>$address]);
             }
             return json_encode($appointment_list);
@@ -324,9 +388,6 @@ curl_close($curl);
                 $address = $patient->address.",".$patient->city.",".$patient->country;
                 $patient_lat = distance_table::where('patient_id','=',$patient_id)->first()->patient_lat;
                 $patient_lon = distance_table::where('patient_id','=',$patient_id)->first()->patient_lon;
-
-
-
 
                 array_push($appointment_list,['p_name'=>$patient_name,'p_id'=>$patient_id,'appointment_time'=>$appointment[$i]->appointed_start_time,'lat'=>$patient_lat,'lon'=>$patient_lon,'p_address'=>$address,'appointment_date'=>$appointment[$i]->appointed_date]);
             }
@@ -385,8 +446,6 @@ curl_close($curl);
               return response()->json(['response'=>'not_ok']);
          }
 
-        // $imageName = time().'.'.request()->image->getClientOriginalExtension();
-        // base64_decode(request()->image)->move(base_path('image/nurse_image'), $imageName);
 
     }
 

@@ -96,11 +96,11 @@ curl_close($curl);
         $nurse_address = $geocoder->getCoordinatesForAddress($nurse_address);
         $patient_address = $geocoder->getCoordinatesForAddress($patient_address);
 
-        $nurse_lat = $nurse_address['lat'];
-        $nurse_lon = $nurse_address['lng'];
+        $nurse_lat = round($nurse_address['lat'],7);
+        $nurse_lon = round($nurse_address['lng'],7);
 
-        $patient_lat = $patient_address['lat'];
-        $patient_lon = $patient_address['lng'];
+        $patient_lat = round($patient_address['lat'],7);
+        $patient_lon = round($patient_address['lng'],7);
 
         //file_put_contents('test2.txt', $nurse_lat . " " . $nurse_lon . " " . $patient_lat . " " . $patient_lon);
 

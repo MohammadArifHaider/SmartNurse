@@ -51,52 +51,52 @@
 
               <div class="form-group">
                 <label for="exampleInputName1">Name <span style="color: red;">*</span></label>
-                <input type="text" class="form-control" id="exampleInputName1" placeholder="">
+                <input type="text" class="form-control" id="name" placeholder="">
               </div>
               <div class="form-group">
                 <label for="exampleInputName1">Gender <span style="color: red;">*</span></label>
-                <select class="form-control" id="exampleSelectGender">
-                    <option>Male</option>
-                    <option>Female</option>
-                    <option>Other</option>
+                <select class="form-control" id="gender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
                   </select>
               </div>
               <div class="form-group">
                 <label for="exampleInputName1">Language <span style="color: red;">*</span></label>
-                <input type="text" class="form-control" id="exampleInputName1" placeholder="Bangla">
+                <input type="text" class="form-control" id="language" placeholder="Bangla">
               </div>
 
               <div class="form-group">
                 <label for="exampleInputName1">Trained Plan</label>
-                <input type="text" class="form-control" id="exampleInputName1" placeholder="">
+                <input type="text" class="form-control" id="trained_plan" placeholder="">
               </div>
               <div class="form-group">
                 <label for="exampleInputName1">Email</label>
-                <input type="email" class="form-control" id="exampleInputName1" placeholder="abc@gmail.com">
+                <input type="email" class="form-control" id="email" placeholder="abc@gmail.com">
               </div>
               <div class="form-group">
                 <label for="exampleInputName1">Nurse Registration No</label>
-                <input type="text" class="form-control" id="exampleInputName1" placeholder="">
+                <input type="text" class="form-control" id="registration_no" placeholder="">
               </div>
               <div class="form-group">
                 <label for="exampleInputName1">Phone Number <span style="color: red;">*</span></label>
-                <input type="text" class="form-control" id="exampleInputName1" placeholder="">
+                <input type="text" class="form-control" id="phone_number" placeholder="">
               </div>
               <div class="form-group">
                 <label for="exampleInputName1">Address</label>
-                <input type="text" class="form-control" id="exampleInputName1" placeholder="Text">
+                <input type="text" class="form-control" id="address" placeholder="Text">
               </div>
               <div class="form-group">
                 <label for="exampleInputCity1">City</label>
-                <input type="text" class="form-control" id="exampleInputCity1" placeholder="Location">
+                <input type="text" class="form-control" id="city" placeholder="Location">
               </div>
               <div class="form-group">
                 <label for="exampleInputCity1">Zip Code</label>
-                <input type="text" class="form-control" id="exampleInputCity1" placeholder="">
+                <input type="text" class="form-control" id="country" placeholder="">
               </div>
               <div class="form-group">
                 <label for="exampleInputCity1">Country</label>
-                <input type="text" class="form-control" id="exampleInputCity1" placeholder="">
+                <input type="text" class="form-control" id="zip" placeholder="">
               </div>
 
               <div class="form-group">
@@ -107,43 +107,43 @@
                   <div class="form-group">
                     <div class="form-check">
                       <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input">
+                        <input type="checkbox" class="form-check-input prefered_day" value = "sunday">
                         Sunday
                       </label>
                     </div>
                     <div class="form-check">
                       <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" checked>
+                        <input type="checkbox" class="form-check-input prefered_day"  value = "monday" checked>
                         Monday
                       </label>
                     </div>
                     <div class="form-check">
                       <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" >
+                        <input type="checkbox" class="form-check-input prefered_day" value = "tuesday" >
                         Tuesday
                       </label>
                     </div>
                     <div class="form-check">
                       <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" >
+                        <input type="checkbox" class="form-check-input prefered_day" value = "wednesday" >
                         Wednesday
                       </label>
                     </div>
                     <div class="form-check">
                       <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" >
+                        <input type="checkbox" class="form-check-input prefered_day" value = "thursday" >
                         Thursday
                       </label>
                     </div>
                     <div class="form-check">
                       <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" >
+                        <input type="checkbox" class="form-check-input prefered_day" value = "friday" >
                         Friday
                       </label>
                     </div>
                     <div class="form-check">
                       <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" >
+                        <input type="checkbox" class="form-check-input prefered_day" >
                         Saturday
                       </label>
                     </div>
@@ -156,18 +156,18 @@
 
               <div class="form-group">
                 <label for="exampleInputName1">Prefered Start Times</label>
-                <input type="text" class="form-control" id="exampleInputName1" placeholder="">
+                <input type="text" class="form-control" id="start_time" placeholder="">
               </div>
               <div class="form-group">
                 <label for="exampleInputName1">Prefered End Times</label>
-                <input type="text" class="form-control" id="exampleInputName1" placeholder="">
+                <input type="text" class="form-control" id="end_time" placeholder="">
               </div>
               <div class="form-group">
                 <label for="exampleInputName1">Prefered Notes</label>
-                <input type="text" class="form-control" id="exampleInputName1" placeholder="text">
+                <input type="text" class="form-control" id="note" placeholder="text">
               </div>
 
-              <button type="submit" class="btn btn-primary mr-2">Create User</button>
+              <button type="button" id="nurse_information_upload" class="btn btn-primary mr-2">Create User</button>
 
             </form>
           </div>
@@ -178,22 +178,89 @@
             <i class="fa fa-plus-square" style="color: #f5a623;"></i>
              Upload the batch file
           </h5>
+          <form method="post" enctype="multipart/form-data" action="{{ url('nurse_file_import') }}">
+                        @csrf
           <div class="form-group">
             <label>File upload</label>
-            <input type="file" name="img[]" class="file-upload-default">
+            <input type="file" class="file-upload-default" name="select_file" id="customFile" multiple>
             <div class="input-group col-xs-8 col-sm-8 col-md-8 col-lg-8">
               <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Excel File">
               <span class="input-group-append">
                 <button class="file-upload-browse btn btn-primary" type="button">Browse</button>
               </span>
               <div class="col-md-2 col-sm-2 col-lg-2">
-                <button class="btn btn-primary btn-md" type="button">
+                <button class="btn btn-primary btn-md" type="button" id="upload">
                     <i class="fas fa-cloud-upload-alt" style="font-size:25px"></i>
                 </button>
             </div>
             </div>
+            </form>
 
           </div>
+
+
+                            <div class="modal fade bd-example-modal-lg" id="excel_error_modal">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content" style="overflow-x: auto;">
+                                        <div class="modal-header">
+
+                                            <button type="button" class="close" data-dismiss="modal">
+                                                <i class="anticon anticon-close"></i>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="card" style="overflow-x: auto;">
+                                                <div class="card-body" style="overflow-x: auto;">
+                                                    <h4>Missing Data</h4><span style="float:right" ><a href="{{ url('export') }}"><button type="button" id="export" class="btn btn-primary">Download Missing Data</button></a></span>
+                                                    <p style="color:red">This record has missing data. Please fill it up and re-upload</p>
+                                                    <div class="m-t-25">
+                                                        <table id="data-table" class="table table-bordred">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Row no</th>
+                                                                    <th>Name</th>
+                                                                    <th>Gender</th>
+                                                                    <th>Language</th>
+                                                                    <th>Trained Plan</th>
+                                                                    <th>Email Address</th>
+                                                                    <th>Nurse Registration No</th>
+                                                                    <th>Phone_number</th>
+                                                                    <th>Address</th>
+                                                                    <th>City</th>
+                                                                    <th>Country</th>
+                                                                    <th>Prefereed Days</th>
+                                                                    <th>Prefered Location</th>
+                                                                    <th>Prefered Start Times</th>
+                                                                    <th>Prefered End Times</th>
+                                                                    <th>Prefered Notes</th>
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="missing_data">
+
+
+                                                            </tbody>
+                                                            {{-- <tfoot>
+                                                                <tr>
+                                                                    <th>Name</th>
+                                                                    <th>Position</th>
+                                                                    <th>Office</th>
+                                                                    <th>Age</th>
+                                                                    <th>Start date</th>
+                                                                    <th>Salary</th>
+                                                                </tr>
+                                                            </tfoot> --}}
+                                                        </table>
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
 
 
@@ -228,6 +295,7 @@
   <script src="{{asset('assets')}}/js/formpickers.js"></script>
   <script src="{{asset('assets')}}/js/form-repeater.js"></script>
   <script src="{{asset('assets')}}/js/file-upload.js"></script>
+  <script src="{{asset('assets')}}/js/custom/nurse_profile.js?{{time()}}"></script>
 
 
 @endsection

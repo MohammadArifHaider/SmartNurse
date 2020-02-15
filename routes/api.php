@@ -35,3 +35,11 @@ Route::post('update_profile','ApiController@update_profile');
 Route::post('nurse_start','ApiController@nurse_start');
 Route::post('nurse_finish','ApiController@nurse_finish');
 
+Route::post('nurse_current_distance_update','ApiController@nurse_current_distance_update');
+
+Route::post('get_status','ApiController@get_status');
+
+Route::post('submit_nurse_form','ApiController@submit_nurse_form');
+
+Route::post('submit_nurse_form_not_available','ApiController@submit_nurse_form_not_available');
+

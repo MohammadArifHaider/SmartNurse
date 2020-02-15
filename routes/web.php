@@ -27,6 +27,11 @@ Route::get('intaker', function () {
 });
 
 
+
+Route::get('examiner', 'ExaminerController@nurse_progression_list');
+
+Route::get('view_nurse_progress_list', 'ExaminerController@view_nurse_progress_list');
+
 Route::get('export', 'ExcelController@export');
 
 
@@ -48,6 +53,7 @@ Route::post('nurse_file_import','ExcelController@nurse_file_import');
 
 
 Route::get('scheduler','SchedulerController@main_page');
+
 Route::post('assign_nurse','ExcelController@assign_nurse');
 
 Route::get('patient_list','SchedulerController@show_patient_list');
@@ -98,6 +104,8 @@ Route::get('view_nurse_list','NurseController@show_nurse_list');
 Route::post('submit_change_address','PatientController@submit_change_address');
 
 Route::post('submit_patient_note','PatientController@submit_patient_note');
+
+Route::post('nurse_assesment_form_value','ExaminerController@nurse_assesment_form_value');
 
 
 
