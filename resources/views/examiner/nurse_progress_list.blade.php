@@ -130,8 +130,13 @@
                                 </tbody>
 
                             </table>
-                            <button type="button" class="btn btn-primary btn-sm" onclick="edit_form_checkbox_show()">Edit</button>
-                            <button type="button" class="btn btn-primary btn-sm" onclick="accept()">Accept</button>
+                            <button type="button" class="btn btn-primary btn-sm" id="edit_form" onclick="edit_form_checkbox_show()">Edit</button>
+                            <button type="button" class="btn btn-primary btn-sm" id="accept_form" onclick="accept_form()">Accept</button>
+
+                            <button type="button" class="btn btn-primary btn-sm" id="send_form" onclick="send_form()">Send Form</button>
+                            <button type="button" class="btn btn-primary btn-sm" id="cancel_edit" onclick="cancel_edit()">Cancel</button>
+                           <input type="hidden" id="hidden_scheduler_id">
+
                         </div>
 
 

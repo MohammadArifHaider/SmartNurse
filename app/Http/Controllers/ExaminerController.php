@@ -8,6 +8,7 @@ use App\nurse_profile;
 use App\patient_profile;
 use App\nurse_status;
 use App\nurse_assesment_form;
+use App\nurse_assesment_form_error;
 use DB;
 
 
@@ -26,13 +27,13 @@ class ExaminerController extends Controller
             $data='<tr>
                <td>'.$question->t1_q1.' </td>
                <td colspan="4">'.$answer->t1_q1_answer.'</td>
-               <td class="test"> <input type="checkbox" class="form-check-input checkbox edit_form_field"  value="'.$question->t1_q1.'"></td>
+               <td class="test"> <input type="checkbox" class="form-check-input checkbox edit_form_field"  value="t1_q1"></td>
             </tr>
 
             <tr>
                <td>'.$question->t1_q2.' </td>
                <td colspan="4">'.$answer->t1_q2_answer.'</td>
-               <td> <input type="checkbox" class="form-check-input checkbox edit_form_field"  value="'.$question->t1_q2.'"></td>
+               <td> <input type="checkbox" class="form-check-input checkbox edit_form_field"  value="t1_q2"></td>
             </tr>
 
 
@@ -41,25 +42,25 @@ class ExaminerController extends Controller
             <tr>
                <td>'.$question->t1_q3.' </td>
                <td colspan="4">'.$answer->t1_q3_answer.'</td>
-               <td> <input type="checkbox" class="form-check-input checkbox edit_form_field"  value="'.$question->t1_q3.'"></td>
+               <td> <input type="checkbox" class="form-check-input checkbox edit_form_field"  value="t1_q3"></td>
             </tr>
 
             <tr>
                <td>'.$question->t2_q1.' </td>
                <td colspan="4">'.$answer->t2_q1_answer.'</td>
-               <td> <input type="checkbox" class="form-check-input checkbox edit_form_field"  value="'.$question->t2_q1.'"></td>
+               <td> <input type="checkbox" class="form-check-input checkbox edit_form_field"  value="t2_q1"></td>
             </tr>
 
             <tr>
                <td>'.$question->t2_q2.' </td>
                <td colspan="4">'.$answer->t2_q2_answer.'</td>
-               <td> <input type="checkbox" class="form-check-input checkbox edit_form_field"  value="'.$question->t2_q2.'"></td>
+               <td> <input type="checkbox" class="form-check-input checkbox edit_form_field"  value="t2_q2"></td>
             </tr>
 
             <tr>
                <td>'.$question->t2_q2.' </td>
                <td colspan="4">'.$answer->t2_q2_answer.'</td>
-               <td> <input type="checkbox" class="form-check-input checkbox edit_form_field"  value="'.$question->t2_q2.'"></td>
+               <td> <input type="checkbox" class="form-check-input checkbox edit_form_field"  value="t2_q3"></td>
             </tr>
 
 
@@ -68,6 +69,22 @@ class ExaminerController extends Controller
 
 
 
+
+    }
+
+    public function send_nurse_form_error(Request $request)
+    {
+       $scheduler_id = $request->scheduler_id;
+       $error_question_list = $request->error_question_list;
+       nurse_assesment_form_error::create(['scheduler_id'=>$scheduler_id,'question_no'=>$error_question_list]);
+
+
+    }
+
+    public function accept_nurse_assesment_form(Request $request)
+    {
+$scheduler_id = $request->scheduler_id;
+nurse_assesment_form::where('scheduler_id','=',$scheduler_id)->update(['status'=>1]);
 
     }
 
@@ -109,7 +126,7 @@ class ExaminerController extends Controller
                 }
                 else
                 {
-                    $assesment_form_confirmation = 'Not Accepted';
+                    $assesment_form_confirmation = 'Accepted';
                 }
 
                 $form = $nurse_status[$i]->scheduler_id;

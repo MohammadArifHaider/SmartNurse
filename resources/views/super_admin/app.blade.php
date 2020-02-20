@@ -11,7 +11,7 @@
   <title>View User</title>
 
   <!-- endinject -->
-  <link rel="shortcut icon" href="{{asset('assets')}}/images/favicon.png" />
+  <link rel="shortcut icon" href="{{asset('assets')}}/images/favicon.png"/>
   @include('all_css')
 </head>
 

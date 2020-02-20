@@ -59,10 +59,31 @@ curl_close($curl);
     }
     public function submit_patient_note(Request $request)
     {
-
-        $patient_id = $request->patient_id;
+        date_default_timezone_set('Asia/Dhaka');
+        $date = date('d-m-Y H:i:s');
+      $patient_id = $request->patient_id;
         $patient_note = $request->patient_note;
-        patient_profile::where('id','=',$patient_id)->update(['note'=>$patient_note]);
+        $user_id = 1;
+
+        $note_archive = array();
+
+        $note_archive_existing = patient_profile::where('id','=',$patient_id)->first();
+
+        $existing_note = $note_archive_existing->note_archive;
+
+            //$existing_note = json_decode($existing_note);
+           // file_put_contents('test.txt',$existing_note);
+            //array_push($note_archive,$existing_note);
+            if ($existing_note) {
+                $note_archive = json_decode($existing_note);
+            }
+
+
+        array_push($note_archive,array('patient_note'=>$patient_note,'date'=>$date,'update_by'=>$user_id));
+
+
+
+        patient_profile::where('id','=',$patient_id)->update(['note'=>$patient_note,'note_archive'=>$note_archive]);
 
     }
      public function submit_change_address(Request $request)

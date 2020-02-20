@@ -520,6 +520,10 @@
                                             <a class="nav-link active" href="scheduler" id="home-tab" data-toggle="tab" role="tab" aria-controls="home-1" aria-selected="true">Scheduler</a>
                                         </li>
 
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="examiner">Examiner</a>
+                                          </li>
+
                                     </ul>
 
                                     <div class="tab-content">
@@ -606,7 +610,8 @@
 
     </html>
 
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="{{asset('assets')}}/js/custom/sweetalert.js?{{time()}}">
+   // <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.js" ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>

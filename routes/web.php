@@ -107,6 +107,11 @@ Route::post('submit_patient_note','PatientController@submit_patient_note');
 
 Route::post('nurse_assesment_form_value','ExaminerController@nurse_assesment_form_value');
 
+Route::post('accept_nurse_assesment_form','ExaminerController@accept_nurse_assesment_form');
+
+Route::post('send_nurse_form_error','ExaminerController@send_nurse_form_error');
+
+
 
 
 

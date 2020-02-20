@@ -1,5 +1,7 @@
 function show_nurse_assesment_form(scheduler_id) {
+    $("#hidden_scheduler_id").val(scheduler_id);
     var formdata = new FormData();
+
 
     formdata.append('scheduler_id', scheduler_id);
     $.ajax({
@@ -12,6 +14,8 @@ function show_nurse_assesment_form(scheduler_id) {
             $("#assign_nurse").html(data);
             $("#nurse_assesment_form_modal").modal('show');
             $('.edit_form_field').hide();
+            $("#send_form").hide();
+            $("#cancel_edit").hide();
 
         }
 
@@ -21,8 +25,71 @@ function show_nurse_assesment_form(scheduler_id) {
 
 }
 
+function accept_form() {
+
+    var scheduler_id = $("#hidden_scheduler_id").val();
+    var formdata = new FormData();
+    formdata.append('scheduler_id', scheduler_id);
+    $.ajax({
+        processData: false,
+        contentType: false,
+        url: "accept_nurse_assesment_form",
+        type: "POST",
+        data: formdata,
+        success: function(data, status) {
+            alert('form accepted');
+            $("#nurse_assesment_form_modal").modal('hide');
+            location.reload();
+
+        }
+
+    })
+
+
+}
+
+function send_form() {
+    var error_question = [];
+    $('.edit_form_field:checked').each(function() {
+        error_question.push($(this).val());
+    });
+    var scheduler_id = $("#hidden_scheduler_id").val();
+    var formdata = new FormData();
+    formdata.append('scheduler_id', scheduler_id);
+    formdata.append('error_question_list', error_question);
+
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: "POST",
+        url: "send_nurse_form_error",
+        data: formdata,
+        success: function(data, status) {
+
+            alert('error_send');
+
+
+        }
+    });
+    // alert(error_question);
+}
+
 function edit_form_checkbox_show() {
     $('.edit_form_field').show();
+    $("#edit_form").hide();
+    $("#accept_form").hide();
+    $("#send_form").show();
+    $("#cancel_edit").show();
+
+}
+
+function cancel_edit() {
+    $('.edit_form_field').hide();
+    $("#edit_form").show();
+    $("#accept_form").show();
+    $("#send_form").hide();
+    $("#cancel_edit").hide();
+
 }
 
 $(function() {

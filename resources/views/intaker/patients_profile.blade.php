@@ -24,6 +24,10 @@
                     <a class="nav-link" href="scheduler">Scheduler</a>
                   </li>
 
+                  <li class="nav-item">
+                    <a class="nav-link" href="examiner">Examiner</a>
+                  </li>
+
 
              </ul>
 
@@ -288,14 +292,14 @@
 
     </div>
   </div>
-  
+
   @include('all_js');
   <script src="{{asset('assets')}}/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
 <script src="{{asset('assets')}}/js/custom/patient_profile.js?{{time()}}"></script>
 
 <script src="{{asset('assets')}}/js/app.min.js"></script>
 
-    
+
 
 
   <script src="{{asset('assets')}}/js/formpickers.js?{{time()}}"></script>
@@ -303,9 +307,9 @@
 
 
   <script src="{{asset('assets')}}/js/file-upload.js"></script>
-  
 
-  
+
+
 
 
 
