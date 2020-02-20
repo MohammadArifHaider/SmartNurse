@@ -445,7 +445,7 @@
                     </div>
                 </div>
 
-                <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                <nav class="sidebar sidebar-offcanvas" id="sidebar" style="padding-right:5px;">
 
                     <ul class="nav">
                         <li class="nav-item nav-profile">
@@ -469,9 +469,87 @@
                             <p class="nav-link" class="menu-title" style="font-size: 15px; font-style: ''"><b>Select a Patient ....</b></p>
                         </li>
 
-                        <input type="hidden" id="hidden_patient_id" value="all"> @foreach ($patient_list as $patient )
+                        <input type="hidden" id="hidden_patient_id" value="all">
+
+                        <div class="grid-margin stretch-card">
+                        <div class="card">
+                        <div class="accordion" id="accordion" role="tablist">
+                        <div class="card">
+                        <div class="card-header" role="tab" id="heading-1">
+                          <h6 class="mb-0">
+                            <a data-toggle="collapse" href="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
+                              Rasel alam
+                            </a>
+                          </h6>
+                        </div>
+                        <div id="collapse-1" class="collapse show" role="tabpanel" aria-labelledby="heading-1" data-parent="#accordion">
+                          <div class="card-body" style="margin-top:0px;">
+                            <div class="row">
+                              <div class="pl-3 mt-4">
+                              <li class="nav-item"><i class="fa fa-id-card"></i><b>Medicaid ID :</b> 123445</li>
+                              <li class="nav-item"><i class="fab fa-telegram"></i><b> Address :</b> housing state</li>
+                              <li class="nav-item"><i class="fa fa-phone"></i><b> Phone No :</b> 0198983767</li>
+                              <li class="nav-item"><i class="fa fa-rss"></i><b> Assesment Type :</b> 234</li>
+                              <li class="nav-item"><i class="fa fa-rss"></i><b> Special Note :</b> 1111</span></li>                          
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card">
+                        <div class="card-header" role="tab" id="heading-2">
+                          <h6 class="mb-0">
+                            <a class="collapsed" data-toggle="collapse" href="#collapse-2" aria-expanded="false" aria-controls="collapse-2">
+                              Rasel alam
+                            </a>
+                          </h6>
+                        </div>
+                        <div id="collapse-2" class="collapse" role="tabpanel" aria-labelledby="heading-2" data-parent="#accordion">
+                          <div class="card-body" style="margin-top:0px;">
+                          <div class="row">
+                              <div class="pl-3 mt-4">
+                              <li class="nav-item"><i class="fa fa-id-card"></i><b> Medicaid ID :</b> 123445</li>
+                              <li class="nav-item"><i class="fab fa-telegram"></i><b> Address :</b> housing state</li>
+                              <li class="nav-item"><i class="fa fa-phone"></i><b> Phone No :</b> 0198983767</li>
+                              <li class="nav-item"><i class="fa fa-rss"></i><b> Assesment Type :</b> 234</li>
+                              <li class="nav-item"><i class="fa fa-rss"></i><b> Special Note :</b> 1111</span></li>                          
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card">
+                        <div class="card-header" role="tab" id="heading-3">
+                          <h6 class="mb-0">
+                            <a class="collapsed" data-toggle="collapse" href="#collapse-3" aria-expanded="false" aria-controls="collapse-3">
+                            Rasel alam
+                            </a>
+                          </h6>
+                        </div>
+                        <div id="collapse-3" class="collapse" role="tabpanel" aria-labelledby="heading-3" data-parent="#accordion">
+                          <div class="card-body" style="margin-top:0px;">
+                          <div class="row">
+                              <div class="pl-3 mt-4">
+                              <li class="nav-item"><i class="fa fa-id-card"></i><b> Medicaid ID :</b> 123445</li>
+                              <li class="nav-item"><i class="fab fa-telegram"></i><b> Address :</b> housing state</li>
+                              <li class="nav-item"><i class="fa fa-phone"></i><b> Phone No :</b> 0198983767</li>
+                              <li class="nav-item"><i class="fa fa-rss"></i><b> Assesment Type :</b> 234</li>
+                              <li class="nav-item"><i class="fa fa-rss"></i><b> Special Note :</b> 1111</span></li>                          
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            
+              
+            </div>
+
+                         <!-- @foreach ($patient_list as $patient )
 
                         <li class="nav-item">
+
                             <a class="nav-link" data-toggle="collapse" href="#patient-{{$patient->id}}" href='javascript:;' onclick='call_full_calendar({{ $patient->id }})' aria-expanded="false" aria-controls="patient-1">
                                 <i class="fa fa-chevron-circle-down menu-icon" style="color: #04b76b;"></i>
                                 <span class="menu-title">{{$patient->first_name." ".$patient->last_name}}</span>
@@ -491,9 +569,9 @@
                                     <input type="hidden" id="hidden_input_for_change" value="{{$patient->id}}">
                                 </ul>
                             </div>
-                        </li>
+                        </li> 
 
-                        @endforeach
+                        @endforeach -->
 
                     </ul>
 

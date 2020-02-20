@@ -20245,7 +20245,7 @@ button.bg-dark:focus,
 
 .mt-4,
 .my-4 {
-    margin-top: 1.5rem !important;
+    margin-top: 1rem !important;
 }
 
 .mr-4,
@@ -24526,7 +24526,7 @@ code {
 .accordion .card .card-header {
     background-color: transparent;
     border: none;
-    padding: 2rem;
+    padding: 0.8rem 1.8rem;
 }
 
 .accordion .card .card-header * {
@@ -24578,7 +24578,9 @@ code {
 }
 
 .accordion .card .card-body i {
-    font-size: 1.25rem;
+    font-size: 1rem;
+    margin-right: 7px;
+    margin-bottom: 3px;
 }
 
 .accordion.accordion-bordered {

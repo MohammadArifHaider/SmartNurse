@@ -48,13 +48,14 @@
                           </ol>
                         </nav> --}}
                       </div>
+                      
                       <div class="card">
-                        <div class="card-body">
+                        <div class="card-body"  >
                             <h4>Patients List</h4>
 
 
 
-                            <div class="m-t-25">
+                            <div class="m-t-25" style="overflow-x:auto;overflow-y:scroll;height: 450px;">
                                 <table id="data-table" class="table table-bordered">
                                     <thead>
                                         <tr>
@@ -70,7 +71,7 @@
 
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody style="overflow-x:auto;overflow-y:scroll;height: 450px;">
                                         @foreach($patient_lists as $patient)
                                         <?php $address = $patient->address.",".$patient->city.",".$patient->country;
                                          if($patient->status=='assign')
