@@ -20245,7 +20245,7 @@ button.bg-dark:focus,
 
 .mt-4,
 .my-4 {
-    margin-top: 1.5rem !important;
+    margin-top: 1rem !important;
 }
 
 .mr-4,
@@ -22171,7 +22171,6 @@ input:focus {
 .sidebar {
     min-height: calc(100vh - 70px);
     background: #e8f0f8;
-    //font-family: "PTSans", sans-serif;
     font-weight: 400;
     padding: 0;
     padding-right: 40px;
@@ -22187,6 +22186,7 @@ input:focus {
     overflow: hidden;
     /* flex-wrap: nowrap; */
     flex-direction: column;
+    padding-left: 10px
 }
 
 .sidebar .nav .nav-item {
@@ -22729,7 +22729,6 @@ input:focus {
 
 .navbar.default-layout-navbar .navbar-menu-wrapper .navbar-nav .nav-item {
     margin-left: .3rem;
-    //margin-right: 1rem;
 }
 
 .navbar.default-layout-navbar .navbar-menu-wrapper .navbar-nav .nav-item .nav-link {
@@ -24143,7 +24142,6 @@ code {
 /* Utilities */
 
 .grid-margin {
-    //margin-top: 50px;
     margin-bottom: 1.25rem;
 }
 
@@ -24526,7 +24524,7 @@ code {
 .accordion .card .card-header {
     background-color: transparent;
     border: none;
-    padding: 2rem;
+    padding: 0.8rem 1.8rem;
 }
 
 .accordion .card .card-header * {
@@ -24578,7 +24576,9 @@ code {
 }
 
 .accordion .card .card-body i {
-    font-size: 1.25rem;
+    font-size: 1rem;
+    margin-right: 7px;
+    margin-bottom: 3px;
 }
 
 .accordion.accordion-bordered {
@@ -30002,11 +30002,9 @@ dl li {
 }
 
 .nav-tabs .nav-link {
-    //background: #f6f8fa;
     color: #ffffff;
     border-radius: 0;
     font-weight: inherit;
-    //border: 1px solid #e0e0ef;
     padding: .75rem 1.5rem;
 }
 
@@ -30021,9 +30019,7 @@ dl li {
     padding-left: 30px;
 }
 
-.nav-tabs .nav-item:last-child .nav-link {
-    //border-radius: 30px 30px 0px 0px;
-}
+.nav-tabs .nav-item:last-child .nav-link {}
 
 .nav-tabs.nav-tabs-vertical,
 .nav-tabs.nav-tabs-vertical-custom {
@@ -30185,7 +30181,6 @@ dl li {
     background-color: #ffffff;
     border: 1px solid #e0e0ef;
     border-top: 0;
-    //padding: 2rem 1rem;
     text-align: justify;
 }
 

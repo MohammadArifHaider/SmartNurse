@@ -445,7 +445,7 @@
                     </div>
                 </div>
 
-                <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                <nav class="sidebar sidebar-offcanvas" id="sidebar" style="padding-right:5px;">
 
                     <ul class="nav">
                         <li class="nav-item nav-profile">
@@ -464,14 +464,52 @@
                             </div>
                             <hr>
                         </li>
-                        <li class="nav-item">
+                         <li class="nav-item">
                             <p class="nav-link" class="menu-title" style="font-size: 18px; font-style: ''"><b>Pending Patient : {{$pending_patient}}</b></p>
                             <p class="nav-link" class="menu-title" style="font-size: 15px; font-style: ''"><b>Select a Patient ....</b></p>
                         </li>
 
-                        <input type="hidden" id="hidden_patient_id" value="all"> @foreach ($patient_list as $patient )
+                        <input type="hidden" id="hidden_patient_id" value="all">
+
+                        <div class="grid-margin stretch-card">
+                        <div class="card">
+
+                        <div class="accordion" id="accordion" role="tablist">
+                            @foreach($patient_list as $patient )
+                        <div class="card">
+                        <div class="card-header" role="tab" id="heading-1">
+                          <h6 class="mb-0">
+                            <a data-toggle="collapse" href="#patient-{{$patient->id}}" href='javascript:;' onclick='call_full_calendar({{ $patient->id }})' aria-expanded="false" aria-controls="collapse-1">
+                                {{$patient->first_name." ".$patient->last_name}}
+                            </a>
+                          </h6>
+                        </div>
+                        <div id="patient-{{$patient->id}}" class="collapse" role="tabpanel" aria-labelledby="heading-1" data-parent="#accordion">
+                          <div class="card-body" style="margin-top:0px;">
+                            <div class="row">
+                              <div class="pl-3 mt-4">
+                              <li class="nav-item"><i class="fa fa-id-card"></i><b>Medicaid ID :</b> {{$patient->medicaid_id}}</li>
+                              <li class="nav-item"><i class="fab fa-telegram"></i><b> Address :</b> <span id="address{{$patient->id}}">  {{ $patient->address.",".$patient->city   }}</span></li>
+                              <li class="nav-item"><i class="fa fa-phone"></i><b> Phone No :</b> {{ $patient->cell_phone }}</li>
+                              <li class="nav-item"><i class="fa fa-rss"></i><b> Assesment Type :</b> {{$patient->assesment_type}}</li>
+                              <li class="nav-item"><i class="fa fa-rss"></i><b> Special Note :</b> <span id="add_note{{$patient->id}}">{{$patient->note}}</span></li>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      @endforeach
+                    </div>
+
+                  </div>
+
+
+            </div>
+
+                         <!-- @foreach ($patient_list as $patient )
 
                         <li class="nav-item">
+
                             <a class="nav-link" data-toggle="collapse" href="#patient-{{$patient->id}}" href='javascript:;' onclick='call_full_calendar({{ $patient->id }})' aria-expanded="false" aria-controls="patient-1">
                                 <i class="fa fa-chevron-circle-down menu-icon" style="color: #04b76b;"></i>
                                 <span class="menu-title">{{$patient->first_name." ".$patient->last_name}}</span>
@@ -493,7 +531,7 @@
                             </div>
                         </li>
 
-                        @endforeach
+                        @endforeach -->
 
                     </ul>
 
