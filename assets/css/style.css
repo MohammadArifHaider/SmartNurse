@@ -24515,10 +24515,11 @@ code {
 /* Accordions */
 
 .accordion .card {
-    margin-bottom: .75rem;
+    margin-bottom: 6px;
     box-shadow: 0px 1px 15px 1px rgba(230, 234, 236, 0.35);
     border-radius: .25rem;
     border: 0;
+    width: 255px;
 }
 
 .accordion .card .card-header {
@@ -24562,10 +24563,12 @@ code {
 
 .accordion .card .card-header a[aria-expanded="true"]:before {
     content: "\f139";
+    color: green;
 }
 
 .accordion .card .card-header a[aria-expanded="false"]:before {
     content: "\f13a";
+    color: green;
 }
 
 .accordion .card .card-body {

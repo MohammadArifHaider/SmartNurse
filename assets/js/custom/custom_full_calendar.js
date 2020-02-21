@@ -101,9 +101,13 @@ function assign_nurse() {
 
 function call_full_calendar(patient_id) {
 
-    $("#hidden_patient_id").val(patient_id);
+    var test = $(".patient-" + patient_id).attr('aria-expanded');
+    if (test == "false") {
 
-    calendar.fullCalendar('refetchEvents');
+        $("#hidden_patient_id").val(patient_id);
+
+        calendar.fullCalendar('refetchEvents');
+    }
 
 
 
