@@ -473,7 +473,7 @@
                         <div class="grid-margin stretch-card">
 
                         <div class="accordion" id="accordion" role="tablist">
-                            <p class="nav-link" class="menu-title" style="font-size: 15px; font-style: ''"><b>English Language</b></p>
+                            <p class="nav-link" class="menu-title" style="font-size: 15px; font-style: ''"><b>Bengali Language</b></p>
                             @foreach($patient_list as $patient )
 
                         <div class="card">
@@ -505,7 +505,7 @@
                       </div>
                       @endforeach
 
-                      <p class="nav-link" class="menu-title" style="font-size: 15px; font-style: ''"><b>English Language</b></p>
+                      <p class="nav-link" class="menu-title" style="font-size: 15px; font-style: ''"><b>Bengali Language</b></p>
                       @foreach($patient_list as $patient )
 
                   <div class="card">
