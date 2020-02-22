@@ -464,7 +464,7 @@
                             </div>
                             <hr>
                         </li>
-                         <li class="nav-item">
+                        <li class="nav-item">
                             <p class="nav-link" class="menu-title" style="font-size: 18px; font-style: ''"><b>Pending Patient : {{$pending_patient}}</b></p>
                         </li>
 
@@ -472,104 +472,71 @@
 
                         <div class="grid-margin stretch-card">
 
-                        <div class="accordion" id="accordion" role="tablist">
-                            <p class="nav-link" class="menu-title" style="font-size: 15px; font-style: ''"><b>Bengali Language</b></p>
-                            @foreach($patient_list as $patient )
+                            <div class="accordion accordion-solid-header" id="accordion-4" role="tablist">
 
-                        <div class="card">
-                        <div class="card-header" role="tab" id="heading-1">
-                          <h6 class="mb-0">
-                            <a data-toggle="collapse" class="patient-{{ $patient->id }}" href="#patient-{{$patient->id}}" href='javascript:;' onclick='call_full_calendar({{ $patient->id }})' aria-expanded="false" aria-controls="collapse-1">
-                                {{$patient->first_name." ".$patient->last_name}}
-                            </a>
-                          </h6>
-                        </div>
-                        <div id="patient-{{$patient->id}}" class="collapse" role="tabpanel" aria-labelledby="heading-1" data-parent="#accordion">
-                          <div class="card-body" style="margin-top:0px;">
-                            <div class="row">
-                              <div class="pl-2 mt-2">
-                              <li class="nav-item"><i class="fa fa-id-card"></i><b>Medicaid ID :</b><br> {{$patient->medicaid_id}}</li><br>
-                              <li class="nav-item"><i class="fa fa-id-card"></i><b>Language :</b><br> {{$patient->primary_language}}</li><br>
-                              <li class="nav-item"><i class="fab fa-telegram"></i><b> Address :</b> <br> <span id="address{{$patient->id}}">  {{ $patient->address.",".$patient->city   }}</span></li><br>
-                              <li class="nav-item"><i class="fa fa-phone"></i><b> Phone No :</b> <br> {{ $patient->cell_phone }}</li><br>
-                              <li class="nav-item"><i class="fa fa-rss"></i><b> Assesment Type :</b> <br> {{$patient->assesment_type}}</li><br>
-                              <li class="nav-item"><i class="fa fa-rss"></i><b> Special Note :</b> <br><span id="add_note{{$patient->id}}">{{$patient->note}}</span></li><br>
+                                <div class="card">
+                                    <div class="card-header" role="tab" id="heading-12">
+                                        <h6 class="mb-0">
+                                      <a class="collapsed" data-toggle="collapse" href="#collapse-12" aria-expanded="false" aria-controls="collapse-12">
+                                        Bengali
+                                      </a>
+                                    </h6>
+                                    </div>
+                                    <div id="collapse-12" class="collapse" role="tabpanel" aria-labelledby="heading-12" data-parent="#accordion-4">
+                                        <div class="card-body" style="margin-top:0px; padding-left:2px">
+                                            <div class="accordion" id="accordion" role="tablist">
 
-                              <li>
-                                <button onclick="change_address()" type="button" class="btn btn-sm btn-primary" style="font-size:10px">Change Address</button> <span><button onclick="add_note()" type="button" class="btn btn-sm btn-primary" style="font-size:10px">Note</button></span></li>
-                            <input type="hidden" id="hidden_input_for_change" value="{{$patient->id}}">
-                              </div>
+
+                                                @foreach($patient_list as $patient )
+
+                                                <div class="card">
+                                                    <div class="card-header" role="tab" id="heading-1">
+                                                        <h6 class="mb-0">
+                                            <a data-toggle="collapse" class="patient-{{ $patient->id }}" href="#patient-{{$patient->id}}" href='javascript:;' onclick='call_full_calendar({{ $patient->id }})' aria-expanded="false" aria-controls="collapse-1">
+                                                {{$patient->first_name." ".$patient->last_name}}
+                                            </a>
+                                          </h6>
+                                                    </div>
+                                                    <div id="patient-{{$patient->id}}" class="collapse" role="tabpanel" aria-labelledby="heading-1" data-parent="#accordion">
+                                                        <div class="card-body" style="margin-top:0px;">
+                                                            <div class="row">
+                                                                <div class="pl-2 mt-2">
+                                                                    <li class="nav-item"><i class="fa fa-id-card"></i><b>Medicaid ID :</b>
+                                                                        <br> {{$patient->medicaid_id}}</li>
+                                                                    <br>
+                                                                    <li class="nav-item"><i class="fa fa-id-card"></i><b>Language :</b>
+                                                                        <br> {{$patient->primary_language}}</li>
+                                                                    <br>
+                                                                    <li class="nav-item"><i class="fab fa-telegram"></i><b> Address :</b>
+                                                                        <br> <span id="address{{$patient->id}}">  {{ $patient->address.",".$patient->city   }}</span></li>
+                                                                    <br>
+                                                                    <li class="nav-item"><i class="fa fa-phone"></i><b> Phone No :</b>
+                                                                        <br> {{ $patient->cell_phone }}</li>
+                                                                    <br>
+                                                                    <li class="nav-item"><i class="fa fa-rss"></i><b> Assesment Type :</b>
+                                                                        <br> {{$patient->assesment_type}}</li>
+                                                                    <br>
+                                                                    <li class="nav-item"><i class="fa fa-rss"></i><b> Special Note :</b>
+                                                                        <br><span id="add_note{{$patient->id}}">{{$patient->note}}</span></li>
+                                                                    <br>
+
+                                                                    <li>
+                                                                        <button onclick="change_address()" type="button" class="btn btn-sm btn-primary" style="font-size:10px">Change Address</button> <span><button onclick="add_note()" type="button" class="btn btn-sm btn-primary" style="font-size:10px">Note</button></span></li>
+                                                                    <input type="hidden" id="hidden_input_for_change" value="{{$patient->id}}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @endforeach
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                          </div>
+
                         </div>
-                      </div>
-                      @endforeach
-
-                      <p class="nav-link" class="menu-title" style="font-size: 15px; font-style: ''"><b>Bengali Language</b></p>
-                      @foreach($patient_list as $patient )
-
-                  <div class="card">
-                  <div class="card-header" role="tab" id="heading-1">
-                    <h6 class="mb-0">
-                      <a data-toggle="collapse" class="patient-{{ $patient->id }}" href="#patient-{{$patient->id}}" href='javascript:;' onclick='call_full_calendar({{ $patient->id }})' aria-expanded="false" aria-controls="collapse-1">
-                          {{$patient->first_name."  ".$patient->last_name}}
-
-                      </a>
-                    </h6>
-                  </div>
-                  <div id="patient-{{$patient->id}}" class="collapse" role="tabpanel" aria-labelledby="heading-1" data-parent="#accordion">
-                    <div class="card-body" style="margin-top:0px;">
-                      <div class="row">
-                        <div class="pl-2 mt-2">
-                        <li class="nav-item"><i class="fa fa-id-card"></i><b>Medicaid ID :</b><br> {{$patient->medicaid_id}}</li><br>
-                        <li class="nav-item"><i class="fa fa-id-card"></i><b>Language :</b><br> {{$patient->primary_language}}</li><br>
-                        <li class="nav-item"><i class="fab fa-telegram"></i><b> Address :</b> <br> <span id="address{{$patient->id}}">  {{ $patient->address.",".$patient->city   }}</span></li><br>
-                        <li class="nav-item"><i class="fa fa-phone"></i><b> Phone No :</b> <br> {{ $patient->cell_phone }}</li><br>
-                        <li class="nav-item"><i class="fa fa-rss"></i><b> Assesment Type :</b> <br> {{$patient->assesment_type}}</li><br>
-                        <li class="nav-item"><i class="fa fa-rss"></i><b> Special Note :</b> <br><span id="add_note{{$patient->id}}">{{$patient->note}}</span></li><br>
-
-                        <li>
-                          <button onclick="change_address()" type="button" class="btn btn-sm btn-primary" style="font-size:10px">Change Address</button> <span><button onclick="add_note()" type="button" class="btn btn-sm btn-primary" style="font-size:10px">Note</button></span></li>
-                      <input type="hidden" id="hidden_input_for_change" value="{{$patient->id}}">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                @endforeach
-                    </div>
-
-
-
-
-            </div>
-
-                         <!-- @foreach ($patient_list as $patient )
-
-                        <li class="nav-item">
-
-                            <a class="nav-link" data-toggle="collapse" href="#patient-{{$patient->id}}" href='javascript:;' onclick='call_full_calendar({{ $patient->id }})' aria-expanded="false" aria-controls="patient-1">
-                                <i class="fa fa-chevron-circle-down menu-icon" style="color: #04b76b;"></i>
-                                <span class="menu-title">{{$patient->first_name." ".$patient->last_name}}</span>
-                            </a>
-                            <div class="collapse" id="patient-{{$patient->id}}">
-                                <ul class="nav flex-column sub-menu">
-
-                                    <li class="nav-item"><i class="fa fa-id-card"></i> Medicaid ID : {{$patient->medicaid_id}}</li>
-
-                                    <li class="nav-item"><i class="fab fa-telegram"></i> Address : <span id="address{{$patient->id}}">  {{ $patient->address.",".$patient->city   }}</span></li>
-                                    <li class="nav-item"><i class="fa fa-phone"></i> Phone No : {{ $patient->cell_phone }}</li>
-                                    <li class="nav-item"><i class="fa fa-rss"></i> Assesment Type : {{$patient->assesment_type}}</li>
-                                    <li class="nav-item"><i class="fa fa-rss"></i> Special Note : <span id="add_note{{$patient->id}}">{{$patient->note}}</span></li>
-
-                                    <li>
-                                        <button onclick="change_address()" type="button" class="btn btn-sm btn-primary" style="font-size:10px">Change Address</button> <span><button onclick="add_note()" type="button" class="btn btn-sm btn-primary" style="font-size:10px">Note</button></span></li>
-                                    <input type="hidden" id="hidden_input_for_change" value="{{$patient->id}}">
-                                </ul>
-                            </div>
-                        </li>
-
-                        @endforeach -->
 
                     </ul>
 
@@ -598,7 +565,7 @@
 
                                         <li class="nav-item">
                                             <a class="nav-link" href="examiner">Examiner</a>
-                                          </li>
+                                        </li>
 
                                     </ul>
 
@@ -687,7 +654,8 @@
     </html>
 
     <script src="{{asset('assets')}}/js/custom/sweetalert.js?{{time()}}">
-   // <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.js" ></script>
+        // <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.js" >
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>

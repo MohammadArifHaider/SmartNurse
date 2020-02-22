@@ -24655,7 +24655,7 @@ code {
 }
 
 .accordion.accordion-solid-header .card .card-header a {
-    padding: 2rem 4.5rem 2rem 2rem;
+    padding: 15px;
     -webkit-transition: all 0.2s linear;
     -moz-transition: all 0.2s linear;
     -ms-transition: all 0.2s linear;
