@@ -292,6 +292,9 @@
 
     </div>
   </div>
+  <script>
+
+  </script>
 
   @include('all_js');
   <script src="{{asset('assets')}}/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>

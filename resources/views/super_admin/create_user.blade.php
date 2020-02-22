@@ -28,6 +28,10 @@
                     <a class="nav-link" href="scheduler">Scheduler</a>
                   </li>
 
+                  <li class="nav-item">
+                    <a class="nav-link" href="examiner">Examiner</a>
+                  </li>
+
 
              </ul>
 

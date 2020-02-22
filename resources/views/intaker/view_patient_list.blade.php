@@ -48,7 +48,11 @@
                           </ol>
                         </nav> --}}
                       </div>
+<<<<<<< HEAD
                       
+=======
+
+>>>>>>> 91fec668cda214d6775f199ff0f933a8b1db57f2
                       <div class="card">
                         <div class="card-body"  >
                             <h4>Patients List</h4>
