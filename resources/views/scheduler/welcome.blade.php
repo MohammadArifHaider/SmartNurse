@@ -512,7 +512,8 @@
                   <div class="card-header" role="tab" id="heading-1">
                     <h6 class="mb-0">
                       <a data-toggle="collapse" class="patient-{{ $patient->id }}" href="#patient-{{$patient->id}}" href='javascript:;' onclick='call_full_calendar({{ $patient->id }})' aria-expanded="false" aria-controls="collapse-1">
-                          {{$patient->first_name." ".$patient->last_name}}
+                          {{$patient->first_name."  ".$patient->last_name}}
+
                       </a>
                     </h6>
                   </div>
