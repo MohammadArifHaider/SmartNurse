@@ -466,7 +466,6 @@
                         </li>
                          <li class="nav-item">
                             <p class="nav-link" class="menu-title" style="font-size: 18px; font-style: ''"><b>Pending Patient : {{$pending_patient}}</b></p>
-                            <p class="nav-link" class="menu-title" style="font-size: 15px; font-style: ''"><b>Select a Patient ....</b></p>
                         </li>
 
                         <input type="hidden" id="hidden_patient_id" value="all">
@@ -474,7 +473,9 @@
                         <div class="grid-margin stretch-card">
 
                         <div class="accordion" id="accordion" role="tablist">
+                            <p class="nav-link" class="menu-title" style="font-size: 15px; font-style: ''"><b>English Language</b></p>
                             @foreach($patient_list as $patient )
+
                         <div class="card">
                         <div class="card-header" role="tab" id="heading-1">
                           <h6 class="mb-0">
@@ -488,6 +489,7 @@
                             <div class="row">
                               <div class="pl-2 mt-2">
                               <li class="nav-item"><i class="fa fa-id-card"></i><b>Medicaid ID :</b><br> {{$patient->medicaid_id}}</li><br>
+                              <li class="nav-item"><i class="fa fa-id-card"></i><b>Language :</b><br> {{$patient->primary_language}}</li><br>
                               <li class="nav-item"><i class="fab fa-telegram"></i><b> Address :</b> <br> <span id="address{{$patient->id}}">  {{ $patient->address.",".$patient->city   }}</span></li><br>
                               <li class="nav-item"><i class="fa fa-phone"></i><b> Phone No :</b> <br> {{ $patient->cell_phone }}</li><br>
                               <li class="nav-item"><i class="fa fa-rss"></i><b> Assesment Type :</b> <br> {{$patient->assesment_type}}</li><br>
@@ -502,6 +504,38 @@
                         </div>
                       </div>
                       @endforeach
+
+                      <p class="nav-link" class="menu-title" style="font-size: 15px; font-style: ''"><b>English Language</b></p>
+                      @foreach($patient_list as $patient )
+
+                  <div class="card">
+                  <div class="card-header" role="tab" id="heading-1">
+                    <h6 class="mb-0">
+                      <a data-toggle="collapse" class="patient-{{ $patient->id }}" href="#patient-{{$patient->id}}" href='javascript:;' onclick='call_full_calendar({{ $patient->id }})' aria-expanded="false" aria-controls="collapse-1">
+                          {{$patient->first_name." ".$patient->last_name}}
+                      </a>
+                    </h6>
+                  </div>
+                  <div id="patient-{{$patient->id}}" class="collapse" role="tabpanel" aria-labelledby="heading-1" data-parent="#accordion">
+                    <div class="card-body" style="margin-top:0px;">
+                      <div class="row">
+                        <div class="pl-2 mt-2">
+                        <li class="nav-item"><i class="fa fa-id-card"></i><b>Medicaid ID :</b><br> {{$patient->medicaid_id}}</li><br>
+                        <li class="nav-item"><i class="fa fa-id-card"></i><b>Language :</b><br> {{$patient->primary_language}}</li><br>
+                        <li class="nav-item"><i class="fab fa-telegram"></i><b> Address :</b> <br> <span id="address{{$patient->id}}">  {{ $patient->address.",".$patient->city   }}</span></li><br>
+                        <li class="nav-item"><i class="fa fa-phone"></i><b> Phone No :</b> <br> {{ $patient->cell_phone }}</li><br>
+                        <li class="nav-item"><i class="fa fa-rss"></i><b> Assesment Type :</b> <br> {{$patient->assesment_type}}</li><br>
+                        <li class="nav-item"><i class="fa fa-rss"></i><b> Special Note :</b> <br><span id="add_note{{$patient->id}}">{{$patient->note}}</span></li><br>
+
+                        <li>
+                          <button onclick="change_address()" type="button" class="btn btn-sm btn-primary" style="font-size:10px">Change Address</button> <span><button onclick="add_note()" type="button" class="btn btn-sm btn-primary" style="font-size:10px">Note</button></span></li>
+                      <input type="hidden" id="hidden_input_for_change" value="{{$patient->id}}">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                @endforeach
                     </div>
 
 
