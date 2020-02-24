@@ -180,9 +180,11 @@ curl_close($curl);
     public function main_page()
     {
         $patient_list = patient_profile::where('status', '=', 'not_assign')->get();
+        $language = patient_profile::get()->groupBy('primary_language');
+       // file_put_contents('test.txt',$language);
         $pending_patient = sizeof($patient_list);
 
-        return view('scheduler.welcome', ['patient_list' => $patient_list,'pending_patient'=>$pending_patient]);
+        return view('scheduler.welcome', ['patient_list' => $patient_list,'pending_patient'=>$pending_patient,'languages'=>$language]);
 
     }
 

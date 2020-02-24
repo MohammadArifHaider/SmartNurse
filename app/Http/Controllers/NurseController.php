@@ -186,12 +186,12 @@ curl_close($curl);
         $nurse_id = $nurse->id;
         $nurse_zip = $nurse->prefered_zip;
         $patient = patient_profile::get();
-        $nurse_address = $request->address.",".$request->city.",".$request->country;
+        $nurse_address = $request->address.",".$request->city.",".$request->country.','.$request->zip;
         for ($m = 0; $m < sizeof($patient); $m++) {
 
             $patient_id = $patient[$m]->id;
             //file_put_contents('test.txt', $patient_id);
-            $patient_address = $patient[$m]['address'] . ',' . $patient[$m]['city'];
+            $patient_address = $patient[$m]['address'] . ',' . $patient[$m]['city'].','.$patient[$m]['country'].','.$patient[$m]['zip_code'];
            //$patient_zip = $patient[$m]['zip_code'];
             $shortest_distance = $this->find_distance($nurse_address, $patient_address);
 

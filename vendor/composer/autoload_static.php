@@ -608,6 +608,7 @@ class ComposerStaticInitf23224b8b20b6552f40affbc1a5bdca1
         'App\\nurse_scheduler' => __DIR__ . '/../..' . '/app/nurse_scheduler.php',
         'App\\nurse_status' => __DIR__ . '/../..' . '/app/nurse_status.php',
         'App\\patient_profile' => __DIR__ . '/../..' . '/app/patient_profile.php',
+        'App\\test' => __DIR__ . '/../..' . '/app/test.php',
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
         'Carbon\\CarbonImmutable' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonImmutable.php',
         'Carbon\\CarbonInterface' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonInterface.php',

@@ -36,8 +36,8 @@
 
             <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row default-layout-navbar">
                 <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                    <a class="navbar-brand brand-logo" href="index-2.html"><img src="{{asset('assets')}}/logo.svg" alt="logo" /></a>
-                    <a class="navbar-brand brand-logo-mini" href="index-2.html"><img src="{{asset('assets')}}/logo-mini.svg" alt="logo" /></a>
+                    {{-- <a class="navbar-brand brand-logo" href="index-2.html"><img src="{{asset('assets')}}/logo.svg" alt="logo" /></a>
+                    <a class="navbar-brand brand-logo-mini" href="index-2.html"><img src="{{asset('assets')}}/logo-mini.svg" alt="logo" /></a> --}}
                 </div>
                 <div class="navbar-menu-wrapper d-flex align-items-stretch">
                     <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -445,7 +445,7 @@
                     </div>
                 </div>
 
-                <nav class="sidebar sidebar-offcanvas" id="sidebar" style="padding-right:5px;">
+                <nav class="sidebar sidebar-offcanvas" id="sidebar" style="width:255px;">
 
                     <ul class="nav">
                         <li class="nav-item nav-profile">
@@ -474,20 +474,25 @@
 
                             <div class="accordion accordion-solid-header" id="accordion-4" role="tablist">
 
+                              @foreach ($languages as $language)
+
+
+
+
                                 <div class="card">
                                     <div class="card-header" role="tab" id="heading-12">
                                         <h6 class="mb-0">
-                                      <a class="collapsed" data-toggle="collapse" href="#collapse-12" aria-expanded="false" aria-controls="collapse-12">
-                                        Bengali
+                                      <a class="collapsed" data-toggle="collapse" href="#collapse-{{$language[0]->id}}" aria-expanded="false" aria-controls="collapse-12">
+                                    {{ $language[0]->primary_language }}
                                       </a>
                                     </h6>
                                     </div>
-                                    <div id="collapse-12" class="collapse" role="tabpanel" aria-labelledby="heading-12" data-parent="#accordion-4">
-                                        <div class="card-body" style="margin-top:0px; padding-left:2px">
+                                    <div id="collapse-{{$language[0]->id}}" class="collapse" role="tabpanel" aria-labelledby="heading-12" data-parent="#accordion-4">
+                                        <div class="card-body" style="margin-top:0px; padding-left:15px">
                                             <div class="accordion" id="accordion" role="tablist">
 
 
-                                                @foreach($patient_list as $patient )
+                                                @foreach($language as $patient )
 
                                                 <div class="card">
                                                     <div class="card-header" role="tab" id="heading-1">
@@ -534,9 +539,13 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endforeach
                             </div>
 
+
                         </div>
+
+
 
                     </ul>
 

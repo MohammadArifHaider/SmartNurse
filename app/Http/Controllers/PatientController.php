@@ -99,7 +99,7 @@ curl_close($curl);
 
              $nurse_id = $nurse[$m]->id;
              //file_put_contents('test.txt',$patient_id);
-            $nurse_address = $nurse[$m]['address'].",".$nurse[$m]['city'].",".$nurse[$m]['country'];
+             $nurse_address = $nurse[$m]['prefered_location'].",".$nurse[$m]['prefered_city'].",".$nurse[$m]['prefered_country'].','.$nurse[$m]['prefered_zip'];
            // $nurse_zip = $nurse[$m]['prefered_zip'];
              $shortest_distance = $this->find_distance($nurse_address, $patient_address);
 
@@ -241,7 +241,7 @@ curl_close($curl);
                 $patients->save();
 
                 $patient_id = $patients->id;
-                $patient_address = $request->address . ',' . $request->city;
+                $patient_address = $request->address . ',' . $request->city.','.$request->country.",".$request->zip_code;
 
                 //$patient_zip = $patients->zip_code;
 
@@ -252,7 +252,7 @@ curl_close($curl);
 
                     $nurse_id = $nurse[$m]->id;
                     //file_put_contents('test.txt',$patient_id);
-                   $nurse_address = $nurse[$m]['address'].",".$nurse[$m]['city'].",".$nurse[$m]['country'];
+                   $nurse_address = $nurse[$m]['prefered_location'].",".$nurse[$m]['prefered_city'].",".$nurse[$m]['prefered_country'].','.$nurse[$m]['prefered_zip'];
                   // $nurse_zip = $nurse[$m]['prefered_zip'];
                     $shortest_distance = $this->find_distance($nurse_address, $patient_address);
 

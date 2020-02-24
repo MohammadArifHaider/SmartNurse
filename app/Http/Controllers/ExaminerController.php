@@ -77,6 +77,7 @@ class ExaminerController extends Controller
        $scheduler_id = $request->scheduler_id;
        $error_question_list = $request->error_question_list;
        nurse_assesment_form_error::create(['scheduler_id'=>$scheduler_id,'question_no'=>$error_question_list]);
+       nurse_status::where('scheduler_id','=',$scheduler_id)->update(['status'=>'6']);
 
 
     }
@@ -85,6 +86,8 @@ class ExaminerController extends Controller
     {
 $scheduler_id = $request->scheduler_id;
 nurse_assesment_form::where('scheduler_id','=',$scheduler_id)->update(['status'=>1]);
+nurse_status::where('scheduler_id','=',$scheduler_id)->update(['status'=>'5']);
+
 
     }
 

@@ -46,6 +46,7 @@ return array(
     'App\\nurse_scheduler' => $baseDir . '/app/nurse_scheduler.php',
     'App\\nurse_status' => $baseDir . '/app/nurse_status.php',
     'App\\patient_profile' => $baseDir . '/app/patient_profile.php',
+    'App\\test' => $baseDir . '/app/test.php',
     'Carbon\\Carbon' => $vendorDir . '/nesbot/carbon/src/Carbon/Carbon.php',
     'Carbon\\CarbonImmutable' => $vendorDir . '/nesbot/carbon/src/Carbon/CarbonImmutable.php',
     'Carbon\\CarbonInterface' => $vendorDir . '/nesbot/carbon/src/Carbon/CarbonInterface.php',
