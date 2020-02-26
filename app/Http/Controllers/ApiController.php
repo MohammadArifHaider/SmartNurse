@@ -331,7 +331,7 @@ curl_close($curl);
     {
          date_default_timezone_set('Asia/Dhaka');
          $date = date('d-m-Y');
-         return $date;
+         //return $date;
 
          $date2 = explode("-",$date);
          $month = $date2[1];
