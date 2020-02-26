@@ -344,7 +344,7 @@ curl_close($curl);
          $date = $date2[0]."-".$month."-".$date2[2];
 
         $appointment = nurse_scheduler::where('nurse_id','=',$nurse_id)->where('appointed_date','=','26-02-2020')->get();
-        file_put_contents('test.txt',$nurse_id);
+        //file_put_contents('test.txt',$nurse_id);
         $appointment_list = array();
 
         if($appointment->isEmpty())
