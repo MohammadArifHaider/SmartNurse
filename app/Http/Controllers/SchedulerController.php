@@ -205,6 +205,36 @@ curl_close($curl);
 
     //     }
     // }
+    public function get_area($lat,$lon)
+    {
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            //CURLOPT_URL => "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=Washington%2CDC&destinations=New%20York%20City%2CNY&key=AIzaSyAXhRPj6NklgCWF5h8Gn-nptIFXX0jpVhE",
+         CURLOPT_URL =>'https://maps.googleapis.com/maps/api/geocode/json?latlng='.$lat.','.$lon.'&key=AIzaSyAXhRPj6NklgCWF5h8Gn-nptIFXX0jpVhE',
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => "",
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 30,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => "GET",
+
+        ));
+
+        $return = curl_exec($curl);
+
+
+       $return = json_decode($return);
+
+       $area =  $return->results[0]->address_components[3]->long_name;
+       return $area;
+
+
+
+    }
+
+
 
     public function push_notification($nurse_id)
     {
@@ -441,6 +471,8 @@ curl_close($curl);
 
           //file_put_contents('test.txt',$array[0]['start']);
 
+
+
     }
 
     public function fetch_calendar_data(Request $request)
@@ -478,7 +510,7 @@ curl_close($curl);
 
                  $nurse_list = distance_table::where('patient_id','=',$patient_id)->orderBy('shortest_distance','ASC')->get();
 
-           // file_put_contents('test.txt',json_encode($nurse_list));
+
             $data2 = array();
             $a = 0;
 

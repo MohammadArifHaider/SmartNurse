@@ -38,6 +38,36 @@ class ExcelController extends Controller
     //     }
     // }
 
+    public function get_area($lat,$lon)
+    {
+
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            //CURLOPT_URL => "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=Washington%2CDC&destinations=New%20York%20City%2CNY&key=AIzaSyAXhRPj6NklgCWF5h8Gn-nptIFXX0jpVhE",
+         CURLOPT_URL =>'https://maps.googleapis.com/maps/api/geocode/json?latlng='.$lat.','.$lon.'&key=AIzaSyAXhRPj6NklgCWF5h8Gn-nptIFXX0jpVhE',
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => "",
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 30,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => "GET",
+
+        ));
+
+        $return = curl_exec($curl);
+
+        //$return = file_get_contents('test.txt');
+       $return = json_decode($return);
+        //$area = $return_arr;
+       $area =  $return->results[0]->address_components[3]->long_name;
+       return $area;
+       // file_put_contents('test.txt',$return);
+
+
+    }
+
     public function distance($lat1,$lon1,$lat2,$lon2)
     {
         $curl = curl_init();
@@ -55,26 +85,31 @@ curl_setopt_array($curl, array(
 ));
 
 $distance = curl_exec($curl);
-file_put_contents('test.txt',$distance);
+//file_put_contents('test.txt',$distance);
  $distance_arr = json_decode($distance);
-        $elements = $distance_arr->rows[0]->elements;
-        $distance = $elements[0]->distance->text;
-        $duration = $elements[0]->duration->text;
-        $distance = explode(" ",$distance);
+      try {
+          $elements = $distance_arr->rows[0]->elements;
+          $distance = $elements[0]->distance->text;
+          $duration = $elements[0]->duration->text;
+          $distance = explode(" ", $distance);
 
-        $total_distance = $distance[0];
+          $total_distance = $distance[0];
 
-        $duration = explode(' ',$duration);
+          $duration = explode(' ', $duration);
           if (sizeof($duration)>2) {
               $total_duration = $duration[0]*60 + $duration[2];
-          }
-          else{
+          } else {
               $total_duration = $duration[0];
           }
 
-        $arr = ['distance'=>$total_distance,
+          $arr = ['distance'=>$total_distance,
                   'duration'=>$total_duration];
-                  return $arr;
+          return $arr;
+      }
+        catch(Exception $e)
+        {
+           return $e;
+        }
 
 $err = curl_error($curl);
 
@@ -698,7 +733,7 @@ curl_close($curl);
                     $distance_table = new distance_table();
                     $distance_table->patient_id = $patient_id;
                     $distance_table->nurse_id = $nurse_id;
-                    $distance_table->shortest_distance = $shortest_distance['distance'];
+                    $distance_table->shortest_distance = round($shortest_distance['distance'],3);
                     $distance_table->duration = $shortest_distance['duration'];
                     $distance_table->patient_lat = $shortest_distance['patient_lat'];
                     $distance_table->patient_lon = $shortest_distance['patient_lon'];

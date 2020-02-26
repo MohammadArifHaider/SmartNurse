@@ -331,37 +331,39 @@ curl_close($curl);
     {
          date_default_timezone_set('Asia/Dhaka');
          $date = date('d-m-Y');
-         $date2 = explode("-",$date);
-         $month = $date2[1];
-         if(strlen($month)==1)
-         {
-             $month ="0".$month;
-         }
-         $date = $date2[0]."-".$month."-".$date2[2];
-        $nurse_id = $request->user_id;
-        $appointment = nurse_scheduler::where('nurse_id','=',$nurse_id)->where('appointed_date','=',$date)->where('cancle','=','no')->get();
-        $appointment_list = array();
+         return $date;
 
-        if($appointment->isEmpty())
-        {
-           // return $date;
-            return json_encode($appointment_list);
-        }
-        else
-        {
-            for($i = 0 ;$i<sizeof($appointment);$i++)
-            {
-                $patient_id = $appointment[$i]->patient_id;
-                $patient = patient_profile::where('id','=',$patient_id)->first();
-                $patient_name = $patient->first_name." ".$patient->last_name;
-                $address = $patient->address.",".$patient->city.",".$patient->country;
-                $patient_lat = distance_table::where('patient_id','=',$patient_id)->first()->patient_lat;
-                $patient_lon = distance_table::where('patient_id','=',$patient_id)->first()->patient_lon;
+        //  $date2 = explode("-",$date);
+        //  $month = $date2[1];
+        //  if(strlen($month)==1)
+        //  {
+        //      $month ="0".$month;
+        //  }
+        //  $date = $date2[0]."-".$month."-".$date2[2];
+        // $nurse_id = $request->user_id;
+        // $appointment = nurse_scheduler::where('nurse_id','=',$nurse_id)->where('appointed_date','=',$date)->where('cancle','=','no')->get();
+        // $appointment_list = array();
 
-                array_push($appointment_list,['scheduler_id'=>$appointment[$i]->id,'p_name'=>$patient_name,'p_id'=>$patient_id,'appointment_time'=>$appointment[$i]->appointed_start_time,'lat'=>$patient_lat,'lon'=>$patient_lon,'p_address'=>$address]);
-            }
-            return json_encode($appointment_list);
-        }
+        // if($appointment->isEmpty())
+        // {
+        //    // return $date;
+        //     return json_encode($appointment_list);
+        // }
+        // else
+        // {
+        //     for($i = 0 ;$i<sizeof($appointment);$i++)
+        //     {
+        //         $patient_id = $appointment[$i]->patient_id;
+        //         $patient = patient_profile::where('id','=',$patient_id)->first();
+        //         $patient_name = $patient->first_name." ".$patient->last_name;
+        //         $address = $patient->address.",".$patient->city.",".$patient->country;
+        //         $patient_lat = distance_table::where('patient_id','=',$patient_id)->first()->patient_lat;
+        //         $patient_lon = distance_table::where('patient_id','=',$patient_id)->first()->patient_lon;
+
+        //         array_push($appointment_list,['scheduler_id'=>$appointment[$i]->id,'p_name'=>$patient_name,'p_id'=>$patient_id,'appointment_time'=>$appointment[$i]->appointed_start_time,'lat'=>$patient_lat,'lon'=>$patient_lon,'p_address'=>$address]);
+        //     }
+        //     return json_encode($appointment_list);
+        // }
 
 
     }

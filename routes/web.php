@@ -111,6 +111,8 @@ Route::post('accept_nurse_assesment_form','ExaminerController@accept_nurse_asses
 
 Route::post('send_nurse_form_error','ExaminerController@send_nurse_form_error');
 
+Route::get('get_area','SchedulerController@get_area');
+
 
 
 
