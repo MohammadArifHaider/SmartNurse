@@ -213,8 +213,8 @@ curl_close($curl);
         {
             $name = $is_avail->name;
             // $image = $is_avail->user_id;
-            $image = 'http://www.quiz-hunt.com/smart_nurse/image/nurse_image/'.$is_avail->user_id.".jpg";
-            return response()->json(['error'=>'no','name'=>$name,'image'=>$image,'address'=>$is_avail->address,'user_id'=>$is_avail->user_id,'working_day'=>$is_avail->prefered_days,'email'=>$is_avail->email_address]);
+            $image = 'http://www.quiz-hunt.com/smart_nurse/image/nurse_image/'.$is_avail->id.".jpg";
+            return response()->json(['error'=>'no','name'=>$name,'image'=>$image,'address'=>$is_avail->address,'user_id'=>$is_avail->id,'working_day'=>$is_avail->prefered_days,'email'=>$is_avail->email_address]);
         }
         else{
             return response()->json(['error'=>'yes']);
@@ -331,6 +331,8 @@ curl_close($curl);
     {
          date_default_timezone_set('Asia/Dhaka');
          $date = date('d-m-Y');
+         $nurse_id = $request->user_id;
+         //return $nurse_id;
          //return $date;
 
          $date2 = explode("-",$date);
@@ -340,8 +342,9 @@ curl_close($curl);
              $month ="0".$month;
          }
          $date = $date2[0]."-".$month."-".$date2[2];
-        $nurse_id = $request->user_id;
-        $appointment = nurse_scheduler::where('nurse_id','=',$nurse_id)->where('appointed_date','=',$date)->where('cancle','=','no')->get();
+
+        $appointment = nurse_scheduler::where('nurse_id','=',$nurse_id)->where('appointed_date','=','26-02-2020')->get();
+        file_put_contents('test.txt',$nurse_id);
         $appointment_list = array();
 
         if($appointment->isEmpty())
