@@ -566,10 +566,10 @@ temporary rendered events).
     /* 	border-radius: 1px; */
     border: 1px solid #3a87ad;
     /* default BORDER color */
-    background-color: #6C95C4!important;
+    background-color: #6C95C4;
     /* default BACKGROUND color */
     font-weight: normal;
-    color: white !important;
+    color: black!important;
     /* undo jqui's ui-widget-header bold */
 }
 
@@ -1169,8 +1169,8 @@ be a descendant of the grid when it is being dragged.
 .fc-time-grid-event .fc-time,
 .fc-time-grid-event .fc-title {
     padding: 0 1px;
-    color: white;
-    font-weight: regular;
+    color: black;
+    font-weight: bold!important;
 }
 
 .fc-time-grid-event .fc-time {

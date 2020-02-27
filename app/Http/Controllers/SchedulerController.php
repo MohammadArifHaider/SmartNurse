@@ -180,11 +180,11 @@ curl_close($curl);
     public function main_page()
     {
         $patient_list = patient_profile::where('status', '=', 'not_assign')->get();
-        $language = patient_profile::get()->groupBy('primary_language');
+        $language = patient_profile::where('status', '=', 'not_assign')->get()->groupBy('primary_language');
        // file_put_contents('test.txt',$language);
         $pending_patient = sizeof($patient_list);
 
-        return view('scheduler.welcome', ['patient_list' => $patient_list,'pending_patient'=>$pending_patient,'languages'=>$language]);
+        return view('scheduler.welcome', ['pending_patient'=>$pending_patient,'languages'=>$language]);
 
     }
 
@@ -445,11 +445,7 @@ curl_close($curl);
         }
     }
 
-    public function show_patient_list()
-    {
-        $patient_lists = patient_profile::all();
-        return view('scheduler.patients_list', ['patient_lists' => $patient_lists]);
-    }
+
 
 
     public function array_frequency_count($array,$value)
@@ -521,8 +517,10 @@ curl_close($curl);
               $nurse_profile = nurse_profile::where('id','=',$nurse_id)->first();
               $patient_profile = patient_profile::where('id','=',$patient_id)->first();
 
+
               $nurse_name = $nurse_profile->name;
               $assesment_type = $patient_profile->assesment_type;
+              $patient_area = $patient_profile->countyr;
               $duration_minute = $nurse_list[$i]->duration;
 
               if($assesment_type =="primary")
@@ -608,89 +606,81 @@ curl_close($curl);
            //usort($data2,array($this,'my_sort'));
 
 
-            for($i = 0;$i<sizeof($nurse_list);$i++)
-            {
-              $nurse_id      = $nurse_list[$i]->nurse_id;
-              $nurse_profile = nurse_profile::where('id','=',$nurse_id)->first();
-              $patient_profile = patient_profile::where('id','=',$patient_id)->first();
-              $nurse_name = $nurse_profile->name;
-              $assesment_type = $patient_profile->assesment_type;
-              $duration_minute = $nurse_list[$i]->duration;
+            for ($i = 0;$i<sizeof($nurse_list);$i++) {
+                $nurse_id      = $nurse_list[$i]->nurse_id;
+                $nurse_profile = nurse_profile::where('id', '=', $nurse_id)->first();
+                $patient_profile = patient_profile::where('id', '=', $patient_id)->first();
+                $nurse_name = $nurse_profile->name;
+                $assesment_type = $patient_profile->assesment_type;
+                $patient_area = $patient_profile->country;
+               $nurse_area_check =  nurse_profile::where('nurse_area', 'LIKE', '%'.$patient_area.'%')->where('id','=',$nurse_id)->first();
 
-              if($assesment_type =="primary")
-              {
-                  $duration_minute = $duration_minute+200;
-              }
-              else
-              {
-                  $duration_minute = $duration_minute+100;
-              }
-                 $duration_hour = ceil($duration_minute/60);
+                if ($nurse_area_check) {
+                    $duration_minute = $nurse_list[$i]->duration;
+
+
+                if ($assesment_type =="primary") {
+                    $duration_minute = $duration_minute+200;
+                } else {
+                    $duration_minute = $duration_minute+100;
+                }
+                $duration_hour = ceil($duration_minute/60);
 
                 //     $myfile = fopen("file.txt", "a+") or die("Unable to open file!");
                 //  fwrite($myfile,$nurse_name." ".$duration_minute." ".$assesment_type."\n");
 
-              $start_time = $nurse_profile->prefered_start_times;
-              $end_time = $nurse_profile->prefered_end_times;
-              $prefered_times = array();
-              $time_difference =$end_time - $start_time;
+                $start_time = $nurse_profile->prefered_start_times;
+                $end_time = $nurse_profile->prefered_end_times;
+                $prefered_times = array();
+                $time_difference =$end_time - $start_time;
 
-             $prefered_times[0] = $start_time.":00";
-              for($m = 1 ;$m<$time_difference;$m++ )
-              {
-                 $start_time = $start_time+1;
-                 $time = $start_time.":00";
-                 $prefered_times[$m] = $time;
-              }
-              $prefered_times[$time_difference] = $end_time.':00';
+                $prefered_times[0] = $start_time.":00";
+                for ($m = 1 ;$m<$time_difference;$m++) {
+                    $start_time = $start_time+1;
+                    $time = $start_time.":00";
+                    $prefered_times[$m] = $time;
+                }
+                $prefered_times[$time_difference] = $end_time.':00';
 
-              $nurse_day =  $nurse_profile->prefered_days;
-              $nurse_day = explode(',',$nurse_day);
+                $nurse_day =  $nurse_profile->prefered_days;
+                $nurse_day = explode(',', $nurse_day);
 
-                for($j = 0;$j<sizeof($date_array);$j++)
-                {
-                   $day = date('l', strtotime($date_array[$j]));
-                   if (in_array($day, $nurse_day)) {
-                      $a =0;
-                      $count = 0;
-                       for ($k=0;$k<sizeof($prefered_times);$k++) {
-
-
-                           $tmp_date = date('d-m-Y', strtotime($date_array[$j]));
+                for ($j = 0;$j<sizeof($date_array);$j++) {
+                    $day = date('l', strtotime($date_array[$j]));
+                    if (in_array($day, $nurse_day)) {
+                        $a =0;
+                        $count = 0;
+                        for ($k=0;$k<sizeof($prefered_times);$k++) {
+                            $tmp_date = date('d-m-Y', strtotime($date_array[$j]));
 
 
-                           $nurse_schedule = nurse_scheduler::where('status', '=', 'running')->where('nurse_id', '=', $nurse_id)->where('appointed_date', '=', $tmp_date)->get();
+                            $nurse_schedule = nurse_scheduler::where('status', '=', 'running')->where('nurse_id', '=', $nurse_id)->where('appointed_date', '=', $tmp_date)->get();
 
-                          $exist = nurse_scheduler::where('status','=','running')->where('nurse_id','=',$nurse_id)->where('appointed_date','=',$tmp_date)->first();
-                           $busy_time = array();
-                           if ($exist) {
-                               $appointed_started_time = $exist->appointed_start_time;
-                               $appointed_started_time2 = explode(':', $appointed_started_time);
-
-
-                               $appointed_started_time = $appointed_started_time2[0];
+                            $exist = nurse_scheduler::where('status', '=', 'running')->where('nurse_id', '=', $nurse_id)->where('appointed_date', '=', $tmp_date)->first();
+                            $busy_time = array();
+                            if ($exist) {
+                                $appointed_started_time = $exist->appointed_start_time;
+                                $appointed_started_time2 = explode(':', $appointed_started_time);
 
 
-                               $busy_time[0] = $appointed_started_time.':00';
-                               for ($m = 1;$m<=$duration_hour-1;$m++) {
-                                   $tmp_time = $appointed_started_time+1;
-                                   $busy_time[$m] = $tmp_time.":00";
-                                   $appointed_started_time =$tmp_time;
-                               }
-
-                           }
-                        if (!$exist) {
+                                $appointed_started_time = $appointed_started_time2[0];
 
 
+                                $busy_time[0] = $appointed_started_time.':00';
+                                for ($m = 1;$m<=$duration_hour-1;$m++) {
+                                    $tmp_time = $appointed_started_time+1;
+                                    $busy_time[$m] = $tmp_time.":00";
+                                    $appointed_started_time =$tmp_time;
+                                }
+                            }
+                            if (!$exist) {
+                                if (!in_array($prefered_times[$k], $busy_time)) {
+                                    $count= $this->array_frequency_count($data2, $date_array[$j].'T'.$prefered_times[$k]);
+                                    if ($count<3) {
+                                        $a++;
 
 
-                            if (!in_array($prefered_times[$k], $busy_time)) {
-                                $count= $this->array_frequency_count($data2, $date_array[$j].'T'.$prefered_times[$k]);
-                                if ($count<3) {
-                                    $a++;
-
-
-                                array_push($data2, [
+                                        array_push($data2, [
 
 
                         'id' => $a,
@@ -703,21 +693,13 @@ curl_close($curl);
 
 
                       ]);
-                            }
-
+                                    }
+                                }
                             }
                         }
-
-
-                       }
-
-
-                   }
-
-
+                    }
                 }
-
-
+            }
             }
             //file_put_contents('test.txt',json_encode($data2));
             echo json_encode($data2);

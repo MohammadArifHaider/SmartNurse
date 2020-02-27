@@ -445,7 +445,7 @@
                     </div>
                 </div>
 
-                <nav class="sidebar sidebar-offcanvas" id="sidebar" style="width:255px; padding:5px">
+                <nav class="sidebar sidebar-offcanvas" id="sidebar" style="padding:5px">
 
                     <ul class="nav">
                         <li class="nav-item nav-profile">
