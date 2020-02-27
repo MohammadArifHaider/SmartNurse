@@ -393,8 +393,7 @@ curl_close($curl);
              <td >'.$time.'</td>
              <td>'.$address.'</td>
              <td>'.$assesment_type.'</td>
-             <td>'.$distance.'</td>
-             <td></td>
+              <td></td>
 
             ';
 

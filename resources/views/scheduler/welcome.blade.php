@@ -617,7 +617,7 @@
                                                                                             <th>Patient Address</th>
                                                                                             <th>Assesment Type</th>
 
-                                                                                            <th>Distance from patient(KM)</th>
+
 
                                                                                             <th></th>
 
