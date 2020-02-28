@@ -63,6 +63,22 @@ class ExaminerController extends Controller
                <td> <input type="checkbox" class="form-check-input checkbox edit_form_field"  value="t2_q3"></td>
             </tr>
 
+            <tr>
+               <td>'.$question->narrative_question.' </td>
+               <td colspan="4">'.$answer->narrative_note_answer.'</td>
+               <td> <input type="checkbox" class="form-check-input checkbox edit_form_field"  value="t2_q3"></td>
+            </tr>
+
+            <tr id="error_text_field">
+                     <td colspan="6">
+                     <label for="exampleTextarea1">Edit Note</label>
+                      <textarea class="form-control" id="error_text" rows="5"></textarea>
+                      </td>
+                  </tr>
+
+
+
+
 
             ';
             return $data;
@@ -76,7 +92,9 @@ class ExaminerController extends Controller
     {
        $scheduler_id = $request->scheduler_id;
        $error_question_list = $request->error_question_list;
-       nurse_assesment_form_error::create(['scheduler_id'=>$scheduler_id,'question_no'=>$error_question_list]);
+       $error_note = $request->error_text;
+       nurse_assesment_form_error::create(['scheduler_id'=>$scheduler_id,'question_no'=>$error_question_list,'error_note'=>$error_note]);
+
        nurse_status::where('scheduler_id','=',$scheduler_id)->update(['status'=>'6']);
 
 

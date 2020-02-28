@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Session;
 use App\Mail\SendMail;
 use App\User;
+
 use Illuminate\Support\Facades\Mail;
 
 class SchedulerController extends Controller

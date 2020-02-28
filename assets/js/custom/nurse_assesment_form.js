@@ -16,6 +16,8 @@ function show_nurse_assesment_form(scheduler_id) {
             $('.edit_form_field').hide();
             $("#send_form").hide();
             $("#cancel_edit").hide();
+            $("#error_text_field").hide();
+
 
         }
 
@@ -53,10 +55,13 @@ function send_form() {
     $('.edit_form_field:checked').each(function() {
         error_question.push($(this).val());
     });
+
+    var error_text = document.getElementById("error_text").value.trim();
     var scheduler_id = $("#hidden_scheduler_id").val();
     var formdata = new FormData();
     formdata.append('scheduler_id', scheduler_id);
     formdata.append('error_question_list', error_question);
+    formdata.append('error_text', error_text);
 
     $.ajax({
         processData: false,
@@ -66,7 +71,8 @@ function send_form() {
         data: formdata,
         success: function(data, status) {
 
-            alert('error_send');
+            alert('Error Mote Send to Nurse');
+            location.reload();
 
 
         }
@@ -80,6 +86,7 @@ function edit_form_checkbox_show() {
     $("#accept_form").hide();
     $("#send_form").show();
     $("#cancel_edit").show();
+    $("#error_text_field").show();
 
 }
 

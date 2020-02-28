@@ -9,6 +9,7 @@ use App\patient_profile;
 use App\distance_table;
 use App\nurse_status;
 use App\nurse_assesment_form;
+use App\nurse_assesment_form_error;
 
 class ApiController extends Controller
 {
@@ -82,7 +83,7 @@ curl_close($curl);
 
      public function submit_nurse_form_not_available(Request $request)
     {
-        file_put_contents('submit_nurse_form_not_available.txt',json_encode($request->all()));
+        //file_put_contents('submit_nurse_form_not_available.txt',json_encode($request->all()));
         $scheduler_id = $request->scheduler_id;
 
         nurse_status::where('scheduler_id','=',$scheduler_id)->update(['status'=>'4']);
@@ -152,14 +153,48 @@ curl_close($curl);
     {
         $scheduler_id = $request->scheduler_id;
         $nurse_status = nurse_status:: where('scheduler_id','=',$scheduler_id)->first();
+       // $status = 6;
         if($nurse_status)
         {
         $status = $nurse_status->status;
+
 
         }
         else
         {
             $status = 0;
+        }
+
+        if($status == 6)
+        {
+             $answer = nurse_assesment_form::where('scheduler_id','=',$scheduler_id)->first();
+             $nurse_error = nurse_assesment_form_error::where('scheduler_id','=',$scheduler_id)->first();
+             $error_question_no = explode(',',$nurse_error->question_no);
+             $question_key = array('t1_q1','t1_q2','t1_q3','t2_q1','t2_q2','t2_q3','narrative_note');
+
+             $error = array();
+
+             for($i=0;$i<sizeof($question_key);$i++)
+             {
+                 $key_name = $question_key[$i];
+                 $key = $key_name.'_answer';
+                 $key_answer = $answer->$key;
+                 if(in_array($key_name,$error_question_no))
+                 {
+                     $status = 'yes';
+                 }
+                 else{
+                     $status = 'no';
+                 }
+                 array_push($error,[$key_name=>$key_answer,'status'=>$status]);
+
+             }
+             array_push($error,['error_note'=>$nurse_error->error_note]);
+             return $error;
+
+             //file_put_contents('test.txt',json_encode($error));
+
+
         }
 
         return response()->json(['status'=>$status]);
