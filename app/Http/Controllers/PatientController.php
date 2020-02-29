@@ -86,29 +86,49 @@ curl_close($curl);
         patient_profile::where('id','=',$patient_id)->update(['note'=>$patient_note,'note_archive'=>$note_archive]);
 
     }
-     public function submit_change_address(Request $request)
+     public function submit_edit_information(Request $request)
      {
-         $patient_id = $request->patient_id;
-         $change_address = $request->change_address;
-         $change_city = $request->change_city;
-         $patient_address = $change_address.",".$change_city;
-         patient_profile::where('id','=',$patient_id)->update(['address'=>$change_address,'city'=>$change_city]);
-         $nurse = nurse_profile::get();
+        date_default_timezone_set('Asia/Dhaka');
+        $date = date('d-m-Y H:i:s');
+      $patient_id = $request->patient_id;
+        $patient_note = $request->patient_note;
+        $user_id = 1;
 
-         for ($m = 0; $m < sizeof($nurse); $m++) {
+        $note_archive = array();
 
-             $nurse_id = $nurse[$m]->id;
-             //file_put_contents('test.txt',$patient_id);
-             $nurse_address = $nurse[$m]['prefered_location'].",".$nurse[$m]['prefered_city'].",".$nurse[$m]['prefered_country'].','.$nurse[$m]['prefered_zip'];
-           // $nurse_zip = $nurse[$m]['prefered_zip'];
-             $shortest_distance = $this->find_distance($nurse_address, $patient_address);
+        $note_archive_existing = patient_profile::where('id','=',$patient_id)->first();
 
-
-
-             distance_table::where('patient_id','=',$patient_id)->where('nurse_id','=',$nurse_id)->update(['shortest_distance'=>$shortest_distance['distance'],'patient_lat'=>$shortest_distance['patient_lat'],'patient_lon'=>$shortest_distance['patient_lon'],'shortest_nurse_lat'=>$shortest_distance['nurse_lat'],'shortest_nurse_lon'=>$shortest_distance['nurse_lon'],'duration'=>$shortest_distance['duration']]);
+        $existing_note = $note_archive_existing->note_archive;
+            if ($existing_note) {
+                $note_archive = json_decode($existing_note);
+            }
 
 
-         }
+        array_push($note_archive,array('patient_note'=>$patient_note,'date'=>$date,'update_by'=>$user_id));
+
+         $second_address = $request->second_addresss;
+         $pet = $request->pet;
+         $sex = $request->sex;
+         $recertification = $request->recertification;
+
+
+         patient_profile::where('id','=',$patient_id)->update(['second_address'=>$second_address,'pet'=>$pet,'sex'=>$sex,'recertification'=>$recertification,'note'=>$patient_note,'note_archive'=>$note_archive]);
+        // $nurse = nurse_profile::get();
+
+        //  for ($m = 0; $m < sizeof($nurse); $m++) {
+
+        //      $nurse_id = $nurse[$m]->id;
+        //      //file_put_contents('test.txt',$patient_id);
+        //      $nurse_address = $nurse[$m]['prefered_location'].",".$nurse[$m]['prefered_city'].",".$nurse[$m]['prefered_country'].','.$nurse[$m]['prefered_zip'];
+        //    // $nurse_zip = $nurse[$m]['prefered_zip'];
+        //      $shortest_distance = $this->find_distance($nurse_address, $patient_address);
+
+
+
+        //      distance_table::where('patient_id','=',$patient_id)->where('nurse_id','=',$nurse_id)->update(['shortest_distance'=>$shortest_distance['distance'],'patient_lat'=>$shortest_distance['patient_lat'],'patient_lon'=>$shortest_distance['patient_lon'],'shortest_nurse_lat'=>$shortest_distance['nurse_lat'],'shortest_nurse_lon'=>$shortest_distance['nurse_lon'],'duration'=>$shortest_distance['duration']]);
+
+
+        //  }
          //file_put_contents('test.txt',$patient_id." ".$change_address." ".$change_city);
      }
     public function show_patient_list()
@@ -116,6 +136,17 @@ curl_close($curl);
         $patient_lists = patient_profile::where('status', '=', 'not_assign')->get();
         return view('intaker.view_patient_list', ['patient_lists' => $patient_lists]);
     }
+
+public function send_message()
+{
+    $nexmo = app('Nexmo\Client');
+
+    $nexmo->message()->send([
+        'to'   => '+8801845318609',
+        'from' => '+8801675974419',
+        'text' => 'Using the instance to send a message.'
+    ]);
+}
 
     public function get_shortest_distance($nurse_zip,$patient_zip)
     {

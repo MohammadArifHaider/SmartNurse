@@ -101,7 +101,7 @@ Route::get('view_patient_list','PatientController@show_patient_list');
 
 Route::get('view_nurse_list','NurseController@show_nurse_list');
 
-Route::post('submit_change_address','PatientController@submit_change_address');
+Route::post('submit_edit_information','PatientController@submit_edit_information');
 
 Route::post('submit_patient_note','PatientController@submit_patient_note');
 
@@ -110,6 +110,8 @@ Route::post('nurse_assesment_form_value','ExaminerController@nurse_assesment_for
 Route::post('accept_nurse_assesment_form','ExaminerController@accept_nurse_assesment_form');
 
 Route::post('send_nurse_form_error','ExaminerController@send_nurse_form_error');
+
+Route::get('send_message','PatientController@send_message');
 
 Route::get('get_area','SchedulerController@get_area');
 

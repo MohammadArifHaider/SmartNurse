@@ -394,27 +394,71 @@
                 </div>
 
                 <div class="modal fade" id="change_address_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-3" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
+                    <div class="modal-dialog" style="max-width:50%;margin-left:320px"  role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel-3">Change address</h5>
+                                <h5 class="modal-title" id="exampleModalLabel-3">Edit Information</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label for="exampleInputName1">Address</label>
-                                    <input type="text" class="form-control" id="address_change" placeholder="378 Syosset Woodbury Road">
+                                    <label for="exampleInputName1">Second Address</label>
+                                    <input type="text" class="form-control" id="second_address" placeholder="378 Syosset Woodbury Road">
                                 </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <label for="exampleTextarea1">Note</label>
+                                <textarea class="form-control" id="patient_note" rows="3"></textarea>
+                            </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
-                                    <label for="exampleInputCity1">City</label>
-                                    <input type="text" class="form-control" id="city_change" placeholder="Woodbury">
+                                    <label for="exampleInputName1">Sex </label>
+                                    <select class="form-control" id="sex">
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                      </select>
+                                  </div>
+                            </div>
+
+                            <div class="col-md-6 col-sm-6">
+
+                                <div class="form-group">
+                                    <label for="exampleInputName1">Pet<span style="color: red;"></span></label>
+                                    <select class="form-control" id="pet">
+                                        <option value="no">No</option>
+                                        <option value="dog">Dog</option>
+                                        <option value="cat">Cat</option>
+                                        <option value="other">Other</option>
+                                      </select>
+                                  </div>
+
+                            </div>
+
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label for="exampleInputName1">Recertification</label>
+                                    <input type="text" class="form-control" id="recertification" placeholder="January">
+                                </div>
+
+                            </div>
+
+
+
+
+
+
+
                                 </div>
 
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" onclick="submit_address_change()">Change</button>
+                                <button type="button" class="btn btn-primary" onclick="submit_edit_information()">Edit</button>
 
                             </div>
                         </div>
@@ -513,7 +557,10 @@
                                                                         <br> {{$patient->primary_language}}</li>
                                                                     <br>
                                                                     <li class="nav-item"><i class="fab fa-telegram"></i><b> Address :</b>
-                                                                        <br> <span id="address{{$patient->id}}">  {{ $patient->address.",".$patient->city   }}</span></li>
+                                                                        <br> <span>  {{ $patient->address.",".$patient->city   }}</span></li><br>
+
+                                                                    <li class="nav-item"><i class="fab fa-telegram"></i><b> Second Address :</b>
+                                                                        <br> <span id="second_address_patient{{$patient->id}}"> </span></li>
                                                                     <br>
                                                                     <li class="nav-item"><i class="fa fa-phone"></i><b> Phone No :</b>
                                                                         <br> {{ $patient->cell_phone }}</li>
@@ -521,12 +568,22 @@
                                                                     <li class="nav-item"><i class="fa fa-rss"></i><b> Assesment Type :</b>
                                                                         <br> {{$patient->assesment_type}}</li>
                                                                     <br>
+                                                                    <li class="nav-item"><i class="fa fa-rss"></i><b> Sex :</b>
+                                                                        <br> <span id="sex_patient{{$patient->id}}">{{$patient->sex}}</span></li>
+                                                                    <br>
+
+                                                                    <li class="nav-item"><i class="fa fa-rss"></i><b> Recertification :</b>
+                                                                        <br> <span id="recertification_patient{{$patient->id}}">{{$patient->recertification}}</span></li>
+                                                                    <br>
+                                                                    <li class="nav-item"><i class="fa fa-rss"></i><b> Pet :</b>
+                                                                        <br> <span id="pet_patient{{$patient->id}}">{{$patient->pet}}</span></li>
+                                                                    <br>
                                                                     <li class="nav-item"><i class="fa fa-rss"></i><b> Special Note :</b>
-                                                                        <br><span id="add_note{{$patient->id}}">{{$patient->note}}</span></li>
+                                                                        <br><span id="add_note_patient{{$patient->id}}">{{$patient->note}}</span></li>
                                                                     <br>
 
                                                                     <li>
-                                                                        <button onclick="change_address()" type="button" class="btn btn-sm btn-primary" style="font-size:10px">Change Address</button> <span><button onclick="add_note()" type="button" class="btn btn-sm btn-primary" style="font-size:10px">Note</button></span></li>
+                                                                        <button onclick="change_address()" type="button" class="btn btn-sm btn-primary" style="font-size:10px">Edit</button> <span><button onclick="add_note()" type="button" class="btn btn-sm btn-primary" style="font-size:10px">Note</button></span></li>
                                                                     <input type="hidden" id="hidden_input_for_change" value="{{$patient->id}}">
                                                                 </div>
                                                             </div>

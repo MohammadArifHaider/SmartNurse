@@ -152,7 +152,7 @@
           </h4>
 
           <div class="card-body" style="margin-top: 0rem;">
-            <form class="forms-sample">
+
               <div class="form-group">
                 <label for="exampleInputName1">Address</label>
                 <input type="text" class="form-control" id="address" placeholder="Text">
@@ -173,7 +173,7 @@
                 <label for="exampleInputCity1">Country</label>
                 <input type="text" class="form-control" id="country" placeholder="">
               </div>
-            </form>
+
             <button type="submit" class="btn btn-primary mr-2" id="patient_form_submit">Create User</button>
           </div>
 

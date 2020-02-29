@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class patient_profile extends Model
 {
     //
-    protected $fillablle = ['insurance_plan','note','date_received','date_need_to_be_finished','date_need_to_be_finished','member_id','first_name','last_name','sex','date_of_birth','primary_language','cell_phone','home_phone','marital_status','email','address','city','state','zip_code','country','user_id','assesment_type','cancel','note_archvie','area'];
+    protected $fillablle = ['insurance_plan','note','date_received','date_need_to_be_finished','date_need_to_be_finished','member_id','first_name','last_name','sex','date_of_birth','primary_language','cell_phone','home_phone','marital_status','email','address','city','state','zip_code','country','user_id','assesment_type','cancel','note_archvie','area','second_address','recertification','pet'];
 }

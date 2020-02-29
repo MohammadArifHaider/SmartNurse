@@ -306,6 +306,7 @@ curl_close($curl);
         $patient_info = distance_table::where('patient_id','=',$patient_id)->first();
         $patient_lat = $patient_info->patient_lat;
         $patient_lon = $patient_info->patient_lon;
+        $patient_phone = $patient_info->cell_phone;
 
         distance_table::where('nurse_id','=',$nurse_id)->update(['shortest_nurse_lat'=>$patient_lat,'shortest_nurse_lon'=>$patient_lon]);
 
@@ -332,12 +333,21 @@ curl_close($curl);
 
          }
 
-         $data = array(
 
-            'nurse_name'   =>  $nurse_name,
-            'phone_number'        =>$nurse_contact_no
-        );
-        Mail::to($patient_email)->send(new SendMail($data));
+        //  $data = array(
+
+        //     'nurse_name'   =>  $nurse_name,
+        //     'phone_number'        =>$nurse_contact_no
+        // );
+        //Mail::to($patient_email)->send(new SendMail($data));
+
+        $nexmo = app('Nexmo\Client');
+
+        // $nexmo->message()->send([
+        //     'to'   => '+8801845318609',
+        //     'from' => '+8801675974419',
+        //     'text' => 'Using the instance to send a message.'
+        // ]);
         $this->push_notification($nurse_id);
 
 

@@ -38,27 +38,40 @@ function submit_note() {
 
 }
 
-function submit_address_change() {
+function submit_edit_information() {
     var patient_id = $("#hidden_input_for_change").val()
-    var change_address = $("#address_change").val();
-    var change_city = $("#city_change").val();
-    var test = $("#address" + patient_id).text();
+    var second_address = $("#second_address").val();
+    var pet = $("#pet").val();
+    var sex = $("#sex").val();
+    var recertifcation = $('#recertification').val();
+    var patient_note = document.getElementById("patient_note").value.trim();
+
+
+    //var change_city = $("#city_change").val();
+    //var test = $("#address" + patient_id).text();
     var formdata = new FormData();
     formdata.append('patient_id', patient_id);
-    formdata.append('change_address', change_address);
-    formdata.append('change_city', change_city);
+    formdata.append('second_address', second_address);
+    formdata.append('pet', pet);
+    formdata.append('sex', sex);
+    formdata.append('recertification', recertifcation);
+    formdata.append('patient_note', patient_note);
     $.ajax({
         processData: false,
         contentType: false,
-        url: 'submit_change_address',
+        url: 'submit_edit_information',
         type: 'POST',
         data: formdata,
         success: function(data, status) {
             $("#change_address_modal").modal('hide');
-            $("#address" + patient_id).text(change_address + "," + change_city);
+            $("#second_address_patient" + patient_id).text(second_address);
+            $("#sex_patient" + patient_id).text(sex);
+            $("#pet" + patient_id).text(pet);
+            $("#recertification_patient" + patient_id).text(recertifcation);
+            $("#add_note_patient" + patient_id).text(patient_note);
 
 
-            call_full_calendar($('#hidden_input_for_change').val());
+            //call_full_calendar(patient_id);
 
         }
     });
