@@ -181,12 +181,12 @@ curl_close($curl);
                  $key_answer = $answer->$key;
                  if(in_array($key_name,$error_question_no))
                  {
-                     $status = 'yes';
+                     $error_status = 'yes';
                  }
                  else{
-                     $status = 'no';
+                     $error_status = 'no';
                  }
-                 array_push($error,['keyword'=>$key_name,'value'=>$key_answer,'status'=>$status]);
+                 array_push($error,['keyword'=>$key_name,'value'=>$key_answer,'status'=>$error_status]);
 
              }
              array_push($error,['error_note'=>$nurse_error->error_note]);

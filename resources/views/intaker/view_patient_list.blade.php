@@ -86,7 +86,9 @@
                                          $nurse =\App\nurse_scheduler::where('patient_id','=',$patient->id)->first();
                                          if($nurse){
                                          $nurse_name = \App\nurse_profile::where('id','=',$nurse->id)->first()->name;
-                                         $
+                                         $scheduled_date = $nurse->appointed_date;
+
+
 
                                          }
 
