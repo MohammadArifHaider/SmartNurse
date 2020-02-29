@@ -190,7 +190,7 @@ curl_close($curl);
 
              }
              array_push($error,['error_note'=>$nurse_error->error_note]);
-             return $error;
+             return response()->json(['form_field'=>$error,'status'=>$status]);
 
              //file_put_contents('test.txt',json_encode($error));
 

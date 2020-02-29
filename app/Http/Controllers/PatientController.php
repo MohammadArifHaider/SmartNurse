@@ -110,19 +110,24 @@ curl_close($curl);
          $pet = $request->pet;
          $sex = $request->sex;
          $recertification = $request->recertification;
+         //$note_archive = json_encode($note_archive);
 
-         $note_archive = (object)$note_archive;
-         file_put_contents('test.txt',$note_archive->date);
+        //  $note_archive =json_enco
+         //$note_archive = json_decode($note_archive);
+         //file_put_contents('test.txt',json_encode($note_archive[5]->date));
 
          $data="";
-        //  for($i=0;$i<sizeof($note_archive);$i++)
-        //  {
-        //     $data.='
-        //     <label  for="exampleInputName1">'.$note_archive[$i]['date'].'</label>
-        //     <p style="color:black;font-weight:bold; font-size:15px">'.$note_archive[$i]['patient_note'].'</p><br>
-        //     ';
-        //  }
-         return $data;
+         for($i=0;$i<sizeof($note_archive);$i++)
+         {
+             $note = (object)$note_archive[$i];
+            // file_put_contents('test.txt',$note->date);
+
+            $data.='
+            <label  for="exampleInputName1">'.$note->date.'</label>
+            <p style="color:black;font-weight:bold; font-size:15px">'.$note->patient_note.'</p><br>
+            ';
+         }
+         //return $data;
 
 
 
@@ -148,7 +153,7 @@ curl_close($curl);
      }
     public function show_patient_list()
     {
-        $patient_lists = patient_profile::where('status', '=', 'not_assign')->get();
+        $patient_lists = patient_profile::get();
         return view('intaker.view_patient_list', ['patient_lists' => $patient_lists]);
     }
 

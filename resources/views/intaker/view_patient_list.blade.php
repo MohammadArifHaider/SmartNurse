@@ -48,11 +48,7 @@
                           </ol>
                         </nav> --}}
                       </div>
-<<<<<<< HEAD
-                      
-=======
 
->>>>>>> 91fec668cda214d6775f199ff0f933a8b1db57f2
                       <div class="card">
                         <div class="card-body"  >
                             <h4>Patients List</h4>
@@ -64,13 +60,13 @@
                                     <thead>
                                         <tr>
                                             <th>Patient Name</th>
-                                            <th>Medicaid Id</th>
-                                            <th>Member Id</th>
-                                            <th>Primary Language</th>
-                                            <th>Phone Number</th>
-                                             <th>Email</th>
-                                            <th>Address</th>
-                                            <th>Status</th>
+                                            <thPatient Status</th>
+                                            <th>Patient Address</th>
+                                            <th>Patient Contact No</th>
+                                            <th>Scheduled Nurse Name</th>
+                                            <th>Scheduled Date</th>
+                                            <th>Scheduled Status</th>
+
                                             {{-- <th>Status</th> --}}
 
                                         </tr>
@@ -86,12 +82,18 @@
                                          {
                                              $status = 'Pending';
                                          }
+
+                                         $nurse =\App\nurse_scheduler::where('patient_id','=',$patient->id)->first();
+                                         if($nurse){
+                                         $nurse_name = \App\nurse_profile::where('id','=',$nurse->id)->first();->
+                                         }
+
                                         ?>
                                         <tr>
                                             <td>{{ $patient->first_name." ".$patient->last_name }}</td>
-                                            <td>{{ $patient->medicaid_id  }}</td>
-                                            <td>{{ $patient->member_id }}</td>
-                                            <td>{{ $patient->primary_language }}</td>
+                                            <td>{{ $patient->status}}</td>
+                                            <td>{{ $patient->address}}</td>
+
                                             <td>{{ $patient->cell_phone }}</td>
                                             <td>{{ $patient->email }}</td>
                                             <td>{{ $address}}</td>
