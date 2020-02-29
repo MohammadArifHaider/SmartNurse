@@ -127,7 +127,7 @@ curl_close($curl);
             <p style="color:black;font-weight:bold; font-size:15px">'.$note->patient_note.'</p><br>
             ';
          }
-         //return $data;
+         return $data;
 
 
 
@@ -153,7 +153,8 @@ curl_close($curl);
      }
     public function show_patient_list()
     {
-        $patient_lists = patient_profile::get();
+        $patient_lists = patient_profile::where('status', '=', 'assign')->get();
+        file_put_contents('test.txt',$patient_lists);
         return view('intaker.view_patient_list', ['patient_lists' => $patient_lists]);
     }
 

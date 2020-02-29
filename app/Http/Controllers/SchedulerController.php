@@ -341,7 +341,7 @@ curl_close($curl);
         // );
         //Mail::to($patient_email)->send(new SendMail($data));
 
-        $nexmo = app('Nexmo\Client');
+       // $nexmo = app('Nexmo\Client');
 
         // $nexmo->message()->send([
         //     'to'   => '+8801845318609',

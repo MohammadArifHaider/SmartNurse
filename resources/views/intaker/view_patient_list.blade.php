@@ -60,48 +60,49 @@
                                     <thead>
                                         <tr>
                                             <th>Patient Name</th>
-                                            <thPatient Status</th>
+                                            <th>Patient Status</th>
                                             <th>Patient Address</th>
                                             <th>Patient Contact No</th>
                                             <th>Scheduled Nurse Name</th>
                                             <th>Scheduled Date</th>
                                             <th>Scheduled Status</th>
 
-                                            {{-- <th>Status</th> --}}
+
 
                                         </tr>
                                     </thead>
                                     <tbody style="overflow-x:auto;overflow-y:scroll;height: 450px;">
                                         @foreach($patient_lists as $patient)
                                         <?php $address = $patient->address.",".$patient->city.",".$patient->country;
-                                         if($patient->status=='assign')
-                                         {
-                                             $status = 'Assigned';
-                                         }
-                                         else
-                                         {
-                                             $status = 'Pending';
-                                         }
+                                        $statuss  ='abc';
+
 
                                          $nurse =\App\nurse_scheduler::where('patient_id','=',$patient->id)->first();
                                          if($nurse){
                                          $nurse_name = \App\nurse_profile::where('id','=',$nurse->id)->first()->name;
                                          $scheduled_date = $nurse->appointed_date;
+                                         $scheduled_status = $nurse->status;
 
 
 
+                                         }
+                                         else{
+                                             $nurse_name = 'Not Available';
+                                             $scheduled_date = 'Not Available';
+                                             $scheduled_status ='Not Available';
                                          }
 
                                         ?>
                                         <tr>
                                             <td>{{ $patient->first_name." ".$patient->last_name }}</td>
-                                            <td>{{ $patient->status}}</td>
+                                            <td>{{ $statuss}}</td>
                                             <td>{{ $patient->address}}</td>
 
                                             <td>{{ $patient->cell_phone }}</td>
-                                            <td>{{ $patient->email }}</td>
-                                            <td>{{ $address}}</td>
-                                            <td>{{ $status}}</td>
+                                            <td>{{$nurse_name}}</td>
+                                            <td>{{$scheduled_date}}</td>
+                                            <td>{{$scheduled_status}}</td>
+
 
 
                                         </tr>

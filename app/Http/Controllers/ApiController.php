@@ -118,6 +118,7 @@ curl_close($curl);
     {
         date_default_timezone_set('Asia/Dhaka');
         $scheduler_id =$request->scheduler_id;
+        nurse_scheduler::where('id','=',$scheduler_id)->update(['status'=>'Completed']);
         $nurse_finish_lat =22.367727;//$request->nurse_finish_lat;
         $nurse_finish_lon =91.832673;//$request->nurse_finish_lon;
 
@@ -189,8 +190,8 @@ curl_close($curl);
                  array_push($error,['keyword'=>$key_name,'value'=>$key_answer,'status'=>$error_status]);
 
              }
-             array_push($error,['error_note'=>$nurse_error->error_note]);
-             return response()->json(['form_field'=>$error,'status'=>$status]);
+
+             return response()->json(['form_field'=>$error,'error_note'=>$nurse_error->error_note,'status'=>$status]);
 
              //file_put_contents('test.txt',json_encode($error));
 
@@ -205,6 +206,7 @@ curl_close($curl);
         date_default_timezone_set('Asia/Dhaka');
 
         $scheduler_id = $request->scheduler_id;
+        nurse_scheduler::where('id','=',$scheduler_id)->update(['status'=>'Running']);
         $nurse_id = nurse_scheduler::where('id','=',$scheduler_id)->first()->nurse_id;
         $patient_id = nurse_scheduler::where('id','=',$scheduler_id)->first()->patient_id;
 
