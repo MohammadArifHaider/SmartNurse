@@ -186,7 +186,7 @@ curl_close($curl);
                  else{
                      $status = 'no';
                  }
-                 array_push($error,[$key_name=>$key_answer,'status'=>$status]);
+                 array_push($error,['keyword'=>$key_name,'value'=>$key_answer,'status'=>$status]);
 
              }
              array_push($error,['error_note'=>$nurse_error->error_note]);
