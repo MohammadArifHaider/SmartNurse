@@ -579,7 +579,36 @@
                                                                         <br> <span id="pet_patient{{$patient->id}}">{{$patient->pet}}</span></li>
                                                                     <br>
                                                                     <li class="nav-item"><i class="fa fa-rss"></i><b> Special Note :</b>
-                                                                        <br><span id="add_note_patient{{$patient->id}}">{{$patient->note}}</span></li>
+                                                                        <br><span id="add_note_patient{{$patient->id}}">
+                                                                            <?php
+                                                                            $notes =\App\patient_profile::where('id','=',$patient->id)->first()->note_archive;
+
+                                                                            $notes = json_decode($notes);
+                                                                             //file_put_contents('test.txt',sizeof($notes));
+
+
+
+                                                                            ?>
+                                                                            @if(!empty($notes))
+                                                                            @foreach ($notes as $note )
+
+
+
+
+                                                                            <label  for="exampleInputName1">{{$note->date}}</label>
+                                                                            <p style="color:black;font-weight:bold; font-size:15px">{{$note->patient_note}}</p><br>
+
+                                                                            @endforeach
+                                                                            @endif
+
+
+
+
+
+
+
+
+                                                                        </span></li>
                                                                     <br>
 
                                                                     <li>

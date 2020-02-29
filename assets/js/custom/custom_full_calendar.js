@@ -63,12 +63,14 @@ function submit_edit_information() {
         type: 'POST',
         data: formdata,
         success: function(data, status) {
+
+
             $("#change_address_modal").modal('hide');
             $("#second_address_patient" + patient_id).text(second_address);
             $("#sex_patient" + patient_id).text(sex);
             $("#pet" + patient_id).text(pet);
             $("#recertification_patient" + patient_id).text(recertifcation);
-            $("#add_note_patient" + patient_id).text(patient_note);
+            $("#add_note_patient" + patient_id).html(data);
 
 
             //call_full_calendar(patient_id);

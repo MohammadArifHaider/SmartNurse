@@ -111,8 +111,23 @@ curl_close($curl);
          $sex = $request->sex;
          $recertification = $request->recertification;
 
+         $note_archive = (object)$note_archive;
+         file_put_contents('test.txt',$note_archive->date);
+
+         $data="";
+        //  for($i=0;$i<sizeof($note_archive);$i++)
+        //  {
+        //     $data.='
+        //     <label  for="exampleInputName1">'.$note_archive[$i]['date'].'</label>
+        //     <p style="color:black;font-weight:bold; font-size:15px">'.$note_archive[$i]['patient_note'].'</p><br>
+        //     ';
+        //  }
+         return $data;
+
+
 
          patient_profile::where('id','=',$patient_id)->update(['second_address'=>$second_address,'pet'=>$pet,'sex'=>$sex,'recertification'=>$recertification,'note'=>$patient_note,'note_archive'=>$note_archive]);
+         return $data;
         // $nurse = nurse_profile::get();
 
         //  for ($m = 0; $m < sizeof($nurse); $m++) {
