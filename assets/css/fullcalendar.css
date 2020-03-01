@@ -1149,6 +1149,7 @@ a.fc-more:hover {
     /* replace space made by the top border with padding */
     border-bottom-width: 0;
     padding-bottom: 1px;
+    bottom: -1150px!important;
     /* remove bottom rounded corners */
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;

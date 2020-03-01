@@ -138,11 +138,32 @@ curl_close($curl);
             <p style="color:black;font-weight:bold; font-size:15px">'.$note->patient_note.'</p><br>
             ';
          }
-         return $data;
+         //return $data;
 
+         if($second_address)
+         {
+             patient_profile::where('id','=',$patient_id)->update(['second_address'=>$second_address]);
+         }
 
+         if($pet)
+         {
+            patient_profile::where('id','=',$patient_id)->update(['pet'=>$pet]);
+         }
 
-         patient_profile::where('id','=',$patient_id)->update(['second_address'=>$second_address,'pet'=>$pet,'sex'=>$sex,'recertification'=>$recertification,'note'=>$patient_note,'note_archive'=>$note_archive]);
+         if($sex)
+         {
+            patient_profile::where('id','=',$patient_id)->update(['sex'=>$sex]);
+         }
+         if($recertification)
+         {
+            patient_profile::where('id','=',$patient_id)->update(['recertification'=>$recertification]);
+         }
+         if($patient_note)
+         {
+            patient_profile::where('id','=',$patient_id)->update(['note'=>$patient_note,'note_archive'=>$note_archive]);
+         }
+
+         //patient_profile::where('id','=',$patient_id)->update(['second_address'=>$second_address,'pet'=>$pet,'sex'=>$sex,'recertification'=>$recertification,'note'=>$patient_note,'note_archive'=>$note_archive]);
          return $data;
         // $nurse = nurse_profile::get();
 

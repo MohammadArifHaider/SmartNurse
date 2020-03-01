@@ -101,9 +101,16 @@ function submit_edit_information() {
             $("#change_address_modal").modal('hide');
             $("#second_address_patient" + patient_id).text(second_address);
             $("#sex_patient" + patient_id).text(sex);
-            $("#pet" + patient_id).text(pet);
+            $("#pet_patient" + patient_id).text(pet);
             $("#recertification_patient" + patient_id).text(recertifcation);
             $("#add_note_patient" + patient_id).html(data);
+            $("#second_address").val('');
+            $("#pet").val('');
+            $("#sex").val('');
+            $('#recertification').val('');
+            $("#patient_note").val('');
+
+
 
 
             //call_full_calendar(patient_id);
