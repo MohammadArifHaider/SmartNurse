@@ -117,6 +117,8 @@ Route::get('get_area','SchedulerController@get_area');
 
 Route::post('cancel_schedule','PatientController@cancel_schedule');
 
+Route::get('nurse_detail','NurseController@nurse_detail');
+
 
 
 

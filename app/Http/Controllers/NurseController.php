@@ -160,7 +160,10 @@ curl_close($curl);
         // file_put_contents('test.txt',$nurse_address." ".$patient_address);
 
     }
-
+     public function nurse_detail()
+     {
+         return view('nurse_detail');
+     }
     public function nurse_information_upload(Request $request)
     {
        $prefered_date = $request->prefered_date;

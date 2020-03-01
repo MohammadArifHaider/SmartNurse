@@ -344,9 +344,9 @@ curl_close($curl);
        $nexmo = app('Nexmo\Client');
 
         $nexmo->message()->send([
-            'to'   => '+8801845318609',
+            'to'   => '+8801819210184',
             'from' => '+8801675974419',
-            'text' => 'Using the instance to send a message.'
+            'text' => 'You have 1 schedule'
         ]);
         $this->push_notification($nurse_id);
 
