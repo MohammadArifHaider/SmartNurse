@@ -57,33 +57,44 @@ curl_close($curl);
 
 
     }
-    public function submit_patient_note(Request $request)
+    public function cancel_schedule(Request $request)
     {
-        date_default_timezone_set('Asia/Dhaka');
-        $date = date('d-m-Y H:i:s');
-      $patient_id = $request->patient_id;
-        $patient_note = $request->patient_note;
-        $user_id = 1;
+           $patient_id = $request->patient_id;
+           patient_profile::where('id','=',$patient_id)->update(['availability_status'=>0]);
+    }
+    public function change_schedule(Request $request)
+    {
+        $patient_id = $request->patient_id;
+        $change_date = explode(' ',$request->change_date);
+        $change_date = $change_date[0].' '.$change_date[1]." ".$change_date[2].' '.$change_date[3];
+        $newDate = date("d-m-Y", strtotime($change_date));
+        patient_profile::where('id','=',$patient_id)->update(['re-schedule-date'=>$newDate,'availability_status'=>0]);
+        //file_put_contents('test.txt',$newDate);
+    //     date_default_timezone_set('Asia/Dhaka');
+    //     $date = date('d-m-Y H:i:s');
+    //   $patient_id = $request->patient_id;
+    //     $patient_note = $request->patient_note;
+    //     $user_id = 1;
 
-        $note_archive = array();
+    //     $note_archive = array();
 
-        $note_archive_existing = patient_profile::where('id','=',$patient_id)->first();
+    //     $note_archive_existing = patient_profile::where('id','=',$patient_id)->first();
 
-        $existing_note = $note_archive_existing->note_archive;
+    //     $existing_note = $note_archive_existing->note_archive;
 
-            //$existing_note = json_decode($existing_note);
-           // file_put_contents('test.txt',$existing_note);
-            //array_push($note_archive,$existing_note);
-            if ($existing_note) {
-                $note_archive = json_decode($existing_note);
-            }
-
-
-        array_push($note_archive,array('patient_note'=>$patient_note,'date'=>$date,'update_by'=>$user_id));
+    //         //$existing_note = json_decode($existing_note);
+    //        // file_put_contents('test.txt',$existing_note);
+    //         //array_push($note_archive,$existing_note);
+    //         if ($existing_note) {
+    //             $note_archive = json_decode($existing_note);
+    //         }
 
 
+    //     array_push($note_archive,array('patient_note'=>$patient_note,'date'=>$date,'update_by'=>$user_id));
 
-        patient_profile::where('id','=',$patient_id)->update(['note'=>$patient_note,'note_archive'=>$note_archive]);
+
+
+    //     patient_profile::where('id','=',$patient_id)->update(['note'=>$patient_note,'note_archive'=>$note_archive]);
 
     }
      public function submit_edit_information(Request $request)
@@ -153,7 +164,7 @@ curl_close($curl);
      }
     public function show_patient_list()
     {
-        $patient_lists = patient_profile::where('status', '=', 'assign')->get();
+        $patient_lists = patient_profile::get();
         file_put_contents('test.txt',$patient_lists);
         return view('intaker.view_patient_list', ['patient_lists' => $patient_lists]);
     }

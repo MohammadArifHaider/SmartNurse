@@ -9,29 +9,62 @@ function change_address() {
 
 }
 
+function cancel_schedule() {
+    var conf = confirm("Are You Sure");
+    if (conf == true) {
+
+        var patient_id = $("#hidden_input_for_change").val();
+        var formdata = new FormData();
+        formdata.append('patient_id', patient_id);
+        $.ajax({
+            processData: false,
+            contentType: false,
+            url: 'cancel_schedule',
+            type: 'POST',
+            data: formdata,
+            success: function(data, status) {
+                // $("#add_note_modal").modal('hide');
+                location.reload();
+
+
+
+
+
+            }
+        });
+
+
+
+
+    }
+}
+
 function add_note() {
     $("#add_note_modal").modal('show');
 }
 
-function submit_note() {
-    var patient_note = document.getElementById("patient_note").value.trim();
+function change_schedule() {
+    var change_date = $("#inline-datepicker").datepicker('getDate');
+    //  alert(change_date);
+    // var patient_note = document.getElementById("patient_note").value.trim();
     var patient_id = $("#hidden_input_for_change").val();
     var formdata = new FormData();
     formdata.append('patient_id', patient_id);
-    formdata.append('patient_note', patient_note);
+    formdata.append('change_date', change_date);
 
     $.ajax({
         processData: false,
         contentType: false,
-        url: 'submit_patient_note',
+        url: 'change_schedule',
         type: 'POST',
         data: formdata,
         success: function(data, status) {
             $("#add_note_modal").modal('hide');
-            $("#add_note" + patient_id).text(patient_note);
+            location.reload();
 
 
-            // call_full_calendar($('#hidden_input_for_change').val());
+
+
 
         }
     });

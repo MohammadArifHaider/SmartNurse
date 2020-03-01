@@ -70,10 +70,7 @@
                 <input type="text" class="form-control" id="language" placeholder="Bangla">
               </div>
 
-              <div class="form-group">
-                <label for="exampleInputName1">Trained Plan</label>
-                <input type="text" class="form-control" id="trained_plan" placeholder="">
-              </div>
+
               <div class="form-group">
                 <label for="exampleInputName1">Email</label>
                 <input type="email" class="form-control" id="email" placeholder="abc@gmail.com">
@@ -104,74 +101,78 @@
               </div>
 
               <div class="form-group">
-                <label for="exampleInputName1">Preferd Days </label>
                 <form>
               <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <div class="form-check">
-                      <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input prefered_day" value = "sunday">
-                        Sunday
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input prefered_day"  value = "monday" checked>
-                        Monday
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input prefered_day" value = "tuesday" >
-                        Tuesday
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input prefered_day" value = "wednesday" >
-                        Wednesday
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input prefered_day" value = "thursday" >
-                        Thursday
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input prefered_day" value = "friday" >
-                        Friday
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input prefered_day" >
-                        Saturday
-                      </label>
-                    </div>
-                  </div>
+                <div class="col-md-12 col-sm-12">
+
+                    <table  class="table table-bordered table-striped" id="tb">
+                        <tr class="tr-header">
+                            <th>Date</th>
+                            <th>Start Time</th>
+
+                            <th>Finish Time</th>
+
+                            <th><a href="javascript:void(0);" style="font-size:18px;" id="addMore" title="Add More Person"><span class="fa fa-plus"></span></a></th>
+                            <tr class="addrows">
+
+                                <td> <div  class="input-group date datepicker datepicker-popup" >
+                                    <input type="text" class="form-control" name="prefered_date[]">
+                                    <span class="input-group-addon input-group-append border-left">
+                                      <span class="far fa-calendar input-group-text"></span>
+                                    </span>
+                                  </div></td>
+                                <td>
+                                    <input type="text" name="prefered_start_time[]" class="form-control">
+
+
+
+                                </td>
+                                <td><input type="text" name="prefered_finish_time[]" class="form-control"></td>
+                                <td><a href='javascript:void(0);'  class='remove'><span class='fa fa-trash'></span></a></td>
+                            </tr>
+
+
+                        </table>
+
+                                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+                                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+
+
+								<script>
+									$(function(){
+										var newRow = $(".addrows").clone();
+
+                                        $(".datepicker").datepicker();
+                                        $("#addMore").on("click", function () {
+
+                                            newRow.clone().appendTo("#tb").find(".datepicker").datepicker();
+                                        });
+
+
+										$(document).on('click', '.remove', function() {
+											var trIndex = $(this).closest("tr").index();
+											if(trIndex>1) {
+												$(this).closest("tr").remove();
+											} else {
+												alert("Sorry!! Can't remove first row!");
+											}
+										});
+									});
+								</script>
+
                 </div>
 
               </div>
             </form>
               </div>
-
               <div class="form-group">
-                <label for="exampleInputName1">Prefered Start Times</label>
-                <input type="text" class="form-control" id="start_time" placeholder="">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputName1">Prefered End Times</label>
-                <input type="text" class="form-control" id="end_time" placeholder="">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputName1">Prefered Notes</label>
-                <input type="text" class="form-control" id="note" placeholder="text">
+                <label for="exampleInputCity1">Prefered Area</label>
+                <input type="text" class="form-control" id="prefered_area" placeholder="">
               </div>
 
-              <button type="button" id="nurse_information_upload" class="btn btn-primary mr-2">Create User</button>
+
+              <button type="button" id="nurse_information_upload" class="btn btn-primary mr-2">Create Nurse</button>
 
             </form>
           </div>
@@ -296,10 +297,12 @@
   <script src="{{asset('assets')}}/js/dropify.js"></script>
   <script src="{{asset('assets')}}/js/dropzone.js"></script>
   <script src="{{asset('assets')}}/js/jquery-file-upload.js"></script>
-  <script src="{{asset('assets')}}/js/formpickers.js"></script>
+
   <script src="{{asset('assets')}}/js/form-repeater.js"></script>
   <script src="{{asset('assets')}}/js/file-upload.js"></script>
   <script src="{{asset('assets')}}/js/custom/nurse_profile.js?{{time()}}"></script>
+
+
 
 
 @endsection

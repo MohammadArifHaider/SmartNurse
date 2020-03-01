@@ -624,31 +624,53 @@ curl_close($curl);
 
             array_push($insert_data, array(
 
-                'insurance_plan' => $data[0][$i][0],
-                'date_received' => $data[0][$i][1],
-                'date_need_to_be_finished' => $data[0][$i][2],
+                //new data
+                'member_id' => $data[0][$i][0],
+                'first_name' => $data[0][$i][1],
+                'last_name' => $data[0][$i][2],
+                'date_of_birth' => $data[0][$i][3],
+                'medicaid_id' => $data[0][$i][4],
+                'schedule_date' => $data[0][$i][5],
+                'completed_within_180_days' => $data[0][$i][6],
+                'completed_date_after_180_days' => $data[0][$i][7],
+                'days_scheduled_to_completed_date' => $data[0][$i][8],
+                'finalized_date' => $data[0][$i][9],
+                'days_from_completed_to_finalize' => $data[0][$i][10],
+                'documents_received_date' => $data[0][$i][11],
+                'days_from_finalize_to_documents_received' => $data[0][$i][12],
+                'disenrollment_date' => $data[0][$i][13],
+                'deceased' => $data[0][$i][14],
+                'adhoc' => $data[0][$i][15],
+                'special_case' => $data[0][$i][16],
+                'team_name' => $data[0][$i][17],
+                'cm' => $data[0][$i][18],
+                'sw' => $data[0][$i][19],
+                'cell_phone' => $data[0][$i][20],
+                'home_phone' => $data[0][$i][21],
+                'phone_number_3' => $data[0][$i][22],
+                'phone_number_4' => $data[0][$i][23],
+                'address' => $data[0][$i][24],
+                'address2' => $data[0][$i][25],
+                'city' => $data[0][$i][26],
+                'state' => $data[0][$i][27],
+                'zip_code' => $data[0][$i][28],
+                'country' => $data[0][$i][29],
+                'primary_language' => $data[0][$i][30],
+                'agency' => $data[0][$i][31],
+                'rn' => $data[0][$i][32],
+                'updates' => $data[0][$i][33],
+                'assesment_type'=>$data[0][$i][34]
 
-                'medicaid_id' => $data[0][$i][3],
 
-                'member_id' => $data[0][$i][4],
-                'first_name' => $data[0][$i][5],
-                'last_name' => $data[0][$i][6],
-                'sex' => $data[0][$i][7],
-                'date_of_birth' => $data[0][$i][8],
-                'primary_language' => $data[0][$i][9],
+                //old data
+                // 'insurance_plan' => $data[0][$i][0],
+                // 'date_received' => $data[0][$i][1],
+                // 'date_need_to_be_finished' => $data[0][$i][2],
+                // 'sex' => $data[0][$i][7],
+                // 'marital_status' => $data[0][$i][12],
+                // 'email' => $data[0][$i][13],
+                // 'assesment_type' => $data[0][$i][19],
 
-                'cell_phone' => $data[0][$i][10],
-                'home_phone' => $data[0][$i][11],
-
-                'marital_status' => $data[0][$i][12],
-                'email' => $data[0][$i][13],
-
-                'address' => $data[0][$i][14],
-                'city' => $data[0][$i][15],
-                'state' => $data[0][$i][16],
-                'zip_code' => $data[0][$i][17],
-                'country' => $data[0][$i][18],
-                'assesment_type' => $data[0][$i][19],
 
             ));
         }
@@ -661,9 +683,8 @@ curl_close($curl);
             $data .= '
             <tr>
             ';
-            if (!$insert_data[$i]['insurance_plan'] || !$insert_data[$i]['date_received'] || !$insert_data[$i]['date_need_to_be_finished']
-                || !$insert_data[$i]['medicaid_id'] || !$insert_data[$i]['member_id'] || !$insert_data[$i]['first_name'] || !$insert_data[$i]['last_name']
-                || !$insert_data[$i]['sex'] || !$insert_data[$i]['email'] || !$insert_data[$i]['marital_status']
+            if ( !$insert_data[$i]['medicaid_id'] || !$insert_data[$i]['member_id'] || !$insert_data[$i]['first_name'] || !$insert_data[$i]['last_name']
+
                 || !$insert_data[$i]['date_of_birth'] || !$insert_data[$i]['primary_language'] || !$insert_data[$i]['cell_phone'] || !$insert_data[$i]['home_phone'] || !$insert_data[$i]['address'] || !$insert_data[$i]['city']
                 || !$insert_data[$i]['state'] || !$insert_data[$i]['zip_code'] || !$insert_data[$i]['country']|| !$insert_data[$i]['assesment_type'])
 
@@ -684,32 +705,52 @@ curl_close($curl);
 
                 $patients = new patient_profile();
                 $patients->user_id = 1;
-                $patients->insurance_plan = $insert_data[$i]['insurance_plan'];
-                $patients->date_received = $insert_data[$i]['date_received'];
-                $patients->date_need_to_be_finished = $insert_data[$i]['date_need_to_be_finished'];
-                $patients->medicaid_id = $insert_data[$i]['medicaid_id'];
+                // $patients->insurance_plan = $insert_data[$i]['insurance_plan'];
+
                 $patients->member_id = $insert_data[$i]['member_id'];
                 $patients->first_name = $insert_data[$i]['first_name'];
                 $patients->last_name = $insert_data[$i]['last_name'];
-                $patients->sex = $insert_data[$i]['sex'];
                 $patients->date_of_birth = $insert_data[$i]['date_of_birth'];
-                $patients->primary_language = $insert_data[$i]['primary_language'];
+                $patients->medicaid_id = $insert_data[$i]['medicaid_id'];
+                $patients->schedule_date = $insert_data[$i]['schedule_date'];
+                $patients->completed_within_180_days = $insert_data[$i]['completed_within_180_days'];
+                $patients->completed_date_after_180_days = $insert_data[$i]['completed_date_after_180_days'];
+                $patients->days_scheduled_to_completed_date = $insert_data[$i]['days_scheduled_to_completed_date'];
+                $patients->finalized_date = $insert_data[$i]['finalized_date'];
+                $patients->days_from_completed_to_finalize = $insert_data[$i]['days_from_completed_to_finalize'];
+                $patients->documents_received_date = $insert_data[$i]['documents_received_date'];
+                $patients->days_from_finalize_to_documents_received = $insert_data[$i]['days_from_finalize_to_documents_received'];
+                $patients->disenrollment_date = $insert_data[$i]['disenrollment_date'];
+                $patients->deceased = $insert_data[$i]['deceased'];
+                $patients->adhoc = $insert_data[$i]['adhoc'];
+                $patients->special_case = $insert_data[$i]['special_case'];
+                $patients->team_name = $insert_data[$i]['team_name'];
+                $patients->cm = $insert_data[$i]['cm'];
+                $patients->sw = $insert_data[$i]['sw'];
                 $patients->cell_phone = $insert_data[$i]['cell_phone'];
                 $patients->home_phone = $insert_data[$i]['home_phone'];
-
-                $patients->marital_status = $insert_data[$i]['marital_status'];
-                $patients->email = $insert_data[$i]['email'];
-                $patients->address = $insert_data[$i]['address'];
-
-                $patients->city = $insert_data[$i]['city'];
+                $patients->phone_number_3 = $insert_data[$i]['phone_number_3'];
+                $patients->phone_number_4 = $insert_data[$i]['phone_number_4'];
+                $patients->address = $insert_data[$i]['address'] ;
+                $patients->second_address = $insert_data[$i]['address2'];
                 $patients->state = $insert_data[$i]['state'];
+                $patients->primary_language = $insert_data[$i]['primary_language'];
+                $patients->agency = $insert_data[$i]['agency'];
+                $patients->rn = $insert_data[$i]['rn'];
+                $patients->updates = $insert_data[$i]['updates'];
+                $patients->city = $insert_data[$i]['city'];
                 $patients->zip_code = $insert_data[$i]['zip_code'];
                 $patients->country = $insert_data[$i]['country'];
                 $patients->assesment_type = $insert_data[$i]['assesment_type'];
+
+                // $patients->sex = $insert_data[$i]['sex'];
+                // $patients->marital_status = $insert_data[$i]['marital_status'];
+                // $patients->email = $insert_data[$i]['email'];
+
                 $patients->save();
 
                 $patient_id = $patients->id;
-                $patient_address = $insert_data[$i]['address'] . ',' . $insert_data[$i]['city'].','. $insert_data[$i]['country'].','. $insert_data[$i]['zip_code'];
+
 
                // $patient_zip = $insert_data[$i]['zip_code'];
 
@@ -751,40 +792,7 @@ curl_close($curl);
 
             }
 
-            if ($insert_data[$i]['insurance_plan']) {
-                $data .= '
-                    <td>' . $insert_data[$i]['insurance_plan'] . '</td>
 
-                    ';
-            } else {
-                $data .= '
-                    <td style="color:red">Missing Data</td>
-
-                    ';
-            }
-            if ($insert_data[$i]['date_received']) {
-                $data .= '
-               <td>' . $insert_data[$i]['date_received'] . '</td>
-
-               ';
-            } else {
-                $data .= '
-               <td style="color:red">Missing Data</td>
-
-               ';
-            }
-            if ($insert_data[$i]['date_need_to_be_finished']) {
-                $data .= '
-                    <td>' . $insert_data[$i]['date_need_to_be_finished'] . '</td>
-
-                    ';
-            } else {
-                $data .= '
-                    <td style="color:red">Missing Data</td>
-
-                    ';
-
-            }
 
             if ($insert_data[$i]['medicaid_id']) {
                 $data .= '
@@ -833,18 +841,7 @@ curl_close($curl);
                     ';
             }
 
-            if ($insert_data[$i]['sex']) {
-                $data .= '
-                    <td>' . $insert_data[$i]['sex'] . '</td>
 
-                    ';
-            } else {
-                $data .= '
-                    <td style="color:red">Missing Data</td>
-
-                    ';
-
-            }
 
             if ($insert_data[$i]['date_of_birth']) {
                 $data .= '
@@ -893,29 +890,8 @@ curl_close($curl);
                     ';
             }
 
-            if ($insert_data[$i]['marital_status']) {
-                $data .= '
-                    <td>' . $insert_data[$i]['marital_status'] . '</td>
 
-                    ';
-            } else {
-                $data .= '
-                    <td style="color:red">Missing Data</td>
 
-                    ';
-            }
-
-            if ($insert_data[$i]['email']) {
-                $data .= '
-                    <td>' . $insert_data[$i]['email'] . '</td>
-
-                    ';
-            } else {
-                $data .= '
-                    <td style="color:red">Missing Data</td>
-
-                    ';
-            }
 
             if ($insert_data[$i]['address']) {
                 $data .= '

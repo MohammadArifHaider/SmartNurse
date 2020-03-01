@@ -50,7 +50,7 @@
                       </div>
 
                       <div class="card">
-                        <div class="card-body"  >
+                        <div class="card-body" >
                             <h4>Patients List</h4>
 
 
@@ -62,40 +62,47 @@
                                             <th>Patient Name</th>
                                             <th>Patient Status</th>
                                             <th>Patient Address</th>
-                                            <th>Patient Contact No</th>
+                                            <th>Patient Contact </th>
                                             <th>Scheduled Nurse Name</th>
                                             <th>Scheduled Date</th>
                                             <th>Scheduled Status</th>
-
-
-
                                         </tr>
                                     </thead>
                                     <tbody style="overflow-x:auto;overflow-y:scroll;height: 450px;">
                                         @foreach($patient_lists as $patient)
-                                        <?php $address = $patient->address.",".$patient->city.",".$patient->country;
-                                        $statuss  ='abc';
+                                        <?php
+                                        $address = $patient->address.",".$patient->city.",".$patient->country;
+                                        $status = $patient->status;
+                                        if($status === 'assign')
+                                        {
+                                            $patient_status = 'Assigned';
+                                            $nurse =\App\nurse_scheduler::where('patient_id','=',$patient->id)->first();
+                                            $nurse_name = \App\nurse_profile::where('id','=',$nurse->nurse_id)->first()->name;
+                                            $scheduled_date = $nurse->appointed_date;
+                                            $scheduled_status = $nurse->status;
+                                        }
+                                        else
+                                        {
+                                            $patient_status = 'Pending';
+                                            $nurse_name = 'Not Available';
+                                            $scheduled_date = 'Not Available';
+                                            $scheduled_status ='Not Available';
+                                        }
 
 
-                                         $nurse =\App\nurse_scheduler::where('patient_id','=',$patient->id)->first();
-                                         if($nurse){
-                                         $nurse_name = \App\nurse_profile::where('id','=',$nurse->id)->first()->name;
-                                         $scheduled_date = $nurse->appointed_date;
-                                         $scheduled_status = $nurse->status;
 
 
 
-                                         }
-                                         else{
-                                             $nurse_name = 'Not Available';
-                                             $scheduled_date = 'Not Available';
-                                             $scheduled_status ='Not Available';
-                                         }
+
+
+
+
+
 
                                         ?>
                                         <tr>
                                             <td>{{ $patient->first_name." ".$patient->last_name }}</td>
-                                            <td>{{ $statuss}}</td>
+                                            <td>{{ $patient_status}}</td>
                                             <td>{{ $patient->address}}</td>
 
                                             <td>{{ $patient->cell_phone }}</td>

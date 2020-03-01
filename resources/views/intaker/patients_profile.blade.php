@@ -224,20 +224,18 @@
                                             <thead>
                                                 <tr>
                                                     <th>Row no</th>
-                                                    <th>Insurance Plan</th>
-                                                    <th>Date of Received</th>
-                                                    <th>Date Nedd to Fiinished</th>
+
+
                                                     <th>Medicaid Id</th>
                                                     <th>Member Id</th>
                                                     <th>Frst Name</th>
                                                     <th>Last Name</th>
-                                                    <th>Sex</th>
+
                                                     <th>Date of Birth</th>
                                                     <th>Language</th>
                                                     <th>Cell Phone</th>
                                                     <th>Home Phone</th>
-                                                    <th>Marital Status</th>
-                                                    <th>Email</th>
+
                                                     <th>Address</th>
                                                     <th>City</th>
                                                     <th>State</th>

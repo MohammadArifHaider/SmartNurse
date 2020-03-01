@@ -18,7 +18,8 @@
 
         <!-- endinject -->
         <link rel="shortcut icon" href="{{asset('assets')}}/images/favicon.png" />
-        <link rel="stylesheet" href="{{asset('assets')}}/css/fullcalendar.css?{{time()}}" /> @include('all_css')
+        <link rel="stylesheet" href="{{asset('assets')}}/css/fullcalendar.css?{{time()}}" />
+        @include('all_css')
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/daygrid/main.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/timegrid/main.css">
         <link href="{{asset('assets')}}/vendors/datatables/dataTables.bootstrap.min.css" rel="stylesheet">
@@ -469,20 +470,26 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel-3">Change address</h5>
+                                <h5 class="modal-title" id="exampleModalLabel-3">Re Schedule</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label for="exampleTextarea1">Note</label>
-                                    <textarea class="form-control" id="patient_note" rows="6"></textarea>
-                                </div>
+                            <div class="modal-body" style="padding:10px">
+
+
+                                    <div class="card">
+                                      <div class="card-body" style="margin-top:2px">
+
+                                        <div id="inline-datepicker" class="datepicker"></div>
+
+                                      </div>
+                                    </div>
+
 
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" onclick="submit_note()">Add</button>
+                                <button type="button" class="btn btn-primary" onclick="change_schedule()">Change</button>
 
                             </div>
                         </div>
@@ -612,7 +619,7 @@
                                                                     <br>
 
                                                                     <li>
-                                                                        <button onclick="change_address()" type="button" class="btn btn-sm btn-primary" style="font-size:10px">Edit</button> <span><button onclick="add_note()" type="button" class="btn btn-sm btn-primary" style="font-size:10px">Note</button></span></li>
+                                                                        <button onclick="change_address()" type="button" class="btn btn-sm btn-primary" style="font-size:10px">Edit</button> <span><button onclick="add_note()" type="button" class="btn btn-sm btn-primary" style="font-size:10px">Hold</button></span> <span><button onclick="cancel_schedule()" type="button" class="btn btn-sm btn-primary" style="font-size:10px">Cancel</button></span></li>
                                                                     <input type="hidden" id="hidden_input_for_change" value="{{$patient->id}}">
                                                                 </div>
                                                             </div>
@@ -744,9 +751,13 @@
 
         </div>
 
+
     </body>
 
+
+
     </html>
+
 
     <script src="{{asset('assets')}}/js/custom/sweetalert.js?{{time()}}">
         // <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.js" >
@@ -767,4 +778,26 @@
     <script src="{{asset('assets')}}/js/pages/datatables.js"></script>
 
     <script src="{{asset('assets')}}/js/custom/custom_full_calendar.js?{{time()}}">
+
+        <script src="{{asset('assets')}}/vendors/js/vendor.bundle.base.js?{{time()}}"></script>
+        <script src="{{asset('assets')}}/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+
+        <script src="{{asset('assets')}}/js/app.min.js"></script>
+
+
+
+
+        <script src="{{asset('assets')}}/js/formpickers.js?{{time()}}"></script>
+
+
+
+        <script src="{{asset('assets')}}/js/file-upload.js"></script>
+
+
+
+
+
+
+
+
     </script>

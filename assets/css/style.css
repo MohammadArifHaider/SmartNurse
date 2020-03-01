@@ -8885,7 +8885,7 @@ a {
 }
 
 a:hover {
-    color: #0056b3;
+    color: #a6a7a8;
     text-decoration: underline;
 }
 
@@ -30019,6 +30019,7 @@ dl li {
 .nav-tabs .nav-item .nav-link {
     border-radius: 5px 5px 0px 0px;
     padding-left: 30px;
+    font-size: 16px;
 }
 
 .nav-tabs .nav-item:last-child .nav-link {}

@@ -180,8 +180,8 @@ curl_close($curl);
    }
     public function main_page()
     {
-        $patient_list = patient_profile::where('status', '=', 'not_assign')->get();
-        $language = patient_profile::where('status', '=', 'not_assign')->get()->groupBy('primary_language');
+        $patient_list = patient_profile::where('status', '=', 'not_assign')->where('availability_status','=','1')->get();
+        $language = patient_profile::where('status', '=', 'not_assign')->where('availability_status','=','1')->get()->groupBy('primary_language');
        // file_put_contents('test.txt',$language);
         $pending_patient = sizeof($patient_list);
 

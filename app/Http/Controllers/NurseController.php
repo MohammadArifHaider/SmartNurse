@@ -163,25 +163,41 @@ curl_close($curl);
 
     public function nurse_information_upload(Request $request)
     {
+       $prefered_date = $request->prefered_date;
+       $prefered_date = explode(',',$prefered_date);
 
+     $start_time = $request->start_time;
+     $start_time = explode(',',$start_time);
+
+       $finish_time =$request->finish_time;
+       $finish_time = explode(',',$finish_time);
+
+
+    //file_put_contents('test.txt',json_encode($start_time));
+
+       $prefered_date_time = array();
+       for($i=0;$i<sizeof($prefered_date);$i++)
+       {
+         array_push($prefered_date_time,['date'=>$prefered_date[$i],'start_time'=>$start_time[$i],'finish_time'=>$finish_time[$i]]);
+       }
         $nurse = new nurse_profile();
         $nurse->user_id = 1;
         $nurse->name = $request->name;
         $nurse->gender =$request->gender;
         $nurse->language =$request->language;
-        $nurse->trained_plan =$request->trained_plan;
+
         $nurse->email_address =$request->email;
         $nurse->nurse_registration_no =$request->registration_no;
         $nurse->phone_number =$request->phone_number;
         $nurse->address =$request->address;
-        $nurse->prefered_days =$request->prefered_day;
+        $nurse->prefered_date_time =$request->prefered_day;
         $nurse->prefered_location =$request->address;
-        $nurse->prefered_start_times =$request->start_time;
-        $nurse->prefered_end_times =$request->end_time;
-        $nurse->prefered_notes =$request->note;
+        $nurse->prefered_date_time = json_encode($prefered_date_time);
+
         $nurse->prefered_city =$request->city;
         $nurse->prefered_county =$request->country;
         $nurse->prefered_zip =$request->zip;
+        $nurse->nurse_area =$request->prefered_area;
         $nurse->save();
         $nurse_id = $nurse->id;
         $nurse_zip = $nurse->prefered_zip;
@@ -210,7 +226,7 @@ curl_close($curl);
 
         }
 
-        //file_put_contents('test.txt',$request->all());
+    //     //file_put_contents('test.txt',$request->all());
 
     }
 }

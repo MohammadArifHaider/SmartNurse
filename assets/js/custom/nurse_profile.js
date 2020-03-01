@@ -33,21 +33,40 @@
  })
 
  $("#nurse_information_upload").on('click', function() {
-     var prefered_day = [];
-     $('.prefered_day:checked').each(function() {
-         prefered_day.push($(this).val().charAt(0).toUpperCase() + $(this).val().slice(1));
-     });
+     //  var prefered_day = [];
+     //  $('.prefered_day:checked').each(function() {
+     //      prefered_day.push($(this).val().charAt(0).toUpperCase() + $(this).val().slice(1));
+     //  });
 
      // alert(prefered_day);
 
      //var gender =   $("#gender:checked").val();
      //alert (gender);
 
+     var prefered_date = [];
+     $('input[name^=prefered_date]').each(function() {
+         var date = $(this).val().split('/');
+         date = date[1] + '-' + date[0] + '-' + date[2];
+         prefered_date.push(date);
+     });
+
+     var prefered_start_time = [];
+     $('input[name^=prefered_start_time]').each(function() {
+         prefered_start_time.push($(this).val());
+     });
+
+     var prefered_finish_time = [];
+     $('input[name^=prefered_finish_time]').each(function() {
+         prefered_finish_time.push($(this).val());
+     });
+
+     //alert(prefered_date + " " + prefered_start_time + " " + prefered_finish_time);
+
      var formdata = new FormData();
      formdata.append("name", $("#name").val());
-     formdata.append("gender", $("#gender:checked").val());
+     formdata.append("gender", $("#gender").val());
      formdata.append("language", $("#language").val());
-     formdata.append("trained_plan", $("#trained_plan").val());
+
      formdata.append("email", $("#email").val());
      formdata.append("registration_no", $("#registration_no").val());
      formdata.append("phone_number", $("#phone_number").val());
@@ -55,10 +74,11 @@
      formdata.append("city", $("#city").val());
      formdata.append("country", $("#country").val());
      formdata.append("zip", $("#zip").val());
-     formdata.append("prefered_day", prefered_day);
-     formdata.append("start_time", $("#start_time").val());
-     formdata.append("end_time", $("#end_time").val());
-     formdata.append("note", $("#note").val());
+     formdata.append("prefered_date", prefered_date);
+     formdata.append("prefered_area", $("#prefered_area").val());
+     formdata.append("start_time", prefered_start_time);
+     formdata.append("finish_time", prefered_finish_time);
+
 
 
      $.ajax({

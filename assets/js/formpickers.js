@@ -19,6 +19,7 @@
         $('#inline-datepicker').datepicker({
             enableOnReadonly: true,
             todayHighlight: true,
+            format: "dd.mm.yyyy",
         });
     }
     if ($(".datepicker-autoclose").length) {
