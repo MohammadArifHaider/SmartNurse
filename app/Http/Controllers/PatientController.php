@@ -186,7 +186,7 @@ curl_close($curl);
     public function show_patient_list()
     {
         $patient_lists = patient_profile::get();
-        file_put_contents('test.txt',$patient_lists);
+        //file_put_contents('test.txt',$patient_lists);
         return view('intaker.view_patient_list', ['patient_lists' => $patient_lists]);
     }
 
