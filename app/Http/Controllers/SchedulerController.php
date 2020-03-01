@@ -346,7 +346,7 @@ curl_close($curl);
         $nexmo->message()->send([
             'to'   => '+8801819210184',
             'from' => '+8801675974419',
-            'text' => 'You have 1 schedule'
+            'text' => 'You have 1 nurse schedule at'." $appointed_date"." ".$start_time
         ]);
         $this->push_notification($nurse_id);
 
