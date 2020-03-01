@@ -439,7 +439,7 @@ curl_close($curl);
              <td >'.$time.'</td>
              <td>'.$address.'</td>
              <td>'.$assesment_type.'</td>
-             <td>'.$distance.'</td>
+
 
              <input type="hidden" id="assign_nurse_id" value='.$nurse_id.'>
              <input type="hidden" id="assign_patient_id" value='.$patient_id.'>
