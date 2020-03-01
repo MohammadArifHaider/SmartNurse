@@ -93,11 +93,11 @@
               </div>
               <div class="form-group">
                 <label for="exampleInputCity1">Zip Code</label>
-                <input type="text" class="form-control" id="country" placeholder="">
+                <input type="text" class="form-control" id="zip" placeholder="">
               </div>
               <div class="form-group">
-                <label for="exampleInputCity1">Country</label>
-                <input type="text" class="form-control" id="zip" placeholder="">
+                <label for="exampleInputCity1">County</label>
+                <input type="text" class="form-control" id="country" placeholder="">
               </div>
 
               <div class="form-group">

@@ -743,11 +743,14 @@ curl_close($curl);
                 $patients->country = $insert_data[$i]['country'];
                 $patients->assesment_type = $insert_data[$i]['assesment_type'];
 
+
                 // $patients->sex = $insert_data[$i]['sex'];
                 // $patients->marital_status = $insert_data[$i]['marital_status'];
                 // $patients->email = $insert_data[$i]['email'];
 
                 $patients->save();
+
+                $patient_address = $insert_data[$i]['address'].",".$insert_data[$i]['city'].','.$insert_data[$i]['country'].','.$insert_data[$i]['zip_code'];
 
                 $patient_id = $patients->id;
 

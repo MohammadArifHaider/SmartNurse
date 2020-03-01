@@ -530,7 +530,7 @@ curl_close($curl);
 
               $nurse_name = $nurse_profile->name;
               $assesment_type = $patient_profile->assesment_type;
-              $patient_area = $patient_profile->countyr;
+              $patient_area = $patient_profile->country;
               $duration_minute = $nurse_list[$i]->duration;
 
               if($assesment_type =="primary")
@@ -617,99 +617,50 @@ curl_close($curl);
 
 
             for ($i = 0;$i<sizeof($nurse_list);$i++) {
+
                 $nurse_id      = $nurse_list[$i]->nurse_id;
-                $nurse_profile = nurse_profile::where('id', '=', $nurse_id)->first();
-                $patient_profile = patient_profile::where('id', '=', $patient_id)->first();
-                $nurse_name = $nurse_profile->name;
-                $assesment_type = $patient_profile->assesment_type;
-                $patient_area = $patient_profile->country;
-               $nurse_area_check =  nurse_profile::where('nurse_area', 'LIKE', '%'.$patient_area.'%')->where('id','=',$nurse_id)->first();
 
-                if ($nurse_area_check) {
-                    $duration_minute = $nurse_list[$i]->duration;
+              $nurse_profile = nurse_profile::where('id','=',$nurse_id)->first();
+              $patient_profile = patient_profile::where('id','=',$patient_id)->first();
 
 
-                if ($assesment_type =="primary") {
-                    $duration_minute = $duration_minute+200;
-                } else {
-                    $duration_minute = $duration_minute+100;
-                }
-                $duration_hour = ceil($duration_minute/60);
+              $nurse_name = $nurse_profile->name;
+              $assesment_type = $patient_profile->assesment_type;
+              $patient_area = $patient_profile->country;
+              $duration_minute = $nurse_list[$i]->duration;
+              if($assesment_type =="primary")
+              {
+                  $duration_minute = $duration_minute+200;
+              }
+              else
+              {
+                  $duration_minute = $duration_minute+100;
+              }
+            $duration_hour = ceil($duration_minute/60);
+              $prefered_date =array();
+              $start_time = array();
+              $finish_time = array();
 
-                //     $myfile = fopen("file.txt", "a+") or die("Unable to open file!");
-                //  fwrite($myfile,$nurse_name." ".$duration_minute." ".$assesment_type."\n");
+              $nurse_prefered_date_time = $nurse_profile->prefered_date_time;
+              $nurse_prefered_date_time = json_decode($nurse_prefered_date_time);
+              for($i=0;$i<sizeof($nurse_prefered_date_time);+$i++)
+              {
+                $prefered_date[]= date('Y-m-d', strtotime($nurse_prefered_date_time[$i]->date));;
+                $start_time[]=$nurse_prefered_date_time[$i]->start_time;
+                $finish_time[] = $nurse_prefered_date_time[$i]->finish_time;
+              }
 
-                $start_time = $nurse_profile->prefered_start_times;
-                $end_time = $nurse_profile->prefered_end_times;
-                $prefered_times = array();
-                $time_difference =$end_time - $start_time;
+             //file_put_contents('test.txt',json_encode($prefered_date));
+              for($i=0;$i<sizeof($prefered_date);$i++)
+              {
 
-                $prefered_times[0] = $start_time.":00";
-                for ($m = 1 ;$m<$time_difference;$m++) {
-                    $start_time = $start_time+1;
-                    $time = $start_time.":00";
-                    $prefered_times[$m] = $time;
-                }
-                $prefered_times[$time_difference] = $end_time.':00';
-
-                $nurse_day =  $nurse_profile->prefered_days;
-                $nurse_day = explode(',', $nurse_day);
-
-                for ($j = 0;$j<sizeof($date_array);$j++) {
-                    $day = date('l', strtotime($date_array[$j]));
-                    if (in_array($day, $nurse_day)) {
-                        $a =0;
-                        $count = 0;
-                        for ($k=0;$k<sizeof($prefered_times);$k++) {
-                            $tmp_date = date('d-m-Y', strtotime($date_array[$j]));
+              }
 
 
-                            $nurse_schedule = nurse_scheduler::where('status', '=', 'running')->where('nurse_id', '=', $nurse_id)->where('appointed_date', '=', $tmp_date)->get();
-
-                            $exist = nurse_scheduler::where('status', '=', 'running')->where('nurse_id', '=', $nurse_id)->where('appointed_date', '=', $tmp_date)->first();
-                            $busy_time = array();
-                            if ($exist) {
-                                $appointed_started_time = $exist->appointed_start_time;
-                                $appointed_started_time2 = explode(':', $appointed_started_time);
+              //file_put_contents('test.txt',json_encode($prefered_date));
 
 
-                                $appointed_started_time = $appointed_started_time2[0];
 
-
-                                $busy_time[0] = $appointed_started_time.':00';
-                                for ($m = 1;$m<=$duration_hour-1;$m++) {
-                                    $tmp_time = $appointed_started_time+1;
-                                    $busy_time[$m] = $tmp_time.":00";
-                                    $appointed_started_time =$tmp_time;
-                                }
-                            }
-                            if (!$exist) {
-                                if (!in_array($prefered_times[$k], $busy_time)) {
-                                    $count= $this->array_frequency_count($data2, $date_array[$j].'T'.$prefered_times[$k]);
-                                    if ($count<3) {
-                                        $a++;
-
-
-                                        array_push($data2, [
-
-
-                        'id' => $a,
-                        'title' => $nurse_name." ".sizeof($nurse_schedule),
-                        'nurse_id'=>$nurse_id,
-                        'start' => $date_array[$j].'T'.$prefered_times[$k],
-                        'end' => $date_array[$j].'T'.$prefered_times[$k],
-                        'call_count'=>sizeof($nurse_schedule),
-                        'color'=>'#2BE7D7'
-
-
-                      ]);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
             }
             //file_put_contents('test.txt',json_encode($data2));
             echo json_encode($data2);
