@@ -414,30 +414,14 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{url('patients_profile')}}">
+            <a class="nav-link" href="{{url('examiner')}}">
               <i class="fa fa-user-circle menu-icon"></i>
-              <span class="menu-title">Patient Profile</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url('nurse_profile') }}">
-              <i class="fa fa-plus-circle menu-icon"></i>
-              <span class="menu-title">Nurse Profile</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url('view_patient_list') }}">
-              <i class="fa fa-user menu-icon"></i>
-              <span class="menu-title">Patient List</span>
+              <span class="menu-title">Nurse Progression</span>
             </a>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="view_nurse_list">
-              <i class="fa fa-female menu-icon"></i>
-              <span class="menu-title">Nurse List</span>
-            </a>
-          </li>
+
+
           <!--<li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#page-layouts" aria-expanded="false" aria-controls="page-layouts">
               <i class="fab fa-trello menu-icon"></i>

@@ -341,13 +341,13 @@ curl_close($curl);
         // );
         //Mail::to($patient_email)->send(new SendMail($data));
 
-       $nexmo = app('Nexmo\Client');
+    //    $nexmo = app('Nexmo\Client');
 
-        $nexmo->message()->send([
-            'to'   => '+8801819210184',
-            'from' => '+8801675974419',
-            'text' => 'You have 1 nurse schedule at'." $appointed_date"." ".$start_time
-        ]);
+    //     $nexmo->message()->send([
+    //         'to'   => '+8801819210184',
+    //         'from' => '+8801675974419',
+    //         'text' => 'You have 1 nurse schedule at'." $appointed_date"." ".$start_time
+    //     ]);
         $this->push_notification($nurse_id);
 
 

@@ -206,6 +206,19 @@ headers: {
 
 });
 
+ $("#data-table").DataTable().destroy();
+
+$('#data-table').DataTable({
+    //order: [[indexOfDefaultSortColumn, "asc"]],
+    'paging' : true,
+    'lengthChange': false,
+    'searching' : true,
+    'ordering' :true,
+    'info' : false,
+    'autoWidth' : true,
+
+  })
+
 
         })
 
@@ -215,14 +228,7 @@ headers: {
 
 
 
-        $('#data-table').DataTable({
-    'paging' : false,
-    'lengthChange': false,
-    'searching' : false,
-    'ordering' : false,
-    'info' : false,
-    'autoWidth' : true
-  })
+
 
 
 
