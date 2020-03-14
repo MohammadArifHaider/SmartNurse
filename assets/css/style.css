@@ -22208,7 +22208,7 @@ input:focus {
     display: flex;
     -webkit-align-items: center;
     align-items: center;
-    white-space: nowrap;
+    // white-space: nowrap;
     color: #4d72c1;
     -webkit-transition-duration: 0.45s;
     -moz-transition-duration: 0.45s;

@@ -435,8 +435,8 @@ $('#data-table').DataTable({
 $(document).ajaxStart(function() {
     window.swal({
         title: "Loading...",
-        text: "Please wait",
-        imageUrl: "{{asset('image')}}/loading_spinner.gif",
+        text: "Plse wait",
+        //imageUrl: "{{asset('image')}}/loading_spinner.gif",
 
         button: false,
         closeOnClickOutside: false,

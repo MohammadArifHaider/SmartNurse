@@ -110,9 +110,10 @@
                             <th>Date</th>
                             <th>Start Time</th>
 
-                            <th>Finish Time</th>
+                            <th></th>
 
                             <th><a href="javascript:void(0);" style="font-size:18px;" id="addMore" title="Add More Person"><span class="fa fa-plus"></span></a></th>
+                        </tr>
                             <tr class="addrows">
 
                                 <td> <div  class="input-group date datepicker datepicker-popup" >
@@ -121,14 +122,26 @@
                                       <span class="far fa-calendar input-group-text"></span>
                                     </span>
                                   </div></td>
-                                <td>
-                                    <input type="text" name="prefered_start_time[]" class="form-control">
-
-
-
+                                <td id="timetd">
+                                <!-- <div class="addTime">
+                                <input type="text" name="prefered_start_time[]" class="form-control">
+                                <a href='javascript:void(0);'  class='removeTime'><span class='fa fa-trash'></span></a>
+                                </div> -->
+                                <div class="input-group date addDateTime timepicker-example"  data-target-input="nearest">
+                                  <div class="input-group datetimepicker" data-target=".timepicker-example" data-toggle="datetimepicker">
+                                    <input type="text" class="form-control datetimepicker-input" data-target=".timepicker-example"/>
+                                    <div class="input-group-addon input-group-append"><i class="far fa-clock input-group-text"></i></div>
+                                    <a href='javascript:void(0);'  class='removeTime'><span class='fa fa-trash'></span></a>
+                                  </div>
+                                </div>
                                 </td>
-                                <td><input type="text" name="prefered_finish_time[]" class="form-control"></td>
-                                <td><a href='javascript:void(0);'  class='remove'><span class='fa fa-trash'></span></a></td>
+                                <td>
+                                <a href="javascript:void(0);" style="font-size:18px;" id="addMoretime" title="Add More shift"><span class="fa fa-plus"></span></a>
+                                  <!-- <input type="text" name="prefered_finish_time[]" class="form-control"> -->
+                                </td>
+                                <td>
+                                  <a href='javascript:void(0);'  class='remove'><span class='fa fa-trash'></span></a>
+                                </td>
                             </tr>
 
 
@@ -141,13 +154,31 @@
 
 								<script>
 									$(function(){
+										var newRow = $(".addDateTime").clone();
+                    $("#timepicker-example").datetimepicker();
+                    $("#addMoretime").on("click", function () {
+
+                        newRow.clone().appendTo("#timetd").find(".datetimepicker").datetimepicker();
+                    });
+										$(document).on('click', '.removeTime', function() {
+											var trIndex = $(this).closest(".addDateTime").index();
+											if(trIndex>0) {
+												$(this).closest(".addDateTime").remove();
+											} else {
+												alert("Sorry!! Can't remove first td!");
+											}
+										});
+									});
+
+
+									$(function(){
 										var newRow = $(".addrows").clone();
 
-                                        $(".datepicker").datepicker();
-                                        $("#addMore").on("click", function () {
+                    $(".datepicker").datepicker();
+                    $("#addMore").on("click", function () {
 
-                                            newRow.clone().appendTo("#tb").find(".datepicker").datepicker();
-                                        });
+                        newRow.clone().appendTo("#tb").find(".datepicker").datepicker();
+                    });
 
 
 										$(document).on('click', '.remove', function() {
