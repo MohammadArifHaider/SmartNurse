@@ -37,7 +37,7 @@
                                         <div class="card-body">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div>
-                                                    <p class="m-b-0" style="color:white;font-weight:bold;font-size:16px">Total Pending Patient</p>
+                                                    <p class="m-b-0" style="color:white;font-weight:bold;font-size:16px">Pending Patient</p>
                                                     <h2 class="m-b-0" style="color:white;font-weight:bold">
                                                         <span>{{$total_pedning_patient}}</span>
                                                     </h2>

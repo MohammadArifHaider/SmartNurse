@@ -1,71 +1,51 @@
-.navbar.default-layout-navbar .navbar-brand-wrapper {
-    /* background: #e8f0f8;
-    transition: width 0.25s ease, background 0.25s ease;
-    -webkit-transition: width 0.25s ease, background 0.25s ease;
-    -moz-transition: width 0.25s ease, background 0.25s ease;
-    -ms-transition: width 0.25s ease, background 0.25s ease; */
-    width: 300px;
-    /* height: 70px; */
+.scheduler-page {
+    width: 100%;
 }
 
-.navbar.default-layout-navbar .navbar-menu-wrapper {
-    /* background: #ffffff;
-    transition: width 0.25s ease, background 0.25s ease;
-    -webkit-transition: width 0.25s ease, background 0.25s ease;
-    -moz-transition: width 0.25s ease, background 0.25s ease;
-    -ms-transition: width 0.25s ease, background 0.25s ease;
-    padding-left: 15px;
-    padding-right: 15px; */
-    width: calc(100% - 300px);
-    /* height: 70px; */
+.scheduler-page .card {
+    width: 100%!important;
 }
 
-.sidebar {
-    /* min-height: calc(100vh - 70px);
-    background: #e8f0f8;
-    font-weight: 400;
-    padding: 0;
-    padding-right: 40px; */
-    width: 300px;
-    /* z-index: 11;
-    transition: width 0.25s ease, background 0.25s ease;
-    -webkit-transition: width 0.25s ease, background 0.25s ease;
-    -moz-transition: width 0.25s ease, background 0.25s ease;
-    -ms-transition: width 0.25s ease, background 0.25s ease; */
+.scheduler-page .card .card-body {
+    width: 95%!important;
+    padding: 15px 0px 0px 0px!important;
+    margin: auto!important;
 }
 
-.main-panel {
-    transition: width 0.25s ease, margin 0.25s ease;
-    width: calc(100% 100%);
-    width: 75%;
-    min-height: calc(100vh - 70px);
-    display: -webkit-flex;
+.scheduler-page .card .card-body .collapse {
+    width: 100%!important;
+    margin: 5px 0px!important;
+}
+
+.sidebar .scheduler-page .card .card-body .collapse .nav.sub-menu {
+    padding: 15px;
+    list-style: none;
+    border: 1px solid #e8e8e8;
+}
+
+.accordion.accordion-solid-header .card .card-header a:before {
+    top: 30%;
+    right: 15px;
+}
+
+.sub-menu.patient-detail li {
+    width: 100%!important;
     display: flex;
-    padding-left: 5px;
-    -webkit-flex-direction: column;
-    flex-direction: column;
 }
 
-.sidebar .nav.sub-menu .nav-item {
-    padding: 0px;
-    width: 100%;
+.sub-menu.patient-detail li p:nth-child(1) {
+    width: 15%!important;
+    display: inline-block;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    line-height: 1.5;
 }
 
-.sidebar .nav.note {
-    overflow: hidden;
-    /* flex-wrap: nowrap; */
-    flex-direction: column;
-    padding-left: 0px;
-}
-
-.pateint-ul {
-    width: 235px;
-}
-
-ul.patient-detail-ul {
-    width: 100%;
-}
-
-ul.patient-detail-ul li {
-    width: 100%;
+.sub-menu.patient-detail li p:nth-child(2) {
+    width: 85%!important;
+    display: inline-block;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    line-height: 1.5;
+    ;
 }

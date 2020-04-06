@@ -555,8 +555,10 @@ curl_close($curl);
               {
                 $prefered_date[]= date('Y-m-d', strtotime($nurse_prefered_date_time[$j]->date));;
                 $start_time[]=$nurse_prefered_date_time[$j]->start_time;
-                $finish_time[] = $nurse_prefered_date_time[$j]->finish_time;
+
+               // $finish_time[] = $nurse_prefered_date_time[$j]->finish_time;
               }
+
 
              //file_put_contents('test.txt',json_encode($prefered_date));
               for ($k=0;$k<sizeof($prefered_date);$k++) {
@@ -571,10 +573,14 @@ curl_close($curl);
                     $busy_time[0] = $appointed_started_time;
                     for ($m = 1;$m<=$duration_hour-1;$m++) {
                         $tmp_time = $appointed_started_time+1;
-                        $busy_time[$m] = $tmp_time;
+                        $busy_time[$m] = $tmp_time.":00";
                         $appointed_started_time =$tmp_time;
                     }
-                    for ($l=$start_time[$k];$l<=$finish_time[$k];$l++) {
+                    for ($l=0;$l<sizeof($start_time[$k]);$l++) {
+
+                        $a = date('H:i', strtotime($start_time[$k][$l]));
+            //                 $myfile = fopen("file.txt", "a+") or die("Unable to open file!");
+            //    fwrite($myfile,$a."\n");
 
                         if(!in_array($l,$busy_time))
                         {
@@ -585,8 +591,8 @@ curl_close($curl);
                                 'id' => $a,
                                 'title' => $nurse_name." ".sizeof($nurse_schedule),
                                 'nurse_id'=>$nurse_id,
-                                'start' => $prefered_date[$k].'T'.$l.':00',
-                                'end' => $prefered_date[$k].'T'.$l.':00',
+                                'start' => $prefered_date[$k].'T'.$a,
+                                'end' => $prefered_date[$k].'T'.$a,
                                 'call_count'=>sizeof($nurse_schedule),
                                 'color'=>'#19CEF3'
 
@@ -649,7 +655,7 @@ curl_close($curl);
               {
                 $prefered_date[]= date('Y-m-d', strtotime($nurse_prefered_date_time[$j]->date));;
                 $start_time[]=$nurse_prefered_date_time[$j]->start_time;
-                $finish_time[] = $nurse_prefered_date_time[$j]->finish_time;
+                //$finish_time[] = $nurse_prefered_date_time[$j]->finish_time;
               }
 
              //file_put_contents('test.txt',json_encode($prefered_date));
@@ -661,7 +667,14 @@ curl_close($curl);
                 if (!$exist) {
                       if(in_array($patient_area,$nurse_area))
                       {
-                        for ($l=$start_time[$k];$l<=$finish_time[$k];$l++) {
+                        for ($l=0;$l<sizeof($start_time[$k]);$l++) {
+
+                            $a = date('H:i', strtotime($start_time[$k][$l]));
+
+
+              //$myfile = fopen("file.txt", "a+") or die("Unable to open file!");
+             // fwrite($myfile,$a."\n");
+
 
                                 $a++;
                                 array_push($data2, [
@@ -670,10 +683,10 @@ curl_close($curl);
                                     'id' => $a,
                                     'title' => $nurse_name." ".sizeof($nurse_schedule),
                                     'nurse_id'=>$nurse_id,
-                                    'start' => $prefered_date[$k].'T'.$l.':00',
-                                    'end' => $prefered_date[$k].'T'.$l.':00',
+                                    'start' => $prefered_date[$k].'T'.$a,
+                                    'end' => $prefered_date[$k].'T'.$a,
                                     'call_count'=>sizeof($nurse_schedule),
-                                    'color'=>'#F9F908'
+                                    'color'=>'#4370A6'
 
 
                                 ]);

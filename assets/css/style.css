@@ -22173,7 +22173,7 @@ input:focus {
     background: #e8f0f8;
     font-weight: 400;
     padding: 0;
-    padding-right: 40px;
+    padding: 10px;
     width: 255px;
     z-index: 11;
     transition: width 0.25s ease, background 0.25s ease;
@@ -22186,7 +22186,8 @@ input:focus {
     overflow: hidden;
     /* flex-wrap: nowrap; */
     flex-direction: column;
-    padding-left: 10px
+    /* padding-left: 10px */
+    width: 100%;
 }
 
 .sidebar .nav .nav-item {
@@ -22197,6 +22198,7 @@ input:focus {
     transition-property: background;
     -webkit-transition-property: background;
     margin-bottom: 5px;
+    width: 100%;
 }
 
 .sidebar .nav .nav-item .collapse {
@@ -22308,7 +22310,7 @@ input:focus {
     position: relative;
     width: 90px;
     height: 90px;
-    margin-left: 80px;
+    margin: auto;
 }
 
 .sidebar .nav .nav-item.nav-profile .profile-image img {
@@ -23668,13 +23670,18 @@ html {
 .main-panel {
     transition: width 0.25s ease, margin 0.25s ease;
     width: calc(100% 100%);
-    width: 100%;
+    width: 75%;
     min-height: calc(100vh - 70px);
     display: -webkit-flex;
     display: flex;
     padding-left: 5px;
     -webkit-flex-direction: column;
     flex-direction: column;
+}
+
+.examinar.main-panel{
+    width: 100%!important;
+    margin-left: 0!important;
 }
 
 @media (max-width: 991px) {

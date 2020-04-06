@@ -40,7 +40,7 @@
 
      // alert(prefered_day);
 
-     //var gender =   $("#gender:checked").val();
+     // var gender =   $("#gender:checked").val();
      //alert (gender);
 
      var prefered_date = [];
@@ -51,16 +51,23 @@
      });
 
      var prefered_start_time = [];
-     $('input[name^=prefered_start_time]').each(function() {
+     $('.prefered_start_time').each(function() {
          prefered_start_time.push($(this).val());
      });
 
-     var prefered_finish_time = [];
-     $('input[name^=prefered_finish_time]').each(function() {
-         prefered_finish_time.push($(this).val());
-     });
+     prefered_start_time = JSON.stringify(prefered_start_time);
 
-     //alert(prefered_date + " " + prefered_start_time + " " + prefered_finish_time);
+     //  $('.prefered_start_time :selected').each(function(i, sel) {
+     //      var abc = [];
+     //      abc.push($(sel).val());
+     //      prefered_start_time.push(abc);
+
+     //  });
+
+
+
+
+     //  //alert(prefered_date + " " + prefered_start_time + " " + prefered_finish_time);
 
      var formdata = new FormData();
      formdata.append("name", $("#name").val());
@@ -77,8 +84,6 @@
      formdata.append("prefered_date", prefered_date);
      formdata.append("prefered_area", $("#prefered_area").val());
      formdata.append("start_time", prefered_start_time);
-     formdata.append("finish_time", prefered_finish_time);
-
 
 
      $.ajax({

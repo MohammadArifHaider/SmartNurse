@@ -110,8 +110,6 @@
                             <th>Date</th>
                             <th>Start Time</th>
 
-                            <th></th>
-
                             <th><a href="javascript:void(0);" style="font-size:18px;" id="addMore" title="Add More Person"><span class="fa fa-plus"></span></a></th>
                         </tr>
                             <tr class="addrows">
@@ -121,28 +119,33 @@
                                     <span class="input-group-addon input-group-append border-left">
                                       <span class="far fa-calendar input-group-text"></span>
                                     </span>
-                                  </div></td>
-                                <td id="timetd">
-                                <!-- <div class="addTime">
-                                <input type="text" name="prefered_start_time[]" class="form-control">
-                                <a href='javascript:void(0);'  class='removeTime'><span class='fa fa-trash'></span></a>
-                                </div> -->
-                                <div class="input-group date addDateTime timepicker-example"  data-target-input="nearest">
-                                  <div class="input-group datetimepicker" data-target=".timepicker-example" data-toggle="datetimepicker">
-                                    <input type="text" class="form-control datetimepicker-input" data-target=".timepicker-example"/>
-                                    <div class="input-group-addon input-group-append"><i class="far fa-clock input-group-text"></i></div>
-                                    <a href='javascript:void(0);'  class='removeTime'><span class='fa fa-trash'></span></a>
                                   </div>
-                                </div>
                                 </td>
                                 <td>
-                                <a href="javascript:void(0);" style="font-size:18px;" id="addMoretime" title="Add More shift"><span class="fa fa-plus"></span></a>
-                                  <!-- <input type="text" name="prefered_finish_time[]" class="form-control"> -->
+                                    <div class="form-group">
+                                        <label>Multiple select using select 2</label>
+                                        <select class="js-example-basic-multiple w-100 prefered_start_time" multiple="multiple" name="prefered_start_time[]" >
+                                          <option value="9:00 AM">9:00 AM</option>
+                                          <option value="10:00 AM">10:00 AM</option>
+                                          <option value="11:00 AM">11:00 AM</option>
+                                          <option value="12:00 AM">12:00 AM</option>
+                                          <option value="01:00 PM">01:00 PM</option>
+                                          <option value="02:00 PM">02:00 PM</option>
+                                          <option value="03:00 PM">03:00 PM</option>
+                                          <option value="04:00 PM">04:00 PM</option>
+                                          <option value="05:00 PM">05:00 PM</option>
+                                          <option value="06:00 PM">06:00 PM</option>
+                                        </select>
+                                      </div>
                                 </td>
+
+
                                 <td>
                                   <a href='javascript:void(0);'  class='remove'><span class='fa fa-trash'></span></a>
                                 </td>
                             </tr>
+
+
 
 
                         </table>
@@ -153,33 +156,32 @@
 
 
 								<script>
-									$(function(){
-										var newRow = $(".addDateTime").clone();
-                    $("#timepicker-example").datetimepicker();
-                    $("#addMoretime").on("click", function () {
-
-                        newRow.clone().appendTo("#timetd").find(".datetimepicker").datetimepicker();
-                    });
-										$(document).on('click', '.removeTime', function() {
-											var trIndex = $(this).closest(".addDateTime").index();
-											if(trIndex>0) {
-												$(this).closest(".addDateTime").remove();
-											} else {
-												alert("Sorry!! Can't remove first td!");
-											}
-										});
-									});
-
 
 									$(function(){
-										var newRow = $(".addrows").clone();
 
+
+					var newRow = $(".addrows").clone();
                     $(".datepicker").datepicker();
+
                     $("#addMore").on("click", function () {
 
-                        newRow.clone().appendTo("#tb").find(".datepicker").datepicker();
-                    });
 
+                      //$("#tb").append(newRow);
+
+
+                      //$('.js-example-basic-multiple').select2();
+
+
+
+
+                      newRow.find('span.select2').remove();
+                      newRow.find('select').removeClass('select2-hidden-accessible');
+
+                        newRow.clone().appendTo("#tb").find(".datepicker").datepicker();
+
+                        $('.js-example-basic-multiple').select2();
+
+                    });
 
 										$(document).on('click', '.remove', function() {
 											var trIndex = $(this).closest("tr").index();
@@ -332,7 +334,7 @@
   <script src="{{asset('assets')}}/js/form-repeater.js"></script>
   <script src="{{asset('assets')}}/js/file-upload.js"></script>
   <script src="{{asset('assets')}}/js/custom/nurse_profile.js?{{time()}}"></script>
-
+  <script src="{{asset('assets')}}/js/select2.js"></script>
 
 
 

@@ -166,23 +166,27 @@ curl_close($curl);
      }
     public function nurse_information_upload(Request $request)
     {
+        //file_put_contents('test2.txt',"hello");
        $prefered_date = $request->prefered_date;
        $prefered_date = explode(',',$prefered_date);
 
      $start_time = $request->start_time;
-     $start_time = explode(',',$start_time);
+     $start_time = json_decode($start_time);
+     //file_put_contents('test.txt',json_encode($start_time[0]));
+  // $start_time = explode(',',$start_time);
 
-       $finish_time =$request->finish_time;
-       $finish_time = explode(',',$finish_time);
 
 
-    //file_put_contents('test.txt',json_encode($start_time));
+
+
+   // file_put_contents('test.txt',json_encode($start_time));
 
        $prefered_date_time = array();
        for($i=0;$i<sizeof($prefered_date);$i++)
        {
-         array_push($prefered_date_time,['date'=>$prefered_date[$i],'start_time'=>$start_time[$i],'finish_time'=>$finish_time[$i]]);
+         array_push($prefered_date_time,['date'=>$prefered_date[$i],'start_time'=>$start_time[$i]]);
        }
+
         $nurse = new nurse_profile();
         $nurse->user_id = 1;
         $nurse->name = $request->name;

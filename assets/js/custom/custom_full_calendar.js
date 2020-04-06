@@ -156,7 +156,11 @@ function assign_nurse() {
 
 function call_full_calendar(patient_id) {
 
+
+
+    // alert('hello');
     var test = $(".patient-" + patient_id).attr('aria-expanded');
+    //alert(test);
     if (test == "false") {
 
         $("#hidden_patient_id").val(patient_id);
